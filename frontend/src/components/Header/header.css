@@ -1,0 +1,14 @@
+.header{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.header .animation{
+    width:10%;
+}
+.header img{
+    max-width: 10%; 
+}
