@@ -1,0 +1,28 @@
+.footer{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    position: sticky;
+    bottom: 0; /* Stick to the bottom of the viewport */
+    z-index: 1000; /* Ensure the footer stays on top */
+}
+
+.footer img{
+    margin-left: 5rem;
+    padding-top: 5rem;
+    max-width:7%; 
+}
+
+.footer .fotenote{
+    padding-top: 7rem;
+    color: chocolate;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+.footer .animation{
+    padding-top: 7rem;
+   width:14%;
+}
