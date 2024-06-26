@@ -1,14 +1,16 @@
 .header{
+    padding: 1rem 15rem 4rem 10rem;
     width: 100%;
     height: fit-content;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: row;
+    box-sizing: border-box;
 }
 
 .header .animation{
-    width:10%;
+    width:10vw;
 }
 .header img{
-    max-width: 10%; 
+    width: 9vw;
 }
