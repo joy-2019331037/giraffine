@@ -1,28 +1,44 @@
-.footer{
+.footerDiv {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: hidden; /* Ensure content stays inside the SVG */
+}
+
+.footerSvg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Change from 100% to 100vw */
+    height: 300px;
+    z-index: -1;
+}
+
+.footer {
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-direction: row;
-    position: sticky;
-    bottom: 0; /* Stick to the bottom of the viewport */
-    z-index: 1000; /* Ensure the footer stays on top */
+    padding: 1rem 0; /* Optional: add some padding */
+    background-color: transparent; /* Make the footer background transparent */
+    z-index: 1; /* Ensure the footer content is above the SVG */
 }
 
-.footer img{
-    margin-left: 5rem;
+.footer img {
     padding-top: 5rem;
-    max-width:7%; 
+    max-width: 3%;
 }
 
-.footer .fotenote{
-    padding-top: 7rem;
+.footer .fotenote {
+    padding-top: 8rem;
     color: chocolate;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: medium;
 }
 
-.footer .animation{
-    padding-top: 7rem;
-   width:14%;
+.footer .animation {
+    width: 8%;
 }
