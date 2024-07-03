@@ -45,4 +45,10 @@ public class UserController {
         }
         return us.verifyOtp(email, otp);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/login")
+    public ResponseEntity<Object> login(@RequestBody User user) {
+        return us.login(user.getEmail(), user.getPassword());
+    }
 }

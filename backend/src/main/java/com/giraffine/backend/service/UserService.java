@@ -36,12 +36,11 @@ public class UserService {
     public ResponseEntity<String> addUser(User user) {
         try {
             String email = user.getEmail();
-            
+
             if (ud.findByEmail(email).isPresent()) {
                 return new ResponseEntity<>("Email address is already registered", HttpStatus.CONFLICT);
             }
-            
-            
+
             user.setVerified(false); // Set verified to false initially
             ud.insert(user);
             generateAndSendOtp(user.getEmail()); // Send OTP email
@@ -53,20 +52,19 @@ public class UserService {
     }
 
     private void generateAndSendOtp(String email) {
-        String otp = String.valueOf(new Random().nextInt(999999));
+        String otp = String.valueOf(new Random().nextInt(999999) + 100000);
         OTP otpEntity = new OTP(new ObjectId(), email, otp, LocalDateTime.now().plusMinutes(10));
         otpRepository.save(otpEntity);
         sendOtpEmail(email, otp);
     }
 
     // private void sendOtpEmail(String email, String otp) {
-    //     SimpleMailMessage message = new SimpleMailMessage();
-    //     message.setTo(email);
-    //     message.setSubject("Your OTP Code");
-    //     message.setText("Your OTP code is " + otp);
-    //     mailSender.send(message);
+    // SimpleMailMessage message = new SimpleMailMessage();
+    // message.setTo(email);
+    // message.setSubject("Your OTP Code");
+    // message.setText("Your OTP code is " + otp);
+    // mailSender.send(message);
     // }
-
 
     public void sendOtpEmail(String email, String otp) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -84,7 +82,7 @@ public class UserService {
     public ResponseEntity<String> verifyOtp(String email, String otp) {
         Optional<OTP> otpEntity = otpRepository.findByEmail(email);
         if (otpEntity.isPresent() && otpEntity.get().getOtp().equals(otp) &&
-            otpEntity.get().getExpiryTime().isAfter(LocalDateTime.now())) {
+                otpEntity.get().getExpiryTime().isAfter(LocalDateTime.now())) {
             User user = ud.findByEmail(email).orElseThrow();
             user.setVerified(true);
             ud.save(user);
@@ -92,5 +90,19 @@ public class UserService {
             return new ResponseEntity<>("Email verified successfully", HttpStatus.OK);
         }
         return new ResponseEntity<>("Invalid OTP", HttpStatus.BAD_REQUEST);
+    }
+
+    public ResponseEntity<Object> login(String email, String password) {
+        Optional<User> userOpt = ud.findByEmail(email);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            if (user.getPassword().equals(password)) {
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+            }
+        } else {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
     }
 }

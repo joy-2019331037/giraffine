@@ -1,8 +1,10 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Swal } from "sweetalert2";
 import "./../styles/register.css";
 import { useNavigate } from "react-router-dom";
+import Lottie from "lottie-react";
+
+import animationData from '../assets/data/animationData/panda_2.json'
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,14 +14,7 @@ const Register = () => {
   const [pass, setPass] = useState("");
   const [confPass, setConfPass] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(false);
-  // const isMounted = useRef(true);
-
-  // useEffect(() => {
-  //   return () => {
-  //     // Clean up on unmount
-  //     isMounted.current = false;
-  //   };
-  // }, []);
+  const [confirmTouched, setConfirmTouched] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,31 +25,23 @@ const Register = () => {
       email: email,
       password: pass,
       rank: "pawn",
-      isVerified: "", // Remove this if not needed
-      friends: [], // Remove this if not needed
+      isVerified: "",
+      friends: [],
     };
-
-    console.log("User:", newUser);
 
     try {
       const response = await axios.post(
         "http://localhost:8080/user/reg",
         newUser
       );
-
-      // Check if component is still mounted before using Swal
       if (response.status === 201) {
-        console.log("Registration successful:", response.data);
-        //console.log(response.status);
         alert(
           "Registration Successful! Please check your email for verification."
         );
         navigate("/otpVerification", { state: { email } });
-      } else {
-        alert("Registration Failed");
       }
     } catch (error) {
-      //console.error("Registration error:", error);
+      alert(error.response.data);
     }
   };
 
@@ -66,14 +53,16 @@ const Register = () => {
   const handleConfirmPasswordChange = (value) => {
     setConfPass(value);
     setPasswordsMatch(pass === value);
+    setConfirmTouched(true); // Set confirmTouched to true when the user starts typing in the confirm password field
   };
 
   return (
-    <div className="main">
-      <form className="form" onSubmit={handleSubmit}>
-        <h2>Register</h2>
+    <div className="register">
+      {/* <Lottie className="reg_anime" animationData={animationData}/> */}
+      <form className="reg_form" onSubmit={handleSubmit}>
+        <h2>Sign Up</h2>
         <div>
-          <label htmlFor="firstname">First Name:</label>
+          <label>First Name</label>
           <input
             type="text"
             id="firstname"
@@ -83,7 +72,7 @@ const Register = () => {
           />
         </div>
         <div>
-          <label htmlFor="lastname">Last Name:</label>
+          <label htmlFor="lastname">Last Name</label>
           <input
             type="text"
             id="lastname"
@@ -93,17 +82,16 @@ const Register = () => {
           />
         </div>
         <div>
-          <label htmlFor="email">Email Address:</label>
+          <label htmlFor="email">Email Address</label>
           <input
-            type="email"
-            id="email"
+            type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
         <div>
-          <label htmlFor="pass">Password:</label>
+          <label htmlFor="pass">Password</label>
           <input
             type="password"
             id="password"
@@ -113,7 +101,7 @@ const Register = () => {
           />
         </div>
         <div>
-          <label htmlFor="confirm pass">Confirm Password:</label>
+          <label htmlFor="confirm pass">Confirm Password</label>
           <input
             type="password"
             id="confirm password"
@@ -121,12 +109,12 @@ const Register = () => {
             onChange={(e) => handleConfirmPasswordChange(e.target.value)}
             required
           />
-          {!passwordsMatch && (
-            <p className="error-text">Passwords do not match!</p>
-          )}
         </div>
-
-        <button type="submit" disabled={!passwordsMatch}>
+        {confirmTouched && !passwordsMatch && (
+          <p className="error_text">Passwords do not match!</p>
+        )}
+    
+        <button className="button" type="submit" disabled={!passwordsMatch}>
           Register
         </button>
       </form>

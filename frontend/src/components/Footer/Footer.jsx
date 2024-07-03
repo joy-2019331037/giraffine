@@ -1,6 +1,6 @@
 import React from "react";
 import Lottie from "lottie-react";
-import animationData from "../../assets/data/panda.json";
+import animationData from "../../assets/data/animationData/panda_2.json";
 import "./footer.css";
 import logo from "../../assets/images/transparent-logo.png";
 
