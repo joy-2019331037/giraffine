@@ -1,21 +1,20 @@
-.register{
+.login{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.register h2{
+.login h2{
     color: var(--primary-color);
 }
-
-.register div{
+.login div{
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-bottom: 1rem;
 }
-.register .reg_form{
-    width: 40%;
+.login .login_form{
+    width: 35%;
     border: 0.5px solid rgb(255, 227, 186);
     margin:2rem 0rem 2rem 0rem ;
     display: flex;
@@ -28,7 +27,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.reg_form input{
+.login_form input{
     width: 25rem;
     height: 1rem;
     padding: 8px;
@@ -36,16 +35,15 @@
     border: 0.5px solid var(--tertiary-color);
     font-size: large;
 }
-.reg_form label{
+.login_form label{
     font-size: medium;
     padding-left: 0.5rem;
 }
-.reg_form input:focus{
+.login_form input:focus{
     outline:none;
 }
 
-
-.reg_form .button{
+.login_form .button{
     background-color:var(--secondary-color);
     font-size: large;
     color: white;
@@ -56,11 +54,6 @@
     border-radius: 10px;
     margin: 1rem 0rem 2rem 0rem;
 }
-
-.reg_form .button:hover{
+.login_form .button:hover{
     background-color:rgb(2, 188, 2);
-}
-.error_text{
-    height: 1rem;
-    color: red;
 }

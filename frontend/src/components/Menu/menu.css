@@ -1,0 +1,39 @@
+
+
+.menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+}
+.menu div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+    /* Add initial styles for non-hover state */
+    /* background-color: #f0f0f0; */
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.menu div:hover {
+    background-color: #f8ede2; /* Change background color on hover */
+    /* Add any additional hover effects here */
+}
+
+.menu div img{
+    width: 1.5rem;
+}
+.menu .item{
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:green
+}
+
+.menu a{
+    text-decoration: none;
+    color: inherit;
+}

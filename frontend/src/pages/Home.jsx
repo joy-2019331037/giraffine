@@ -1,12 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Home = () => {
-  return <>
-  <Link to="/register">Register</Link>
-  <br></br>
-  <Link to="/login">Login</Link>
-  </>
-}
+  const { user } = useContext(AuthContext);
+  console.log(user);
+  return <div>
+    
+  </div>;
+};
 
-export default Home
+export default Home;

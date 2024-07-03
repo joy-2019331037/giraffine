@@ -1,0 +1,170 @@
+/* src/styles/problems.css */
+.problems_intro{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10rem;
+}
+.problems_intro .title{
+  font-size: 3rem;
+  color: green;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.msg{
+  margin-top: 3rem;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.msg .delighted{
+  width: 33%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.msg .delighted p{
+  font-size: 1.5rem;
+  color: chocolate;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.msg .delighted .animation{
+  width: 33%;
+}
+.msg .continue{
+  width: 33%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid gray;
+  border-left: 1px solid gray;
+}
+
+.msg .continue p{
+  font-size: 1.5rem;
+  color: chocolate;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.msg .continue .animation{
+  width: 33%;
+}
+
+.msg .scroll{
+  width: 33%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.msg .scroll p{
+  font-size: 1.5rem;
+  color: chocolate;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.msg .scroll .animation{
+  width: 40%;
+}
+
+
+
+.problems {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  .level {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 20px;
+  }
+  
+  .level label{
+    margin-left: 1rem;
+  }
+  .level.left {
+    flex-direction: row;
+  }
+  
+  .level.right {
+    flex-direction: row-reverse;
+  }
+  
+  .text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+  .text label{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: xx-large;
+    color: rgb(2, 173, 2);
+    font-weight: 700;
+  }
+  .text img{
+    width: 30%;
+  }
+  .problem {
+    width: 25rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: rgb(255, 238, 214);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  .problem:hover {
+    background-color: rgb(255, 247, 234);
+  }
+  
+  .problem-1, .problem-5 {
+    margin-left: 1rem;
+  }
+  
+  .problem-2, .problem-4 {
+    margin-left: 3rem;
+  }
+  
+  .problem-3 {
+    margin-left: 5rem;
+  }
+
+ 
+  
+
+  .level.right .problem-3 {
+    margin-left: 0rem;
+    margin-right: 5rem;
+  }
+
+  .level.right .problem-2, .level.right .problem-4 {
+    margin-left: 2rem;
+    margin-right: 5rem;
+  }
+  
+  .level.right .problem-1, .level.right .problem-5 {
+    margin-left: 4rem;
+    margin-right: 5rem;
+  }
+  .level.right label{
+    margin-left: 4rem;
+    margin-right: 5rem;
+  }
+  .problem > .chakra-text {
+    margin-bottom: 4px;
+  }
+  

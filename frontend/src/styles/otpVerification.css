@@ -1,42 +1,43 @@
-.main {
+.otp{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
+    height: 60vh;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   
-  .form {
-    background-color: #fff;
+  .otp_form {
+    width: 30%;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:white;
+    border: 0.5px solid rgb(255, 227, 186);
     padding: 2rem;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    gap: 1.5rem;
   }
   
-  .form h2 {
+  .otp_form h2 {
     margin-bottom: 1rem;
+    color: var(--primary-color);
   }
   
-  .form div {
-    margin-bottom: 1rem;
-  }
-  
-  .form label {
+
+  .otp_form label {
     display: block;
     margin-bottom: 0.5rem;
   }
   
-  .form input[type="email"] {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
+
   .otp-inputs {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
+    gap: 1rem;
   }
   
   .otp-inputs input {
@@ -48,17 +49,19 @@
     border-radius: 5px;
   }
   
-  .form button {
-    width: 100%;
+  .otp_form button {
+    width: 60%;
     padding: 0.5rem;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     border: none;
     color: white;
     border-radius: 3px;
     cursor: pointer;
+    font-size: large;
+    font-weight: 600;
   }
   
-  .form button:hover {
-    background-color: #0056b3;
+  .otp_form button:hover {
+    background-color: var(--tertiary-color);
   }
   

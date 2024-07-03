@@ -11,6 +11,34 @@
 .header .animation{
     width:10vw;
 }
-.header img{
-    width: 9vw;
+.header .logo{
+    width: 7vw;
+    margin-right: 2rem;
 }
+
+
+
+.user{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+.user img{
+    width: 2vw;
+}
+
+.user label{
+    font-size: larger;
+    font-family: Georgia, 'Times New Roman', Times, seri;
+}
+
+.user label a {
+    text-decoration: none;
+    color: inherit; 
+  }
+  
+  .user label a:hover {
+    color: green; 
+    
+  }

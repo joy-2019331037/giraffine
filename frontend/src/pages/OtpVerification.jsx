@@ -38,7 +38,7 @@ const OtpVerification = () => {
       console.log(email.toString());
       console.log(otpCode);
       const response = await axios.post(
-        `http://localhost:8080/user/verify-otp?email=${email.toString()}&otp=${OTP}`
+        `http://localhost:8080/user/verify-otp?email=${email}&otp=${OTP}`
       );
 
       if (response.status === 200) {
@@ -61,8 +61,8 @@ const OtpVerification = () => {
   };
 
   return (
-    <div className="main">
-      <form className="form" onSubmit={handleSubmit}>
+    <div className="otp">
+      <form className="otp_form" onSubmit={handleSubmit}>
         <h2>OTP Verification</h2>
         <div className="otp-inputs">
           {otp.map((data, index) => {
