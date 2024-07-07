@@ -1,5 +1,6 @@
 class Problem {
-    constructor(title, description, input, output) {
+    constructor(id, title, description, input, output) {
+      this.id=id;
       this.title = title;
       this.description = description;
       this.input = input;

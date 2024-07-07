@@ -4,6 +4,7 @@ import React from "react";
 import { ChakraProvider, Box, Text, VStack } from "@chakra-ui/react";
 import theme from "../components/Editor/theme.js";
 import problemsData from "../assets/data/problemsData/ProblemData.js";
+import { Link } from "react-router-dom";
 
 import "./../styles/problems.css";
 
@@ -25,7 +26,6 @@ const Problems = () => {
       <div className="problems_intro">
         <p className="title">Welcome back to Problem Solving</p>
         <div className="msg">
-
           <div className="delighted">
             <Lottie className="animation" animationData={panda_hi} />
             <div>
@@ -35,8 +35,6 @@ const Problems = () => {
               <p>back</p>
             </div>
           </div>
-
-         
 
           <div className="continue">
             <Lottie className="animation" animationData={coding} />
@@ -57,7 +55,6 @@ const Problems = () => {
               <p>of you</p>
             </div>
           </div>
-          
         </div>
       </div>
       <div className="problems">
@@ -73,18 +70,24 @@ const Problems = () => {
                 <img src={images[levelIndex]} />
               </Text>
               <VStack align="start" spacing={3}>
-                {problems.map((problem, problemIndex) => (
-                  <Box
-                    key={problemIndex}
-                    className={`problem problem-${problemIndex + 1}`}
-                  >
-                    <Text fontSize="xl">{problem.title}</Text>
-                    {/* <Text whiteSpace="pre-line">{problem.description}</Text>
+                {problems.slice(0, 5).map((problem, problemIndex) => (
+                  <Link to={`/problem/${level}/${problem.id}`}>
+                    <Box
+                      key={problemIndex}
+                      className={`problem problem-${problemIndex + 1}`}
+                    >
+                      {/* <Text fontSize="xl">{problem.id}</Text> */}
+
+                      <Text fontSize="xl">{problem.title}</Text>
+                      {/* <Text whiteSpace="pre-line">{problem.description}</Text>
                   <Text><strong>Input:</strong> {problem.input}</Text>
                   <Text><strong>Output:</strong> {problem.output}</Text> */}
-                  </Box>
+                    </Box>
+                  </Link>
                 ))}
-                <label>. . . more</label>
+                <label>
+                  . . . <Link to={`/problems/${level}`}>more</Link>
+                </label>
               </VStack>
             </div>
           </>
@@ -95,3 +98,15 @@ const Problems = () => {
 };
 
 export default Problems;
+// {/* <Link to={`/problem/${levelName}/${problem.id}`}></Link>
+// <Box
+//                     key={problemIndex}
+//                     className={`problem problem-${problemIndex + 1}`}
+//                   >
+//                     {/* <Text fontSize="xl">{problem.id}</Text> */}
+
+//                     <Text fontSize="xl">{problem.title}</Text>
+//                     {/* <Text whiteSpace="pre-line">{problem.description}</Text>
+//                   <Text><strong>Input:</strong> {problem.input}</Text>
+//                   <Text><strong>Output:</strong> {problem.output}</Text> */}
+//                   </Box> */}

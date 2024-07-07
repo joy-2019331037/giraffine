@@ -1,5 +1,109 @@
+.loading{
+    width: 15%;
+}
+
 .individualproblem{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
+
+.individualproblem .probDetails{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.individualproblem .probDetails img{
+    width: 1rem;
+ }
+
+.individualproblem .probDetails .desc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    
+}
+.individualproblem .probDetails .desc label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: green;
+    font-size: 1.8rem;
+    padding-left: 1rem;
+}
+
+.individualproblem .probDetails .desc .text{
+    background-color: rgb(255, 248, 237);
+    border-radius: 20PX;
+    padding: 2rem;
+}
+
+.individualproblem .probDetails .desc p{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: chocolate;
+    font-size: 1.2rem;
+    padding-left: 1rem;
+}
+
+.individualproblem .probDetails .io{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   gap: 2rem;
+   
+}
+.individualproblem .probDetails .io img{
+    width: 10rem;
+ }
+
+ .individualproblem .probDetails .io .other{
+    
+ }
+
+.individualproblem .probDetails .io .input{
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+ }
+   
+
+ .individualproblem .probDetails .io .input label{
+    width: 60%;
+    color: rgb(7, 33, 55);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: green;
+    font-size: 1.5rem;
+    border-bottom: 1px solid gray;
+ }
+ .individualproblem .probDetails .io .input p{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: chocolate;
+    font-size: 1.2rem;
+ }
+
+ .individualproblem .probDetails .io .output{
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+ }
+   
+
+ .individualproblem .probDetails .io .output label{
+    width: 60%;
+    color: rgb(7, 33, 55);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: green;
+    font-size: 1.5rem;
+    border-bottom: 1px solid gray;
+ }
+ .individualproblem .probDetails .io .output p{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: chocolate;
+    font-size: 1.2rem;
+ }
+   

@@ -1,0 +1,55 @@
+.levelWiseProblem{
+    margin-bottom: 5rem;
+}
+.levelWiseProblem .arrows{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.levelWiseProblem .arrows img{
+    width:5%;
+}
+
+.levelWiseProblem .Problem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 20rem 2rem 20rem;
+    gap: 2rem;
+}
+
+
+.levelWiseProblem .Problem .text img{
+    width: 40%;
+}
+
+.levelWiseProblem .Problem .sing_prob{
+    width: 25rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: rgb(255, 238, 214);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+}
+.levelWiseProblem .Problem a{
+   text-decoration: none;
+   color: black;
+}
+
+.levelWiseProblem .Problem .sing_prob:hover {
+    background-color: rgb(255, 247, 234);
+  }
+
+.levelWiseProblem .Problem .sing_prob .id{
+    background-color: aliceblue;
+    padding: 8px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.levelWiseProblem .Problem .sing_prob .title{
+    padding: 8px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
