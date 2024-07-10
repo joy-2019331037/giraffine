@@ -1,10 +1,8 @@
-// src/pages/Problems.jsx
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ChakraProvider, Box, Text, VStack } from "@chakra-ui/react";
 import theme from "../components/Editor/theme.js";
-import problemsData from "../assets/data/problemsData/ProblemData.js";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 import "./../styles/problems.css";
 
@@ -20,7 +18,34 @@ import coding from "../assets/data/animationData/coding.json";
 import ScrollDown from "../assets/data/animationData/scrollDown.json";
 
 const Problems = () => {
+  const [problemsData, setProblemsData] = useState({});
   const images = [sprout, explorer, adventurer, challenger, mastermind];
+
+  useEffect(() => {
+    const fetchProblems = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/problems/');
+        const problems = response.data;
+
+        const groupedProblems = problems.reduce((acc, problem) => {
+          const { level } = problem;
+          if (!acc[level]) {
+            acc[level] = [];
+          }
+          acc[level].push(problem);
+          return acc;
+        }, {});
+
+        setProblemsData(groupedProblems);
+        console.log(problemsData)
+      } catch (error) {
+        console.error("Error fetching problems:", error);
+      }
+    };
+
+    fetchProblems();
+  }, []);
+
   return (
     <ChakraProvider theme={theme}>
       <div className="problems_intro">
@@ -59,38 +84,29 @@ const Problems = () => {
       </div>
       <div className="problems">
         {Object.entries(problemsData).map(([level, problems], levelIndex) => (
-          <>
-            <div
-              key={level}
-              className={`level ${levelIndex % 2 === 0 ? "left" : "right"}`}
-              mb={6}
-            >
-              <Text className="text">
-                <label>{level}</label>
-                <img src={images[levelIndex]} />
-              </Text>
-              <VStack align="start" spacing={3}>
-                {problems.slice(0, 5).map((problem, problemIndex) => (
-                  <Link to={`/problem/${level}/${problem.id}`}>
-                    <Box
-                      key={problemIndex}
-                      className={`problem problem-${problemIndex + 1}`}
-                    >
-                      {/* <Text fontSize="xl">{problem.id}</Text> */}
-
-                      <Text fontSize="xl">{problem.title}</Text>
-                      {/* <Text whiteSpace="pre-line">{problem.description}</Text>
-                  <Text><strong>Input:</strong> {problem.input}</Text>
-                  <Text><strong>Output:</strong> {problem.output}</Text> */}
-                    </Box>
-                  </Link>
-                ))}
-                <label>
-                  . . . <Link to={`/problems/${level}`}>more</Link>
-                </label>
-              </VStack>
-            </div>
-          </>
+          <div
+            key={level}
+            className={`level ${levelIndex % 2 === 0 ? "left" : "right"}`}
+            mb={6}
+          >
+            <Text className="text">
+              <label>{level}</label>
+              <img src={images[levelIndex]} alt={`${level} icon`} />
+            </Text>
+            <VStack align="start" spacing={3}>
+              {problems.slice(0, 5).map((problem, problemIndex) => (
+                <Link key={problem.id} to={`/problem/${level}/${problem.id}`}>
+                  <Box className={`problem problem-${problemIndex + 1}`}>
+                    <Text fontSize="xl">{problem.title}</Text>
+                    {/* <Text whiteSpace="pre-line">{problem.description}</Text> */}
+                  </Box>
+                </Link>
+              ))}
+              <label>
+                . . . <Link to={`/problems/${level}`}>more</Link>
+              </label>
+            </VStack>
+          </div>
         ))}
       </div>
     </ChakraProvider>
@@ -98,15 +114,3 @@ const Problems = () => {
 };
 
 export default Problems;
-// {/* <Link to={`/problem/${levelName}/${problem.id}`}></Link>
-// <Box
-//                     key={problemIndex}
-//                     className={`problem problem-${problemIndex + 1}`}
-//                   >
-//                     {/* <Text fontSize="xl">{problem.id}</Text> */}
-
-//                     <Text fontSize="xl">{problem.title}</Text>
-//                     {/* <Text whiteSpace="pre-line">{problem.description}</Text>
-//                   <Text><strong>Input:</strong> {problem.input}</Text>
-//                   <Text><strong>Output:</strong> {problem.output}</Text> */}
-//                   </Box> */}

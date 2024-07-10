@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import animationData from "../../assets/data/animationData/header.json";
-import logo from "../../assets/images/transparent-logo.png";
+import logo from "../../assets/images/logo.png";
 import { AuthContext } from "../../context/AuthContext";
 import logout from "../../assets/images/logout.png";
 
