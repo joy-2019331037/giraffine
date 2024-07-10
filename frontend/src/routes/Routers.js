@@ -10,6 +10,10 @@ import Profile from '../pages/Profile';
 import Problems from '../pages/Problems';
 import IndividualProblem from '../pages/IndividualProblem';
 import LevelWiseProblemSet from '../pages/LevelWiseProblemSet';
+import Competition from '../pages/Competition';
+import Artciles from '../pages/Articles';
+import Tutorials from '../pages/Tutorials';
+import Leaderboard from '../pages/Leaderboard';
 
 const Routers = () => {
   return (
@@ -24,6 +28,10 @@ const Routers = () => {
       <Route path='/problems' element={<Problems />} />
       <Route path='/problem/:levelName/:ID' element={<IndividualProblem/>} />
       <Route path='/problems/:levelName' element={<LevelWiseProblemSet />} />
+      <Route path='/competition' element={<Competition/>} />
+      <Route path='/articles' element={<Artciles/>} />
+      <Route path='/tutorials' element={<Tutorials/>} />
+      <Route path='/leaderboard' element={<Leaderboard/>} />
     </Routes>
   );
 }

@@ -6,13 +6,17 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    
 }
 
 .individualproblem .probDetails{
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
     align-items: center;
+    gap: 2rem;
+    justify-content: center;
+   
 }
 
 .individualproblem .probDetails img{
@@ -24,26 +28,41 @@
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
-    
+    width: 35%; 
 }
 .individualproblem .probDetails .desc label{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: green;
+    color: chocolate;
     font-size: 1.8rem;
-    padding-left: 1rem;
 }
 
-.individualproblem .probDetails .desc .text{
-    background-color: rgb(255, 248, 237);
-    border-radius: 20PX;
-    padding: 2rem;
+.individualproblem .probDetails .desc div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.individualproblem .probDetails .desc .description{
+    border: none;
+    color: black;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: none;
 }
 
 .individualproblem .probDetails .desc p{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: chocolate;
+    color: green;
+    width: auto;
     font-size: 1.2rem;
-    padding-left: 1rem;
+    border-bottom: 1px solid rgb(254, 202, 165);
+}
+
+.individualproblem .probDetails .others{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 30%;
 }
 
 .individualproblem .probDetails .io{
@@ -57,9 +76,11 @@
     width: 10rem;
  }
 
- .individualproblem .probDetails .io .other{
-    
+.individualproblem .probDetails .others .settings img{
+    width: 1.5rem;
  }
+
+
 
 .individualproblem .probDetails .io .input{
     width: 25vw;
@@ -75,13 +96,12 @@
     color: rgb(7, 33, 55);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: green;
-    font-size: 1.5rem;
-    border-bottom: 1px solid gray;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgb(254, 202, 165);
  }
  .individualproblem .probDetails .io .input p{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: chocolate;
-    font-size: 1.2rem;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 1rem;
  }
 
  .individualproblem .probDetails .io .output{
@@ -91,19 +111,99 @@
     justify-content: center;
     gap: 0.5rem;
  }
-   
 
+  
  .individualproblem .probDetails .io .output label{
     width: 60%;
     color: rgb(7, 33, 55);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: green;
-    font-size: 1.5rem;
-    border-bottom: 1px solid gray;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgb(254, 202, 165);
  }
  .individualproblem .probDetails .io .output p{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: chocolate;
-    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
  }
-   
+ .settings .chakra-menu__menu-button{
+    background-color: blanchedalmond;
+    width: 10rem;
+    padding: 2px 10px 2px 10px;
+    border-radius: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+  }
+
+.settings .chakra-menu__menu-list {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+    background-color: blanchedalmond;
+    width: 10rem;
+    padding: 2px 10px 2px 10px;
+    border-radius: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+  }
+.menu-button{
+    opacity: 1;
+  transition: all 0.3s ease-in-out; 
+  }
+
+  .settings .menu-button-appear {
+    opacity: 1;
+  }
+
+  .settings .chakra-menu__menu-list .menu-item:hover{
+    color: green;
+  }
+  
+  .settings .chakra-menu__menu-list[style*="display: block"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .whiteboard-modal-header {
+    cursor: move;
+    background-color: blanchedalmond;
+  }
+
+  .hint-modal-content {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hint-modal-header {
+    color: green;
+    display: flex;
+    align-items: center;
+  }
+
+  .hint-modal-content .hint-text{
+    /* font-family: "Segoe Script";
+    font-family: "Papyrus";
+    font-family: "Harrington"; */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.1rem;
+  }
+
+  .hint-modal-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hint-modal-body .animation{
+    width: 30%;
+  }
+
+  .hint-modal-header .animation{
+    width: 8%;
+  }
+  
+  .hint-modal-footer button {
+    color: green;
+  }
+  
