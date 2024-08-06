@@ -40,7 +40,7 @@ const Header = () => {
         <>
           <Menu />
           <div className="user">
-            {/* <Lottie className="animation" animationData={animationData} /> */}
+    
             <label>
               <Link to="/profile"> {user.firstName} </Link>
             </label>
@@ -54,6 +54,7 @@ const Header = () => {
           </div>
         </>
       )}
+      
     </div>
   );
 };
