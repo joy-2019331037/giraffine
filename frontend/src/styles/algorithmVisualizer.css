@@ -1,0 +1,46 @@
+h1 {
+  color: rgb(247, 134, 54);
+  margin-bottom: 2rem;
+}
+
+h2{
+  color: green;
+}
+
+
+.visualizer-container {
+    padding: 0rem 15rem 1rem 15rem;
+  }
+
+  .visualizer-container a{
+    text-decoration: none; 
+    color: inherit;
+  }
+
+
+  .visualizer-container img{
+    width: 1.3rem;
+  }
+
+  .visualizer-container label{
+    width: auto;
+    text-align: center;
+    border-radius: 5px;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .visualizer-container label:hover{
+    cursor: pointer;
+  }
+
+  
+  .visualizer-container .chakra-stack > .chakra-box {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .visualizer-container .chakra-stack > .chakra-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

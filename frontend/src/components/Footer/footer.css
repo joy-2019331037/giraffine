@@ -29,12 +29,12 @@
 
 .footer img {
     padding-top: 5rem;
-    max-width: 3%;
+    max-width: 4%;
 }
 
 .footer .fotenote {
     padding-top: 8rem;
-    color: chocolate;
+    color: green;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: medium;
 }
