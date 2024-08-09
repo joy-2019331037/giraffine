@@ -1,104 +1,119 @@
-import React, { useState, useEffect, useRef } from 'react';
-import * as d3 from 'd3';
-
+import React, { useState, useEffect, useRef } from "react";
+import * as d3 from "d3";
 import Lottie from "lottie-react";
 import visualizer_success from "../../assets/data/animationData/visu_success.json";
-import "./bfsvisualizer.css";
 
-// Sample tree data
 const treeData = {
-  name: 'A',
-  children: [
-    { name: 'B', children: [{ name: 'E', children: [{ name: 'I' }, { name: 'J' }] }, { name: 'F' }] },
-    { name: 'C' },
-    { name: 'D', children: [{ name: 'G', children: [{ name: 'K' }, { name: 'L',children:[{name:"M"}] }] }, { name: 'H' }] }
-  ],
-};
+    name: "A",
+    children: [
+      {
+        name: "B",
+        children: [
+          { name: "D" },
+          { name: "E", children: [{ name: "H" }, { name: "I" }] },
+        ],
+      },
+      {
+        name: "C",
+        children: [
+          { name: "F" , children: [{ name: "J" }, { name: "K" }] },
+          { name: "G"},
+        ],
+      },
+    ],
+  };
 
-// DFS function that returns traversal and level info
-const dfsWithLevels = (tree) => {
-  const stack = [{ node: tree, level: 0 }];
+const inorderTraversalWithMessages = (tree) => {
   const visited = [];
-  const levels = {};
+  const messages = [];
 
-  while (stack.length > 0) {
-    const { node, level } = stack.pop();
-    visited.push(node.name);
-    if (!levels[level]) levels[level] = [];
-    levels[level].push(node.name);
+  const traverse = (node) => {
+    if (!node) return;
 
-    if (node.children) {
-      for (let i = node.children.length - 1; i >= 0; i--) {
-        stack.push({ node: node.children[i], level: level + 1 });
-      }
+    if (node.children && node.children[0]) {
+      messages.push(`Traversing to the left subtree of node ${node.name}.`);
+      traverse(node.children[0]);
     }
-  }
 
-  return { visited, levels };
+    messages.push(`Visiting node ${node.name}.`);
+    visited.push(node.name);
+
+    if (node.children && node.children[1]) {
+      messages.push(`Traversing to the right subtree of node ${node.name}.`);
+      traverse(node.children[1]);
+    }
+  };
+
+  traverse(tree);
+  messages.push("Traversal is complete.");
+
+  return { visited, messages };
 };
 
-const DfsVisualizer = () => {
+const InorderVisualizer = () => {
   const [visitedNodes, setVisitedNodes] = useState([]);
   const [step, setStep] = useState(0);
   const [messages, setMessages] = useState([]);
   const [currentNodeIndex, setCurrentNodeIndex] = useState(0);
+  const [done, setDone] = useState(false);
   const [isAutoSimulating, setIsAutoSimulating] = useState(false);
   const intervalRef = useRef(null);
-  const [done, setDone] = useState(false);
 
   useEffect(() => {
-    const { visited, levels } = dfsWithLevels(treeData);
+    const { visited, messages } = inorderTraversalWithMessages(treeData);
     setVisitedNodes(visited);
-
-    // Create messages for each node visit
-    const msgs = visited.map(node => `Visiting node ${node}`);
-    msgs.push('Traversal is complete.');
-    setMessages(msgs);
+    setMessages(messages);
   }, []);
 
   useEffect(() => {
-    const svg = d3.select('#tree-container');
-    svg.selectAll('*').remove(); // Clear previous drawings
+    const svg = d3.select("#tree-container");
+    svg.selectAll("*").remove();
 
     const width = 600;
     const height = 300;
     const margin = { top: 40, right: 40, bottom: 40, left: 40 };
 
-    const treeLayout = d3.tree().size([width - margin.left - margin.right, height - margin.top - margin.bottom]);
+    const treeLayout = d3
+      .tree()
+      .size([width - margin.left - margin.right, height - margin.top - margin.bottom]);
     const root = d3.hierarchy(treeData);
     treeLayout(root);
 
-    const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+    const g = svg
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    g.selectAll('line')
+    g.selectAll("line")
       .data(root.links())
       .enter()
-      .append('line')
-      .attr('x1', (d) => d.source.x)
-      .attr('y1', (d) => d.source.y)
-      .attr('x2', (d) => d.target.x)
-      .attr('y2', (d) => d.target.y)
-      .attr('stroke', 'black');
+      .append("line")
+      .attr("x1", (d) => d.source.x)
+      .attr("y1", (d) => d.source.y)
+      .attr("x2", (d) => d.target.x)
+      .attr("y2", (d) => d.target.y)
+      .attr("stroke", "black");
 
-    g.selectAll('circle')
+    g.selectAll("circle")
       .data(root.descendants())
       .enter()
-      .append('circle')
-      .attr('cx', (d) => d.x)
-      .attr('cy', (d) => d.y + 5)
-      .attr('r', 15)
-      .attr('fill', (d, i) =>
-        visitedNodes.slice(0, currentNodeIndex).includes(d.data.name) ? 'green' : 'lightgray'
+      .append("circle")
+      .attr("cx", (d) => d.x)
+      .attr("cy", (d) => d.y)
+      .attr("r", 15)
+      .attr("fill", (d, i) =>
+        visitedNodes.slice(0, currentNodeIndex).includes(d.data.name)
+          ? "rgb(2, 182, 2)"
+          : "lightgray"
       );
 
-    g.selectAll('text')
+    g.selectAll("text")
       .data(root.descendants())
       .enter()
-      .append('text')
-      .attr('x', (d) => d.x)
-      .attr('y', (d) => d.y + 10) // Center the text vertically within the circle
-      .attr('text-anchor', 'middle')
-      .attr('fill', 'white') // Text color inside the circle
+      .append("text")
+      .attr("x", (d) => d.x)
+      .attr("y", (d) => d.y + 5)
+      .attr("text-anchor", "middle")
+      .attr("fill", "white")
       .text((d) => d.data.name);
   }, [visitedNodes, currentNodeIndex]);
 
@@ -119,11 +134,9 @@ const DfsVisualizer = () => {
       const nextMessage = messages[step];
       setStep(step + 1);
 
-      if (nextMessage.includes('Visiting node')) {
+      if (nextMessage.includes("Visiting node")) {
         setCurrentNodeIndex(currentNodeIndex + 1);
       }
-    } else {
-      setIsAutoSimulating(false);
     }
     if (step === messages.length - 2) setDone(true);
   };
@@ -131,9 +144,9 @@ const DfsVisualizer = () => {
   const handleRestart = () => {
     setStep(0);
     setCurrentNodeIndex(0);
+    setDone(false);
     setIsAutoSimulating(false);
     clearInterval(intervalRef.current);
-    setDone(false);
   };
 
   const handleAutoSimulate = () => {
@@ -143,10 +156,10 @@ const DfsVisualizer = () => {
   return (
     <div className="visualizer">
       <div className="header">
-        <h1>DFS Visualizer</h1>
-        <label>DFS explores as far as possible along each branch before backtracking</label>
-        <label>Here is a simple graph with 12 nodes</label>
-        <label>Click on the buttons below to visualize the DFS!</label>
+        <h1>Inorder Traversal Visualizer</h1>
+        <label>Inorder Traversal recursively visits the left subtree, then the root node, and finally the right subtree</label>
+        <label>Here is a simple tree with 11 nodes</label>
+        <label>Click on the buttons below to visualize the Inorder traversal!</label>
       </div>
 
       <div className="content">
@@ -177,14 +190,13 @@ const DfsVisualizer = () => {
 
       <div className="footer">
         <div className="message-box">
-          <p>{messages[step -1]}</p>
-          
+          <p>{messages[step - 1]}</p>
         </div>
-        {step >= 1 && <h3>Traversal Order</h3>}
+        {step > 1 && <h3>Traversal Order</h3>}
         <label>{visitedNodes.slice(0, currentNodeIndex).join(" -> ")}</label>
       </div>
     </div>
   );
 };
 
-export default DfsVisualizer;
+export default InorderVisualizer;

@@ -1,169 +1,103 @@
-import React, { useState, useEffect } from 'react';
-import * as d3 from 'd3';
+import React, { useState, useEffect } from "react";
+import "./MergeSortVisualizer.css";
 
 const MergeSortVisualizer = () => {
-  const [data, setData] = useState([]);
-  const [steps, setSteps] = useState([]);
-  const [stepIndex, setStepIndex] = useState(0);
-  const [sorted, setSorted] = useState(false);
-  const [message, setMessage] = useState('');
-  const [isAutoSorting, setIsAutoSorting] = useState(false);
+  const hardcodedSteps = [
+    [6, 89, 34, 23, 56, 12, 90],
+    [6, 89, 34, 23, "  ", 56, 12, 90],
+    [6, 89, "  ", 34, 23, "  ", 56, 12, "  ", 90],
+    [6, "  ", 89, "  ", 34, "  ", 23, "  ", 56, "  ", 12, "  ", 90],
+    [6, "  ", 89, "  ", 23, "  ", 34, "  ", 12, "  ", 56, "  ", 90],
+    [6, 23, "  ", 34, 89, "  ", 12, 56, "  ", 90],
+    [6, 12, 23, 34, "  ", 56, 89, 90],
+    [6, 12, 23, 34, 56, 89, 90],
+  ];
+
+  const messages = [
+    "Spliting the elements into subarrays",
+    "Spliting the subarrays again",
+    "Spliting the subarrays again",
+    "Sorting the elements pairwise",
+    "Merging and sorting the subarrays",
+    "Merging and sorting the subarrays",
+    "Array is sorted!!!",
+  ];
+
+  const [currentStep, setCurrentStep] = useState(0);
+  const [isAutoSimulate, setIsAutoSimulate] = useState(false);
 
   useEffect(() => {
-    const generateData = () => {
-      const array = Array.from({ length: 10 }, () => Math.floor(Math.random() * 100));
-      setData(array);
-      const steps = [];
-      mergeSort([...array], 0, array.length, steps);
-      setSteps(steps);
-    };
-
-    generateData();
-  }, []);
-
-  useEffect(() => {
-    drawChart();
-  }, [data, stepIndex]);
-
-  useEffect(() => {
-    let interval;
-    if (isAutoSorting && !sorted) {
-      interval = setInterval(() => {
-        nextStep();
-      }, 1000);
+    if (isAutoSimulate && currentStep < hardcodedSteps.length - 1) {
+      const timer = setTimeout(() => {
+        setCurrentStep((prev) => prev + 1);
+      }, 2000);
+      return () => clearTimeout(timer);
     }
-    return () => clearInterval(interval);
-  }, [isAutoSorting, steps, stepIndex, sorted]);
+  }, [isAutoSimulate, currentStep, hardcodedSteps.length]);
 
-  const mergeSort = (array, start, end, steps) => {
-    if (end - start <= 1) return;
-
-    const mid = Math.floor((start + end) / 2);
-    steps.push({ array: [...array], left: array.slice(start, mid), right: array.slice(mid, end), type: 'split' });
-    mergeSort(array, start, mid, steps);
-    mergeSort(array, mid, end, steps);
-    merge(array, start, mid, end, steps);
-  };
-
-  const merge = (array, start, mid, end, steps) => {
-    const left = array.slice(start, mid);
-    const right = array.slice(mid, end);
-
-    let i = start, j = 0, k = 0;
-    while (j < left.length && k < right.length) {
-      if (left[j] < right[k]) {
-        array[i++] = left[j++];
-      } else {
-        array[i++] = right[k++];
-      }
-      steps.push({ array: [...array], left, right, type: 'merge' });
-    }
-
-    while (j < left.length) {
-      array[i++] = left[j++];
-      steps.push({ array: [...array], left, right, type: 'merge' });
-    }
-
-    while (k < right.length) {
-      array[i++] = right[k++];
-      steps.push({ array: [...array], left, right, type: 'merge' });
+  const handleNextStep = () => {
+    if (currentStep < hardcodedSteps.length - 1) {
+      setCurrentStep((prev) => prev + 1);
     }
   };
 
-  const nextStep = () => {
-    if (stepIndex < steps.length) {
-      setData(steps[stepIndex].array);
-      setStepIndex(stepIndex + 1);
-      setMessage(`Step ${stepIndex + 1}: ${steps[stepIndex].type}`);
-    } else {
-      setSorted(true);
-      setMessage('Array is sorted!');
-      setIsAutoSorting(false);
-    }
+  const handleAutoSimulate = () => {
+    setIsAutoSimulate(true);
   };
 
-  const drawChart = () => {
-    const width = 600;
-    const height = 300;
-    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
-
-    d3.select('#chart').selectAll('*').remove();
-    const svg = d3.select('#chart')
-                  .attr('width', width)
-                  .attr('height', height)
-                  .style('background', '#f4f4f4')
-                  .style('margin-top', '50px');
-
-    const xScale = d3.scaleBand()
-                     .domain(d3.range(data.length))
-                     .range([margin.left, width - margin.right])
-                     .padding(0.1);
-
-    const yScale = d3.scaleLinear()
-                     .domain([0, d3.max(data)])
-                     .nice()
-                     .range([height - margin.bottom, margin.top]);
-
-    svg.selectAll('rect')
-       .data(data)
-       .enter()
-       .append('rect')
-       .attr('x', (d, i) => xScale(i))
-       .attr('y', d => yScale(d))
-       .attr('height', d => yScale(0) - yScale(d))
-       .attr('width', xScale.bandwidth())
-       .attr('fill', (d, i) => {
-         if (stepIndex > 0 && stepIndex < steps.length) {
-           const { left, right, type } = steps[stepIndex];
-           if (type === 'split') {
-             if (i < left.length) return 'red';
-             if (i >= left.length && i < left.length + right.length) return 'blue';
-           } else if (type === 'merge') {
-             if (left.includes(d)) return 'red';
-             if (right.includes(d)) return 'blue';
-           }
-         }
-         return 'steelblue';
-       });
-
-    if (stepIndex > 0 && stepIndex < steps.length) {
-      const { left, right, type } = steps[stepIndex];
-      if (type === 'split') {
-        svg.selectAll('text.left')
-           .data(left)
-           .enter()
-           .append('text')
-           .attr('class', 'left')
-           .attr('x', (d, i) => xScale(i))
-           .attr('y', height - margin.bottom + 20)
-           .text(d => d)
-           .attr('fill', 'red');
-
-        svg.selectAll('text.right')
-           .data(right)
-           .enter()
-           .append('text')
-           .attr('class', 'right')
-           .attr('x', (d, i) => xScale(i + left.length))
-           .attr('y', height - margin.bottom + 20)
-           .text(d => d)
-           .attr('fill', 'blue');
-      }
-    }
-  };
-
+  // Render the cumulative steps with line breaks between each hardcoded step
   return (
-    <div>
-      <h1>Merge Sort Visualizer</h1>
-      <svg id="chart"></svg>
-      <div>
-        <button onClick={nextStep} disabled={isAutoSorting || sorted}>Next Step</button>
-        <button onClick={() => setIsAutoSorting(!isAutoSorting)} disabled={sorted}>
-          {isAutoSorting ? 'Pause' : 'Auto Sort'}
-        </button>
-        <button onClick={() => window.location.reload()}>Reset</button>
+    <div className="merge-sort-visualizer">
+      <div className="header">
+        <h2>Merge Sort Visualizer</h2>
+        <label>
+          Merge Sort is a <span>divide-and-conquer</span> algorithm that recursively splits an array into smaller subarrays 
+        </label>
+        <label>
+          until each subarray contains a single
+          element.
+        </label>
+        <label>
+          {" "}
+          It then merges and sorts these subarrays back together to form the
+          sorted array!
+        </label>
+        <label>Click the buttons below to visualize the merge sort!</label>
       </div>
-      <p>{message}</p>
+      <div className="controls">
+        <button
+          onClick={handleNextStep}
+          disabled={currentStep >= hardcodedSteps.length - 1}
+        >
+          Next Step
+        </button>
+        <button
+          onClick={handleAutoSimulate}
+          disabled={isAutoSimulate || currentStep >= hardcodedSteps.length - 1}
+        >
+          Auto Simulate
+        </button>
+      </div>
+      <div className="array-container">
+        {hardcodedSteps.slice(0, currentStep + 1).map((step, stepIdx) => (
+          <div key={stepIdx} className="merge-step">
+            {step.map((value, idx) => (
+              <div key={idx} className="array-item">
+                {value}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="message">
+        <p>{messages[currentStep - 1] || "Here is an unsorted array of 7 numbers"}</p>
+      </div>
+
+      {/* <div>
+        {messages.map((value, index) => (
+          <div key={index}>{value}</div>
+        ))}
+      </div> */}
     </div>
   );
 };

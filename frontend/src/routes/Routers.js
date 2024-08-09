@@ -27,6 +27,19 @@ import BFSVisualizer from '../pages/Visualizer/BFSVisualizer.jsx';
 import BinarySearchVisualizer from '../pages/Visualizer/BinarySearchVisualizer.jsx';
 import LinearSearchVisualizer from '../pages/Visualizer/LinearSearchVisualizer.jsx';
 import DFSVisualizer from '../pages/Visualizer/DFSVisualizer.jsx';
+import DijkstraVisualizer from '../pages/Visualizer/DijkstraVisualizer.jsx';
+import PreorderVisualizer from '../pages/Visualizer/PreOrderVisualizer.jsx';
+import PostorderVisualizer from '../pages/Visualizer/PostOrderVisualizer.jsx';
+import InOrderVisualizer from '../pages/Visualizer/InOrderVisualizer.jsx';
+import StackVisualizer from '../pages/Visualizer/StackVisualizer.jsx';
+import QueueVisualizer from '../pages/Visualizer/QueueVisualizer.jsx';
+import DequeVisualizer from '../pages/Visualizer/DequeVisualizer.jsx';
+import KMPVisualizer from '../pages/Visualizer/KMPVisualizer.jsx';
+import SieveVisualizer from '../pages/Visualizer/SieveVisualizer.jsx';
+import GCDVisualizer from '../pages/Visualizer/GCDVisualizer.jsx';
+import FibonacciVisualizer from '../pages/Visualizer/FibonacciVisualizer.jsx';
+import NQueensVisualizer from '../pages/Visualizer/NQueensVisualizer.jsx';
+
 
 
 const Routers = () => {
@@ -58,8 +71,26 @@ const Routers = () => {
       <Route path='/tutorials/algoVisualizer/sorting/quick-sort' element={<QuickSortVisualizer/>}/>
       <Route path='/tutorials/algoVisualizer/graph/bfs' element={<BFSVisualizer/>}/>
       <Route path='/tutorials/algoVisualizer/graph/dfs' element={<DFSVisualizer/>}/>
+      <Route path='/tutorials/algoVisualizer/graph/dijkstra' element={<DijkstraVisualizer/>}/>
       <Route path='/tutorials/algoVisualizer/search/binary-search' element={<BinarySearchVisualizer/>}/>
       <Route path='/tutorials/algoVisualizer/search/linear-search' element={<LinearSearchVisualizer/>}/>
+
+      <Route path='/tutorials/algoVisualizer/tree/preorder' element={<PreorderVisualizer/>}/>
+      <Route path='/tutorials/algoVisualizer/tree/postorder' element={<PostorderVisualizer/>}/>
+      <Route path='/tutorials/algoVisualizer/tree/inorder' element={<InOrderVisualizer/>}/>
+
+      <Route path='/tutorials/algoVisualizer/dataStructures/stack' element={<StackVisualizer/>}/>
+      <Route path='/tutorials/algoVisualizer/dataStructures/queue' element={<QueueVisualizer/>}/>
+      <Route path='/tutorials/algoVisualizer/dataStructures/deque' element={<DequeVisualizer/>}/>
+
+    
+
+      <Route path='/tutorials/algoVisualizer/math/prime-generation' element={<SieveVisualizer/>}/>
+      <Route path='/tutorials/algoVisualizer/math/gcd' element={<GCDVisualizer/>}/>
+      <Route path='/tutorials/algoVisualizer/math/fibonacci' element={<FibonacciVisualizer/>}/>
+
+      <Route path='/tutorials/algoVisualizer/others/kmp' element={<KMPVisualizer/>}/>
+      <Route path='/tutorials/algoVisualizer/others/n-queens' element={<NQueensVisualizer/>}/>
     </Routes>
   );
 }

@@ -11,7 +11,7 @@ const BinarySearchVisualizer = () => {
   const [left, setLeft] = useState(0);
   const [right, setRight] = useState(0);
   const [mid, setMid] = useState(null);
-  const [midMsg, setMidMsg]=useState("");
+  const [midMsg, setMidMsg] = useState("");
   const [message, setMessage] = useState("");
   const [isAutoSearching, setIsAutoSearching] = useState(false);
   const [found, setFound] = useState(false);
@@ -19,7 +19,7 @@ const BinarySearchVisualizer = () => {
   useEffect(() => {
     // Generate a sorted array of random numbers
     const generateData = () => {
-      const array = Array.from({ length: 15 }, () =>
+      const array = Array.from({ length: 20 }, () =>
         Math.floor(Math.random() * 100)
       ).sort((a, b) => a - b);
       setData(array);
@@ -63,13 +63,13 @@ const BinarySearchVisualizer = () => {
     } else if (data[midIndex] < target) {
       setMessage(
         // `Target ${target} is greater than ${data[midIndex]} 🔵 Searching in the right half between ${data[midIndex + 1]} and ${data[right]}`
-        `Target ${target} is greater than ${data[midIndex]} 🔵 Searching in the right half`
+        `Target ${target} is greater than ${data[midIndex]} | Searching in the right half`
       );
       setLeft(midIndex + 1);
     } else {
       setMessage(
         // `Target ${target} is less than ${data[midIndex]}  🔵 Searching in the left half between ${data[left]} and ${data[midIndex - 1]}`
-        `Target ${target} is less than ${data[midIndex]} 🔵 Searching in the left half`
+        `Target ${target} is less than ${data[midIndex]} | Searching in the left half`
       );
       setRight(midIndex - 1);
     }
@@ -93,7 +93,7 @@ const BinarySearchVisualizer = () => {
       .scaleBand()
       .domain(d3.range(data.length))
       .range([margin.left, width - margin.right])
-      .padding(0.4); // Increase the padding between bars
+      .padding(0.2); // Increase the padding between bars
 
     const yScale = d3
       .scaleLinear()
@@ -115,7 +115,7 @@ const BinarySearchVisualizer = () => {
         return "lightgrey";
       })
       .attr("stroke", (d, i) => {
-        if (i === left || i === right) return "blue";
+        // if (i === left || i === right) return "blue";
         if (i === mid) return "red";
         return "none";
       })
@@ -174,7 +174,11 @@ const BinarySearchVisualizer = () => {
       <div className="header">
         <h2>Binary Search Visualizer</h2>
         <label>
-          We have a <span>sorted</span> list of 15 numbers from which one
+          Binary Search efficiently finds a target value within a sorted list
+          by repeatedly dividing the search interval in half.
+        </label>
+        <label>
+          We have a <span>sorted</span> list of 20 numbers from which one
           particular number is to be searched out.
         </label>
         <label>
@@ -217,10 +221,12 @@ const BinarySearchVisualizer = () => {
 
       <div className="footer">
         {left > right && <p>Target {target} not found in the array.</p>}
-        {!found && <p>
-          <div>{midMsg}</div>
-          {message}
-          </p>}
+        {!found && (
+          <p>
+            <div>{midMsg}</div>
+            {message}
+          </p>
+        )}
         {found && <p className="found">{message}</p>}
       </div>
     </div>

@@ -67,7 +67,7 @@ const BfsVisualizer = () => {
     Object.keys(levels).forEach((level) => {
       levels[level].forEach((node, index) => {
         if (index === 0) {
-          msgs.push(`Now have to traverse all nodes at level ${level}`);
+          msgs.push(`Next to traverse  -> all nodes at level ${level}`);
         }
         msgs.push(`Visiting node ${node}`);
       });
@@ -171,6 +171,9 @@ const BfsVisualizer = () => {
     <div className="visualizer">
       <div className="header">
         <h1>BFS Visualizer</h1>
+        <label>BFS explores all nodes at the present depth level before moving on to nodes at the next depth level</label>
+        <label>Here is a simple graph with 12 nodes</label>
+        <label>Click on the buttons below to visualize the BFS!</label>
       </div>
 
       <div className="content">

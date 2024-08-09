@@ -1,0 +1,26 @@
+
+
+h3 {
+    margin-bottom: 20px; /* Adjust the space as needed */
+  }
+  
+  table {
+    width: 30%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .message-box {
+    margin-top: 20px;
+  }
+  

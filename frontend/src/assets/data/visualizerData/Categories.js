@@ -14,11 +14,12 @@ export const categories = [
       ],
     },
     {
-      label: "search",
-      name: "Search Algorithms",
+      label: "dataStructures",
+      name: "Basic Data Structures",
       items: [
-        { id: "linear-search", name: "Linear Search" },
-        { id: "binary-search", name: "Binary Search" },
+        { id: "stack", name: "Stack Operations" },
+        { id: "queue", name: "Queue Operations" },
+        { id: "deque", name: "Deque Operations" },
       ],
     },
     {
@@ -28,78 +29,56 @@ export const categories = [
         { id: "bfs", name: "Breadth-First Search (BFS)" },
         { id: "dfs", name: "Depth-First Search (DFS)" },
         { id: "dijkstra", name: "Dijkstra's Algorithm" },
-        // { id: 'a-star', name: 'A* Search Algorithm' },
-        // { id: 'kruskal', name: 'Kruskal\'s Algorithm' },
-        // { id: 'prim', name: 'Prim\'s Algorithm' },
       ],
     },
     {
-      label: "dynamicProgramming",
-      name: "Dynamic Programming",
+      label: "tree",
+      name: "Binary Search Tree",
       items: [
+        { id: "preorder", name: "Preorder Traversal" },
+        { id: "inorder", name: "Inorder Traversal" },
+        { id: "postorder", name: "Postorder Traversal" },
+      ],
+    },
+ 
+    
+    // {
+    //   label: "backtracking",
+    //   name: "Backtracking",
+    //   items: [
+    //     { id: "n-queens", name: "N-Queens Problem" },
+    //     { id: "sudoku", name: "Sudoku Solver" },
+    //     { id: "maze", name: "Maze Solver" },
+    //   ],
+    // },
+   
+    {
+      label: "math",
+      name: "Math Algorithms",
+      items: [
+        { id: "gcd", name: "Euclidian Algorithm (GCD)" },
+        {
+          id: "prime-generation",
+          name: "Prime Generation (Sieve)",
+        },
+      
         { id: "fibonacci", name: "Fibonacci Sequence" },
-        { id: "knapsack", name: "Knapsack Problem" },
-        { id: "lcs", name: "Longest Common Subsequence" },
       ],
     },
-    {
-      label: "greedy",
-      name: "Greedy Algorithms",
+     {
+      label: "search",
+      name: "Search Algorithms",
       items: [
-        { id: "huffman", name: "Huffman Coding" },
-        { id: "activity-selection", name: "Activity Selection Problem" },
-      ],
-    },
-    {
-      label: "divide&conquer",
-      name: "Divide and Conquer",
-      items: [
-        { id: "merge-sort", name: "Merge Sort" },
-        { id: "quick-sort", name: "Quick Sort" },
+        { id: "linear-search", name: "Linear Search" },
         { id: "binary-search", name: "Binary Search" },
       ],
     },
     {
-      label: "backtracking",
-      name: "Backtracking",
-      items: [
-        { id: "n-queens", name: "N-Queens Problem" },
-        { id: "sudoku", name: "Sudoku Solver" },
-        { id: "maze", name: "Maze Solver" },
-      ],
-    },
-    {
-      label: "dataStructures",
-      name: "Basic Data Structures",
-      items: [
-        { id: "stack", name: "Stack Operations" },
-        { id: "queue", name: "Queue Operations" },
-        { id: "linked-list", name: "Linked List Operations" },
-        {
-          id: "tree-traversals",
-          name: "Tree Traversals (Inorder, Preorder, Postorder)",
-        },
-      ],
-    },
-    {
-      label: "Math",
-      name: "Math Algorithms",
-      items: [
-        { id: "gcd", name: "Greatest Common Divisor (GCD)" },
-        {
-          id: "prime-generation",
-          name: "Prime Number Generation (Sieve of Eratosthenes)",
-        },
-        { id: "factorial", name: "Factorial Calculation" },
-      ],
-    },
-    {
-      label: "String",
-      name: "String Algorithms",
+      label: "others",
+      name: "Others",
       items: [
         { id: "kmp", name: "Pattern Matching (KMP Algorithm)" },
-        { id: "lps", name: "Longest Palindromic Substring" },
-        { id: "anagram", name: "Anagram Checker" },
+        { id: "n-queens", name: "N-Queens Problem" },
       ],
     },
   ];

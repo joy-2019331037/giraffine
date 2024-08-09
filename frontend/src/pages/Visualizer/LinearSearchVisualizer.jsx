@@ -78,7 +78,7 @@ const LinearSearchVisualizer = () => {
       .scaleBand()
       .domain(d3.range(data.length))
       .range([margin.left, width - margin.right])
-      .padding(0.4); // Increase the padding between bars
+      .padding(0.1); // Increase the padding between bars
 
     const yScale = d3
       .scaleLinear()
@@ -179,7 +179,11 @@ const LinearSearchVisualizer = () => {
       <div className="header">
         <h2>Linear Search Visualizer</h2>
         <label>
-          We have a <span>random</span> list of 15 numbers from which one
+          Linear Search sequentially checks each element in a list until the
+          desired element is found or the list is exhausted.
+        </label>
+        <label>
+          We have a <span>random</span> list of 15 numbers here from which one
           particular number is to be searched out.
         </label>
         <label>
@@ -221,7 +225,9 @@ const LinearSearchVisualizer = () => {
       </div>
 
       <div className="footer">
-        {current >= data.length && <p>Target {target} not found in the array.</p>}
+        {current >= data.length && (
+          <p>Target {target} not found in the array.</p>
+        )}
         {!found && <p>{message}</p>}
         {found && <p className="found">{message}</p>}
       </div>

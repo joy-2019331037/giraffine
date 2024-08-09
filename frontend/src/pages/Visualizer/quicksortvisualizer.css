@@ -1,0 +1,54 @@
+.quicksortvisualizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .quicksortvisualizer  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .quicksortvisualizer .array-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .quicksortvisualizer .array,
+  .left-array,
+  .right-array {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  
+ .quicksortvisualizer .array span,
+  .left-array span,
+  .right-array span {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+  }
+  
+  .quicksortvisualizer .pivot {
+    background-color: #ff6347;
+    color: white;
+  }
+  
+  .quicksortvisualizer .buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .quicksortvisualizer .footer {
+    margin-top: 20px;
+  }
+  
+  .quicksortvisualizer .found {
+    color: green;
+  }
+  

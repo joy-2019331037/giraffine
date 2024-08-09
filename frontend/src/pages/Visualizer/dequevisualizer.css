@@ -1,0 +1,107 @@
+.dequevisualizer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dequevisualizer .error{
+    font-size: 1rem;
+    color: chocolate;
+}
+
+.dequevisualizer .errorLite{
+    font-size: 0.8rem;
+    color: chocolate;
+}
+.dequevisualizer span{
+    color: rgb(2, 190, 2);
+    font-weight: 600;
+}
+.dequevisualizer .header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dequevisualizer .header .desc{
+    display: flex;
+    flex-direction: row;
+    .animation{
+        width: 25%;
+    }
+    gap: 5rem;
+}
+
+
+
+.dequevisualizer .header .desc div{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3rem;
+    .animation{
+        width: 10%;
+    }
+}
+
+.dequevisualizer .content{
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+}
+
+.dequevisualizer .content svg{
+    align-items: center;
+    border: 5px solid rgb(255, 192, 109);
+    background-color: rgb(255, 243, 224);
+    border-right: none;
+    border-left: none;
+}
+
+.dequevisualizer .content .controls{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+
+.dequevisualizer .content .controls input{
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid yellowgreen;
+}
+
+.dequevisualizer .content .controls .buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+
+.dequevisualizer .content .controls button{
+    padding: 5px 10px 5px 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(195, 239, 106);
+}
+
+.dequevisualizer .footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+}
+
+.dequevisualizer .footer h3{
+  color: rgb(24, 216, 24);
+}
+
+.dequevisualizer .footer .message{
+    font-size: 1.1rem;
+    color: chocolate;
+}
