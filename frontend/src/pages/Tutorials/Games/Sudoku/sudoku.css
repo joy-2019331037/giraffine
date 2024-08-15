@@ -1,0 +1,99 @@
+.sudoku {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.sudoku .sudoku-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap:5rem;
+}
+
+.sudoku .sudoku-content .animation{
+  width: 20%;
+}
+
+.user-input {
+  background-color: #fdd;
+  border: 1px solid red;
+}
+.board {
+  display: grid;
+  grid-template-columns: repeat(9, 40px);  
+  border: 1px solid black;
+}
+
+.row {
+  display: contents;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  box-sizing: border-box;
+  border: 1px solid gray;
+}
+
+.cell.top-left {
+  background-color: #fadfac;
+}
+
+.cell.top-middle {
+  background-color: #9ffa98; 
+}
+
+.cell.top-right {
+  background-color:#fadfac ; 
+}
+
+.cell.middle-left {
+  background-color: #9ffa98;
+}
+
+.cell.middle-middle {
+  background-color: #fadfac; 
+}
+
+.cell.middle-right {
+  background-color:#9ffa98; 
+}
+
+.cell.bottom-left {
+  background-color: #fadfac; 
+}
+
+.cell.bottom-middle {
+  background-color: #9ffa98; 
+}
+
+.cell.bottom-right {
+  background-color: #fadfac; 
+}
+
+.sudoku .buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.sudoku .buttons button {
+  padding: 5px 10px 5px 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(195, 239, 106);
+}
+
+.sudoku .buttons button:hover{
+  background-color: rgb(220, 253, 155);
+}
+
+.sudoku .buttons .instructions-btn{
+  border-radius: 50%;
+  background-color: rgb(209, 206, 206);
+}

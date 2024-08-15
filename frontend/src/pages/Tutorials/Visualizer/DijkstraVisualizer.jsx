@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import './dijkstravisualizer.css';
 import Lottie from "lottie-react";
-import visualizer_success from "../../assets/data/animationData/visu_success.json";
+import visualizer_success from "../../../assets/data/animationData/visu_success.json";
 
 // Sample graph data
 const graphData = {

@@ -3,28 +3,24 @@ import * as d3 from "d3";
 import "./visualizer.css";
 import "animate.css";
 import Lottie from "lottie-react";
-import visualizer_success from "../../assets/data/animationData/visu_success.json";
+import visualizer_success from "../../../assets/data/animationData/visu_success.json";
 
-const BinarySearchVisualizer = () => {
+const LinearSearchVisualizer = () => {
   const [data, setData] = useState([]);
   const [target, setTarget] = useState(null);
-  const [left, setLeft] = useState(0);
-  const [right, setRight] = useState(0);
-  const [mid, setMid] = useState(null);
-  const [midMsg, setMidMsg] = useState("");
+  const [current, setCurrent] = useState(0);
   const [message, setMessage] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
   const [isAutoSearching, setIsAutoSearching] = useState(false);
   const [found, setFound] = useState(false);
 
   useEffect(() => {
-    // Generate a sorted array of random numbers
+    // Generate an array of random numbers
     const generateData = () => {
-      const array = Array.from({ length: 20 }, () =>
+      const array = Array.from({ length: 15 }, () =>
         Math.floor(Math.random() * 100)
-      ).sort((a, b) => a - b);
+      );
       setData(array);
-      setLeft(0);
-      setRight(array.length - 1);
       setTarget(array[Math.floor(Math.random() * array.length)]);
     };
 
@@ -33,45 +29,34 @@ const BinarySearchVisualizer = () => {
 
   useEffect(() => {
     drawChart();
-  }, [data, left, right, mid]);
+  }, [data, current]);
 
   useEffect(() => {
     let interval;
     if (isAutoSearching) {
       interval = setInterval(() => {
-        binarySearchStep();
+        linearSearchStep();
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [isAutoSearching, left, right, mid]);
+  }, [isAutoSearching, current]);
 
-  const binarySearchStep = () => {
-    if (left > right) {
+  const linearSearchStep = () => {
+    if (current >= data.length) {
       setMessage(`Target ${target} not found in the array.`);
       setIsAutoSearching(false);
       return;
     }
 
-    const midIndex = Math.floor((left + right) / 2);
-    setMid(midIndex);
-    setMidMsg(`New midpoint is ${data[midIndex]}`);
-
-    if (data[midIndex] === target) {
-      setMessage(`Target ${target} found at index ${midIndex}`);
+    if (data[current] === target) {
+      setMessage(`Target ${target} found at index ${current}`);
       setIsAutoSearching(false);
       setFound(true);
-    } else if (data[midIndex] < target) {
-      setMessage(
-        // `Target ${target} is greater than ${data[midIndex]} 🔵 Searching in the right half between ${data[midIndex + 1]} and ${data[right]}`
-        `Target ${target} is greater than ${data[midIndex]} | Searching in the right half`
-      );
-      setLeft(midIndex + 1);
     } else {
       setMessage(
-        // `Target ${target} is less than ${data[midIndex]}  🔵 Searching in the left half between ${data[left]} and ${data[midIndex - 1]}`
-        `Target ${target} is less than ${data[midIndex]} | Searching in the left half`
+        `Target ${target} not found at index ${current}. Checking next element...`
       );
-      setRight(midIndex - 1);
+      setCurrent(current + 1);
     }
   };
 
@@ -93,12 +78,27 @@ const BinarySearchVisualizer = () => {
       .scaleBand()
       .domain(d3.range(data.length))
       .range([margin.left, width - margin.right])
-      .padding(0.2); // Increase the padding between bars
+      .padding(0.1); // Increase the padding between bars
 
     const yScale = d3
       .scaleLinear()
       .domain([0, d3.max(data) + 10])
       .range([height - margin.bottom, margin.top]);
+
+    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
+    const xAxis = (g) =>
+      g.attr("transform", `translate(0,${height - margin.bottom})`).call(
+        d3
+          .axisBottom(xScale)
+          .tickFormat((i) => i + 1)
+          .tickSizeOuter(0)
+      );
+
+    const yAxis = (g) =>
+      g
+        .attr("transform", `translate(${margin.left},0)`)
+        .call(d3.axisLeft(yScale));
 
     svg
       .selectAll("rect")
@@ -109,20 +109,7 @@ const BinarySearchVisualizer = () => {
       .attr("y", (d) => yScale(d))
       .attr("width", xScale.bandwidth())
       .attr("height", (d) => yScale(0) - yScale(d))
-      .attr("fill", (d, i) => {
-        if (i === mid) return "red";
-        if (i >= left && i <= right) return "#FFD6AC";
-        return "lightgrey";
-      })
-      .attr("stroke", (d, i) => {
-        // if (i === left || i === right) return "blue";
-        if (i === mid) return "red";
-        return "none";
-      })
-      .attr("stroke-width", (d, i) => {
-        if (i === left || i === right || i === mid) return 2;
-        return 0;
-      });
+      .attr("fill", (d, i) => colorScale(i));
 
     svg
       .selectAll("text.label")
@@ -155,10 +142,28 @@ const BinarySearchVisualizer = () => {
           .attr("fill", "green");
       }
     }
+
+    // Highlight current value
+    if (current !== null && current < data.length) {
+      const xPos = xScale(current) + xScale.bandwidth() / 2;
+      const yPos = yScale(data[current]) - 20;
+
+      svg
+        .append("polygon")
+        .attr(
+          "points",
+          `
+          ${xPos},${yPos} 
+          ${xPos - 10},${yPos - 10} 
+          ${xPos + 10},${yPos - 10}
+        `
+        )
+        .attr("fill", "red");
+    }
   };
 
   const handleNextStep = () => {
-    binarySearchStep();
+    linearSearchStep();
   };
 
   const handleAutoSearch = () => {
@@ -172,13 +177,13 @@ const BinarySearchVisualizer = () => {
   return (
     <div className="visualizer">
       <div className="header">
-        <h2>Binary Search Visualizer</h2>
+        <h2>Linear Search Visualizer</h2>
         <label>
-          Binary Search efficiently finds a target value within a sorted list
-          by repeatedly dividing the search interval in half.
+          Linear Search sequentially checks each element in a list until the
+          desired element is found or the list is exhausted.
         </label>
         <label>
-          We have a <span>sorted</span> list of 20 numbers from which one
+          We have a <span>random</span> list of 15 numbers here from which one
           particular number is to be searched out.
         </label>
         <label>
@@ -186,7 +191,7 @@ const BinarySearchVisualizer = () => {
           <span>{target}</span>
         </label>
         <label>
-          Click on the buttons below to visualize the binary search!
+          Click on the buttons below to visualize the linear search!
         </label>
       </div>
 
@@ -203,13 +208,13 @@ const BinarySearchVisualizer = () => {
         <div className="buttons">
           <button
             onClick={handleNextStep}
-            disabled={isAutoSearching || left > right}
+            disabled={isAutoSearching || current >= data.length}
           >
             Next Step
           </button>
           <button
             onClick={handleAutoSearch}
-            disabled={isAutoSearching || left > right}
+            disabled={isAutoSearching || current >= data.length}
           >
             Auto Simulate
           </button>
@@ -220,17 +225,14 @@ const BinarySearchVisualizer = () => {
       </div>
 
       <div className="footer">
-        {left > right && <p>Target {target} not found in the array.</p>}
-        {!found && (
-          <p>
-            <div>{midMsg}</div>
-            {message}
-          </p>
+        {current >= data.length && (
+          <p>Target {target} not found in the array.</p>
         )}
+        {!found && <p>{message}</p>}
         {found && <p className="found">{message}</p>}
       </div>
     </div>
   );
 };
 
-export default BinarySearchVisualizer;
+export default LinearSearchVisualizer;

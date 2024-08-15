@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import * as d3 from "d3";
+
 import "./visualizer.css";
 import Lottie from "lottie-react";
-import visualizer_success from "../../assets/data/animationData/visu_success.json";
+import visualizer_success from "../../../assets/data/animationData/visu_success.json";
 
-const InsertionSortVisualizer = () => {
+const SelectionSortVisualizer = () => {
   const [data, setData] = useState([]);
   const [colors, setColors] = useState([]);
-  const [current, setCurrent] = useState(1);
+  const [i, setI] = useState(0);
+  const [j, setJ] = useState(0);
   const [sorted, setSorted] = useState(false);
   const [message, setMessage] = useState("");
   const [isAutoSorting, setIsAutoSorting] = useState(false);
@@ -27,17 +29,17 @@ const InsertionSortVisualizer = () => {
 
   useEffect(() => {
     drawChart();
-  }, [data, colors, current]);
+  }, [data, i, j, colors]);
 
   useEffect(() => {
     let interval;
     if (isAutoSorting && !sorted) {
       interval = setInterval(() => {
-        insertionSortStep();
+        selectionSortStep();
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [isAutoSorting, data, current, sorted]);
+  }, [isAutoSorting, data, i, j, sorted]);
 
   const getRandomColor = () => {
     const letters = "0123456789ABCDEF";
@@ -48,33 +50,30 @@ const InsertionSortVisualizer = () => {
     return color;
   };
 
-  const insertionSortStep = () => {
+  const selectionSortStep = () => {
     const array = [...data];
     const colorArray = [...colors];
-    let i = current;
-    let j = i - 1;
-    let key = array[i];
-
-    while (j >= 0 && array[j] > key) {
-      array[j + 1] = array[j];
-      colorArray[j + 1] = colorArray[j];
-      j--;
-    }
-    array[j + 1] = key;
-    colorArray[j + 1] = getRandomColor();
-
-    if (current < array.length - 1) {
-      setData(array);
-      setColors(colorArray);
-      setMessage(`Inserting ${key} into the sorted portion of the array.`);
-      setCurrent(current + 1);
+    if (i < array.length - 1) {
+      if (j < array.length) {
+        if (array[j] < array[i]) {
+          [array[i], array[j]] = [array[j], array[i]];
+          [colorArray[i], colorArray[j]] = [colorArray[j], colorArray[i]];
+          setColors(colorArray);
+          setMessage(
+            `Swapping ${array[i]} and ${array[j]} because ${array[i]} is less than ${array[j]}`
+          );
+        }
+        setJ(j + 1);
+      } else {
+        setJ(i + 1);
+        setI(i + 1);
+      }
     } else {
-      setData(array);
-      setColors(colorArray);
-      setMessage("Array is sorted!");
       setSorted(true);
+      setMessage("Array is sorted!");
       setIsAutoSorting(false);
     }
+    setData(array);
   };
 
   const drawChart = () => {
@@ -82,7 +81,6 @@ const InsertionSortVisualizer = () => {
     const height = 300;
     const margin = { top: 20, right: 30, bottom: 30, left: 40 };
 
-    d3.select("#chart").selectAll("*").remove();
     const svg = d3
       .select("#chart")
       .attr("width", width)
@@ -101,25 +99,23 @@ const InsertionSortVisualizer = () => {
       .domain([0, d3.max(data) + 10])
       .range([height - margin.bottom, margin.top]);
 
-    const xAxis = (g) =>
-      g.attr("transform", `translate(0,${height - margin.bottom})`).call(
-        d3
-          .axisBottom(xScale)
-          .tickFormat((i) => i + 1)
-          .tickSizeOuter(0)
-      );
+    const bars = svg.selectAll("rect").data(data);
 
-    const yAxis = (g) =>
-      g
-        .attr("transform", `translate(${margin.left},0)`)
-        .call(d3.axisLeft(yScale));
+    // Exit old elements not present in new data
+    bars.exit().remove();
 
-    // svg.append('g').call(xAxis);
-    // svg.append('g').call(yAxis);
+    // Update existing elements
+    bars
+      .transition()
+      .duration(500)
+      .attr("x", (d, i) => xScale(i))
+      .attr("y", (d) => yScale(d))
+      .attr("width", xScale.bandwidth())
+      .attr("height", (d) => yScale(0) - yScale(d))
+      .attr("fill", (d, i) => colors[i]);
 
-    svg
-      .selectAll("rect")
-      .data(data)
+    // Enter new elements
+    bars
       .enter()
       .append("rect")
       .attr("x", (d, i) => xScale(i))
@@ -128,9 +124,22 @@ const InsertionSortVisualizer = () => {
       .attr("height", (d) => yScale(0) - yScale(d))
       .attr("fill", (d, i) => colors[i]);
 
-    svg
-      .selectAll("text.label")
-      .data(data)
+    const labels = svg.selectAll("text.label").data(data);
+
+    // Exit old elements not present in new data
+    labels.exit().remove();
+
+    // Update existing elements
+    labels
+      .transition()
+      .duration(500)
+      .attr("x", (d, i) => xScale(i) + xScale.bandwidth() / 2)
+      .attr("y", (d) => yScale(d) - 5)
+      .attr("text-anchor", "middle")
+      .text((d) => d);
+
+    // Enter new elements
+    labels
       .enter()
       .append("text")
       .attr("class", "label")
@@ -139,10 +148,14 @@ const InsertionSortVisualizer = () => {
       .attr("text-anchor", "middle")
       .text((d) => d);
 
+    // Remove any existing pointers
+    svg.selectAll("polygon").remove();
+
     // Add pointer (triangle) to the current element
     if (!sorted && data.length > 0) {
       const pointerSize = 10;
-      const xPos = xScale(current) + xScale.bandwidth() / 2;
+      const xPosI = xScale(i) + xScale.bandwidth() / 2;
+      const xPosJ = xScale(j) + xScale.bandwidth() / 2;
       const yPos = yScale(0) + 10; // Position at the bottom
 
       svg
@@ -150,17 +163,29 @@ const InsertionSortVisualizer = () => {
         .attr(
           "points",
           `
-          ${xPos},${yPos} 
-          ${xPos - pointerSize},${yPos + pointerSize} 
-          ${xPos + pointerSize},${yPos + pointerSize}
+          ${xPosI},${yPos} 
+          ${xPosI - pointerSize},${yPos + pointerSize} 
+          ${xPosI + pointerSize},${yPos + pointerSize}
         `
         )
         .attr("fill", "red");
+
+      svg
+        .append("polygon")
+        .attr(
+          "points",
+          `
+          ${xPosJ},${yPos} 
+          ${xPosJ - pointerSize},${yPos + pointerSize} 
+          ${xPosJ + pointerSize},${yPos + pointerSize}
+        `
+        )
+        .attr("fill", "blue");
     }
   };
 
   const handleNextStep = () => {
-    insertionSortStep();
+    selectionSortStep();
   };
 
   const handleAutoSort = () => {
@@ -175,13 +200,13 @@ const InsertionSortVisualizer = () => {
   return (
     <div className="visualizer">
       <div className="header">
-        <h2>Insertion Sort Visualizer</h2>
+        <h2>Selection Sort Visualizer</h2>
         <label>
           We have a <span>unsorted</span> list of 10 numbers from which we want
           to sort in ascending order
         </label>
 
-        <label>Click on the buttons below to visualize the Insertion Sort!</label>
+        <label>Click on the buttons below to visualize the Selection Sort!</label>
       </div>
 
       <div className="content">
@@ -215,4 +240,4 @@ const InsertionSortVisualizer = () => {
   );
 };
 
-export default InsertionSortVisualizer;
+export default SelectionSortVisualizer;

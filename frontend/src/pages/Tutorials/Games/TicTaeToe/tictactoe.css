@@ -1,0 +1,40 @@
+.tictactoe .tictactoe-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap:3rem;
+}
+
+.tictactoe .tictactoe-content .animation{
+  width: 20%;
+}
+
+.tictactoe .hintIdea{
+  width: 5%;
+}
+.tictactoe .buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+.tictactoe .buttons button {
+    padding: 5px 10px 5px 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(195, 239, 106);
+  }
+  
+  .tictactoe .buttons button:hover{
+    background-color: rgb(220, 253, 155);
+  }
+  
+  .tictactoe .buttons .instructions-btn{
+    border-radius: 50%;
+    background-color: rgb(209, 206, 206);
+  }

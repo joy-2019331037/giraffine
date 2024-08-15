@@ -1,0 +1,44 @@
+.games {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15rem;
+  padding: 0rem 20rem 0rem 20rem;
+}
+.games a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.games div {
+  height: 60vh;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  border-radius: 10px;
+}
+
+.games div:hover{
+    background-color: rgb(227, 242, 255);
+    color: chocolate;
+
+    .gameIntro{
+        color: green;
+    }
+}
+
+.games div img {
+  width: 40%;
+}
+
+.games div .gameIntro {
+  padding: 0px 1rem 0px 1rem;
+  font-family: cursive;
+  font-size: small;
+  color: rgb(133, 133, 133);
+  text-align: center;
+}

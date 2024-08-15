@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import "./visualizer.css";
 
 import Lottie from "lottie-react";
-import visualizer_success from "../../assets/data/animationData/visu_success.json";
+import visualizer_success from "../../../assets/data/animationData/visu_success.json";
 
 const SieveVisualizer = () => {
   const [actionMessage, setActionMessage] = useState("");

@@ -1,0 +1,59 @@
+.webdevbasics{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.webdevbasics .case{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
+    width: 60%;
+    margin-bottom: 2rem;
+}
+
+
+.webdevbasics .case a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.webdevbasics .case .element{
+    width: 80%;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.webdevbasics .case .element:hover{
+    background-color: rgb(227, 242, 255);
+    color: chocolate;
+
+    div{
+        color: green;
+    }
+}
+
+
+
+
+.webdevbasics .case .element img{
+    width: 30%;
+}
+
+.webdevbasics .case .element div{
+    padding: 0px 20px 0px 10px;
+    font-family: cursive;
+    font-size: smaller;
+   color: rgb(133, 133, 133);
+   text-align:center   ;
+}
+

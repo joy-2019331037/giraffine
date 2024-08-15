@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import "./dequevisualizer.css";
 
 import Lottie from "lottie-react";
-import dequeAnimation from "../../assets/data/animationData/queue.json";
+import dequeAnimation from "../../../assets/data/animationData/queue.json";
 
 const MAX_DEQUE_SIZE = 10;
 

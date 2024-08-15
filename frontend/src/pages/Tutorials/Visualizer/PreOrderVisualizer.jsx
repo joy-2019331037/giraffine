@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 import Lottie from "lottie-react";
-import visualizer_success from "../../assets/data/animationData/visu_success.json";
+import visualizer_success from "../../../assets/data/animationData/visu_success.json";
+
 
 // Sample tree data
 const treeData = {
@@ -24,46 +25,41 @@ const treeData = {
   ],
 };
 
-// Postorder traversal function that returns traversal order
-const postorderTraversalWithMessages = (tree) => {
-  const visited = [];
-  const messages = [];
-
-  const traverse = (node, isRoot = false, isBacktracking = false) => {
-    if (!node) return;
-
-    if (isRoot) {
-      messages.push(`Starting traversal from the root node ${node.name}.`);
-    } else if (isBacktracking) {
-      messages.push(
-        `Backtracking to next right subtree with root node ${node.name}`
-      );
-    } else {
-      messages.push(
-        `Traversing to the next left subtree with root node ${node.name}.`
-      );
-    }
-
-    if (node.children) {
-      node.children.forEach((child, index) => {
-        traverse(child, false, index === node.children.length - 1);
-      });
-    }
-
-    visited.push(node.name);
-    messages.push(`Visiting node ${node.name}.`);
+// Preorder traversal function that returns traversal order
+const preorderTraversalWithMessages = (tree) => {
+    const visited = [];
+    const messages = [];
+  
+    const traverse = (node, isRoot = false, isBacktracking = false) => {
+      if (!node) return;
+  
+      if (isRoot) {
+        messages.push(`Starting traversal from the root node ${node.name}.`);
+      } else if (isBacktracking) {
+        messages.push(
+          `Backtracking to next right subtree with root node ${node.name}`
+        );
+      } else {
+        messages.push(`Traversing to the next left subtree with root node ${node.name}.`);
+      }
+  
+      visited.push(node.name);
+      messages.push(`Visiting node ${node.name}.`);
+  
+      if (node.children) {
+        node.children.forEach((child, index) => {
+          traverse(child, false, index === node.children.length - 1);
+        });
+      }
+    };
+  
+    traverse(tree, true);
+    messages.push("Traversal is complete.");
+  
+    return { visited, messages };
   };
 
-  traverse(tree, true);
-  messages.push("Traversal is complete.");
-
-  return { visited, messages };
-};
-
-
-
-
-const PostorderVisualizer = () => {
+const PreorderVisualizer = () => {
     const [visitedNodes, setVisitedNodes] = useState([]);
     const [step, setStep] = useState(0);
     const [messages, setMessages] = useState([]);
@@ -71,15 +67,9 @@ const PostorderVisualizer = () => {
     const [done, setDone] = useState(false);
     const [isAutoSimulating, setIsAutoSimulating] = useState(false);
     const intervalRef = useRef(null);
-
+  
     useEffect(() => {
-      const { visited, messages } = postorderTraversalWithMessages(treeData);
-      setVisitedNodes(visited);
-      setMessages(messages);
-    }, []);
-
-    useEffect(() => {
-      const { visited, messages } = postorderTraversalWithMessages(treeData);
+      const { visited, messages } = preorderTraversalWithMessages(treeData);
       setVisitedNodes(visited);
       setMessages(messages);
     }, []);
@@ -179,10 +169,10 @@ const PostorderVisualizer = () => {
   return (
     <div className="visualizer">
       <div className="header">
-        <h1>Postorder Traversal Visualizer</h1>
-        <label>Postorder Traversal recursively visits the left and right subtrees first before visiting the root node</label>
+        <h1>Preorder Traversal Visualizer</h1>
+        <label>Preorder Traversal visits the root node first, then recursively visits the left and right subtrees </label>
         <label>Here is a simple tree with 11 nodes</label>
-        <label>Click on the buttons below to visualize the Postorder traversal!</label>
+        <label>Click on the buttons below to visualize the Preorder Traversal!</label>
       </div>
 
       <div className="content">
@@ -222,5 +212,4 @@ const PostorderVisualizer = () => {
   );
 };
 
-export default PostorderVisualizer;
-
+export default PreorderVisualizer;

@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import "./stackvisualizer.css";
 
 import Lottie from "lottie-react";
-import stackAnimation from "../../assets/data/animationData/stack.json";
+import stackAnimation from "../../../assets/data/animationData/stack.json";
 
 const MAX_STACK_SIZE = 10;
 

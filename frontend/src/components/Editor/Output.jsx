@@ -20,6 +20,8 @@ const Output = ({
       <Button
         variant="outline"
         colorScheme="green"
+        border="2px solid"
+        borderColor="green"
         mb={4}
         isLoading={isLoading}
         onClick={runCode}
@@ -29,9 +31,9 @@ const Output = ({
       <Textarea
         height="40vh"
         color={isError ? "red.400" : ""}
-        border="1px solid"
+        border="2px solid"
         borderRadius={4}
-        borderColor={isError ? "red.500" : "#333"}
+        borderColor={isError ? "red.500" : "blue.600"}
         value={output}
         placeholder="Run Code to see the output here"
         isReadOnly

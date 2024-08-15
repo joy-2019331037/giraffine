@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import "./queuevisualizer.css";
 
 import Lottie from "lottie-react";
-import queueAnimation from "../../assets/data/animationData/queue.json";
+import queueAnimation from "../../../assets/data/animationData/queue.json";
 
 const MAX_QUEUE_SIZE = 10;
 

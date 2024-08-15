@@ -1,85 +1,88 @@
-.tutorials{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0rem 10rem 0rem 10rem;
-    margin-bottom: 5rem;
+.tutorials {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 10rem 0rem 10rem;
+  margin-bottom: 5rem;
 }
 
-.tutorials img{
-    width: 25%;
+.tutorials img {
+  width: 25%;
 }
 
-.tutorials a{
-    text-decoration: none;
+.tutorials a {
+  text-decoration: none;
+  color: inherit;
 }
 
-.tutorials p{
-    font-family: cursive;
-    font-size: smaller;
-   color: rgb(154, 154, 154);
+.tutorials p {
+  font-family: cursive;
+  font-size: small;
+  color: rgb(154, 154, 154);
 }
 
-.tutorials label{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: larger;
-    color: chocolate;
+.tutorials label {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: large;
+  font-weight: 550;
 }
 
-.tutorials .pre{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap:3rem;
-    
+.tutorials .pre {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
 }
-.tutorials .pre div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2rem;
-    border-radius: 1rem;
-    background-color: aliceblue;
-}
-
-
-
-.tutorials .pre div:hover{
-    background-color: rgb(227, 242, 255);
+.tutorials .pre div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: aliceblue;
 }
 
-.tutorials .pre div label{
-    margin-left: auto;
+.tutorials .pre div:hover {
+  background-color: rgb(227, 242, 255);
+  color: chocolate;
+  p {
+    color: green;
+  }
 }
 
-.tutorials .post{
-    display: flex;
-    flex-direction: column;
-    gap:3rem;
-    
+.tutorials .pre div label {
+  margin-left: auto;
 }
 
-.tutorials .post div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2rem;
-    border-radius: 1rem;
-    background-color: aliceblue;
+.tutorials .post {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-.tutorials .post div:hover{
-    background-color: rgb(227, 242, 255);
+.tutorials .post div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: aliceblue;
+}
+
+.tutorials .post div:hover {
+  background-color: rgb(227, 242, 255);
+  color: chocolate;
+  p {
+    color: green;
+  }
 }
 
 .tutorials .post .post-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+}
+
 .tutorials .post .post-container .animate__animated {
-    margin-left: auto;
-  }
-
-
+  margin-left: auto;
+}

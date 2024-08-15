@@ -195,12 +195,7 @@ const IndividualProblem = () => {
         </div>
         <div className="others">
           <div className="io">
-            {/* {imageUrl ? (
-              <img src={imageUrl} alt="Generated visual representation" />
-            ) : (
-              <p>Loading image...</p>
-            )} */}
-            {/* <img src={imageUrl} alt="Generated visual representation" /> */}
+           
             <div className="input">
               <label>Input</label>
               <p>{problem.input}</p>

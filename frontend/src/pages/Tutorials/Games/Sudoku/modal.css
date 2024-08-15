@@ -1,0 +1,33 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .modal-content button {
+    padding: 5px 10px 5px 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(195, 239, 106);
+  }
+  
+  .modal-content button:hover {
+    background-color: rgb(220, 253, 155);
+  }
+  

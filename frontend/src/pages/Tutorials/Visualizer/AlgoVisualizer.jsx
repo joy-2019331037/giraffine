@@ -2,10 +2,10 @@ import React from "react";
 import {Link} from 'react-router-dom'
 import { Box, Heading, Text, Flex, List, ListItem } from "@chakra-ui/react";
 import "animate.css";
-import "../../styles/algorithmVisualizer.css";
-import arrow from "../../assets/images/arrow_down.png";
+import "../../../styles/algorithmVisualizer.css";
+import arrow from "../../../assets/images/arrow_down.png";
 
-import {categories} from '../../assets/data/visualizerData/Categories.js';
+import {categories} from '../../../assets/data/visualizerData/Categories.js';
 
 const AlgoVisualizer = () => {
   return (

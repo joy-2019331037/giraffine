@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
 import * as d3 from "d3";
-
 import "./visualizer.css";
 import Lottie from "lottie-react";
-import visualizer_success from "../../assets/data/animationData/visu_success.json";
+import visualizer_success from "../../../assets/data/animationData/visu_success.json";
 
-const SelectionSortVisualizer = () => {
+const BubbleSortVisualizer = () => {
   const [data, setData] = useState([]);
   const [colors, setColors] = useState([]);
-  const [i, setI] = useState(0);
-  const [j, setJ] = useState(0);
+  const [index, setIndex] = useState(0);
   const [sorted, setSorted] = useState(false);
   const [message, setMessage] = useState("");
+  const [isComparing, setIsComparing] = useState(false);
   const [isAutoSorting, setIsAutoSorting] = useState(false);
 
   useEffect(() => {
-    // Generate an array of random numbers
+    // Generate an array of random numbers and their colors
     const generateData = () => {
       const array = Array.from({ length: 10 }, () =>
         Math.floor(Math.random() * 100)
@@ -29,17 +28,17 @@ const SelectionSortVisualizer = () => {
 
   useEffect(() => {
     drawChart();
-  }, [data, i, j, colors]);
+  }, [data, colors, index]);
 
   useEffect(() => {
     let interval;
     if (isAutoSorting && !sorted) {
       interval = setInterval(() => {
-        selectionSortStep();
+        bubbleSortStep();
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [isAutoSorting, data, i, j, sorted]);
+  }, [isAutoSorting, data, index, sorted]);
 
   const getRandomColor = () => {
     const letters = "0123456789ABCDEF";
@@ -50,60 +49,84 @@ const SelectionSortVisualizer = () => {
     return color;
   };
 
-  const selectionSortStep = () => {
+  const bubbleSortStep = () => {
     const array = [...data];
     const colorArray = [...colors];
-    if (i < array.length - 1) {
-      if (j < array.length) {
-        if (array[j] < array[i]) {
-          [array[i], array[j]] = [array[j], array[i]];
-          [colorArray[i], colorArray[j]] = [colorArray[j], colorArray[i]];
-          setColors(colorArray);
-          setMessage(
-            `Swapping ${array[i]} and ${array[j]} because ${array[i]} is less than ${array[j]}`
-          );
-        }
-        setJ(j + 1);
+    if (index < array.length - 1) {
+      setIsComparing(true);
+      if (array[index] > array[index + 1]) {
+        [array[index], array[index + 1]] = [array[index + 1], array[index]];
+        [colorArray[index], colorArray[index + 1]] = [
+          colorArray[index + 1],
+          colorArray[index],
+        ];
+        setData(array);
+        setColors(colorArray);
+        setMessage(
+          `Swapping ${array[index + 1]} and ${array[index]} because ${
+            array[index + 1]
+          } is greater than ${array[index]}`
+        );
       } else {
-        setJ(i + 1);
-        setI(i + 1);
+        setMessage(
+          `No swap needed because ${array[index]} is less than or equal to ${
+            array[index + 1]
+          }`
+        );
       }
+      setIndex(index + 1);
     } else {
-      setSorted(true);
-      setMessage("Array is sorted!");
-      setIsAutoSorting(false);
+      setIndex(0);
+      if (isSorted(array)) {
+        setSorted(true);
+        setMessage("Array is sorted!");
+        setIsComparing(false);
+        setIsAutoSorting(false);
+      } else {
+        setMessage("Starting next pass through the array.");
+      }
     }
-    setData(array);
+    setIsComparing(false); // Reset isComparing state
+  };
+
+  const isSorted = (array) => {
+    for (let i = 0; i < array.length - 1; i++) {
+      if (array[i] > array[i + 1]) {
+        return false;
+      }
+    }
+    return true;
   };
 
   const drawChart = () => {
     const width = 600;
     const height = 300;
     const margin = { top: 20, right: 30, bottom: 30, left: 40 };
-
+  
     const svg = d3
       .select("#chart")
       .attr("width", width)
       .attr("height", height)
       .style("background", "white")
-      .style("margin-top", "50px");
-
+      .style("margin", "50px auto") // Center the chart
+      .style("display", "block"); // Center the chart
+  
     const xScale = d3
       .scaleBand()
       .domain(d3.range(data.length))
       .range([margin.left, width - margin.right])
-      .padding(0.1);
-
+      .padding(0.1); // Increase the padding between bars
+  
     const yScale = d3
       .scaleLinear()
       .domain([0, d3.max(data) + 10])
       .range([height - margin.bottom, margin.top]);
-
+  
     const bars = svg.selectAll("rect").data(data);
-
+  
     // Exit old elements not present in new data
     bars.exit().remove();
-
+  
     // Update existing elements
     bars
       .transition()
@@ -113,7 +136,7 @@ const SelectionSortVisualizer = () => {
       .attr("width", xScale.bandwidth())
       .attr("height", (d) => yScale(0) - yScale(d))
       .attr("fill", (d, i) => colors[i]);
-
+  
     // Enter new elements
     bars
       .enter()
@@ -122,13 +145,18 @@ const SelectionSortVisualizer = () => {
       .attr("y", (d) => yScale(d))
       .attr("width", xScale.bandwidth())
       .attr("height", (d) => yScale(0) - yScale(d))
-      .attr("fill", (d, i) => colors[i]);
-
+      .attr("fill", (d, i) => colors[i])
+      .transition()
+      .duration(500)
+      .attr("x", (d, i) => xScale(i))
+      .attr("y", (d) => yScale(d))
+      .attr("height", (d) => yScale(0) - yScale(d));
+  
     const labels = svg.selectAll("text.label").data(data);
-
+  
     // Exit old elements not present in new data
     labels.exit().remove();
-
+  
     // Update existing elements
     labels
       .transition()
@@ -137,7 +165,7 @@ const SelectionSortVisualizer = () => {
       .attr("y", (d) => yScale(d) - 5)
       .attr("text-anchor", "middle")
       .text((d) => d);
-
+  
     // Enter new elements
     labels
       .enter()
@@ -146,46 +174,41 @@ const SelectionSortVisualizer = () => {
       .attr("x", (d, i) => xScale(i) + xScale.bandwidth() / 2)
       .attr("y", (d) => yScale(d) - 5)
       .attr("text-anchor", "middle")
-      .text((d) => d);
-
+      .text((d) => d)
+      .transition()
+      .duration(500)
+      .attr("x", (d, i) => xScale(i) + xScale.bandwidth() / 2)
+      .attr("y", (d) => yScale(d) - 5);
+  
     // Remove any existing pointers
     svg.selectAll("polygon").remove();
-
+  
     // Add pointer (triangle) to the current element
     if (!sorted && data.length > 0) {
       const pointerSize = 10;
-      const xPosI = xScale(i) + xScale.bandwidth() / 2;
-      const xPosJ = xScale(j) + xScale.bandwidth() / 2;
+      const xPos = xScale(index) + xScale.bandwidth() / 2;
       const yPos = yScale(0) + 10; // Position at the bottom
-
+  
       svg
         .append("polygon")
         .attr(
           "points",
           `
-          ${xPosI},${yPos} 
-          ${xPosI - pointerSize},${yPos + pointerSize} 
-          ${xPosI + pointerSize},${yPos + pointerSize}
+          ${xPos},${yPos} 
+          ${xPos - pointerSize},${yPos + pointerSize} 
+          ${xPos + pointerSize},${yPos + pointerSize}
         `
         )
         .attr("fill", "red");
-
-      svg
-        .append("polygon")
-        .attr(
-          "points",
-          `
-          ${xPosJ},${yPos} 
-          ${xPosJ - pointerSize},${yPos + pointerSize} 
-          ${xPosJ + pointerSize},${yPos + pointerSize}
-        `
-        )
-        .attr("fill", "blue");
     }
   };
+  
+  
+  
+  
 
   const handleNextStep = () => {
-    selectionSortStep();
+    bubbleSortStep();
   };
 
   const handleAutoSort = () => {
@@ -200,13 +223,13 @@ const SelectionSortVisualizer = () => {
   return (
     <div className="visualizer">
       <div className="header">
-        <h2>Selection Sort Visualizer</h2>
+        <h2>Bubble Sort Visualizer</h2>
         <label>
           We have a <span>unsorted</span> list of 10 numbers from which we want
           to sort in ascending order
         </label>
 
-        <label>Click on the buttons below to visualize the Selection Sort!</label>
+        <label>Click on the buttons below to visualize the Bubble Sort!</label>
       </div>
 
       <div className="content">
@@ -240,4 +263,4 @@ const SelectionSortVisualizer = () => {
   );
 };
 
-export default SelectionSortVisualizer;
+export default BubbleSortVisualizer;

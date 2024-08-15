@@ -23,8 +23,8 @@ const CodeEditor = ({
   return (
     <Box
       minH="50vh"
-      bg="#0f0a19"
-      color="blue.600"
+      bg="rgb(242, 249, 255)"
+      color="chocolate"
       px={6}
       py={8}
       ml={200}
@@ -37,7 +37,7 @@ const CodeEditor = ({
             <LanguageSelector language={language} onSelect={onSelect} />
             <Editor
               height="70vh"
-              theme="vs-dark"
+              theme="vs"
               language={language}
               defaultValue={CODE_SNIPPETS[language]}
               value={value}
@@ -51,6 +51,8 @@ const CodeEditor = ({
             </Text>
             <Textarea
               placeholder="Enter input here..."
+              border="2px solid"
+              borderColor="blue.600"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               height="20vh"
