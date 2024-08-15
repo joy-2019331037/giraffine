@@ -28,9 +28,10 @@ const Login = () => {
         userCredentials
       );
       if (response.status === 200) {
-        alert(
-          response.data
-        );
+        // alert(
+        //   response.data
+        // );
+        console.log(response)
         dispatch({ type: "LOGIN_SUCCESS", payload: response.data});
         navigate("/home");  
       }

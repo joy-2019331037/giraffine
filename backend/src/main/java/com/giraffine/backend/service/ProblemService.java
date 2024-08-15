@@ -31,20 +31,20 @@ public class ProblemService {
         return problemRepository.save(problem);
     }
 
-    public Problem updateProblem(String id, Problem problemDetails) {
-        Optional<Problem> optionalProblem = problemRepository.findById(id);
-        if (optionalProblem.isPresent()) {
-            Problem problem = optionalProblem.get();
-            problem.setTitle(problemDetails.getTitle());
-            problem.setDescription(problemDetails.getDescription());
-            problem.setInput(problemDetails.getInput());
-            problem.setOutput(problemDetails.getOutput());
-            problem.setHint(problemDetails.getHint());
-            return problemRepository.save(problem);
-        } else {
-            throw new RuntimeException("Problem not found");
-        }
-    }
+    // public Problem updateProblem(String id, Problem problemDetails) {
+    //     Optional<Problem> optionalProblem = problemRepository.findById(id);
+    //     if (optionalProblem.isPresent()) {
+    //         Problem problem = optionalProblem.get();
+    //         problem.setTitle(problemDetails.getTitle());
+    //         problem.setDescription(problemDetails.getDescription());
+    //         problem.setInput(problemDetails.getInput());
+    //         problem.setOutput(problemDetails.getOutput());
+    //         problem.setHint(problemDetails.getHint());
+    //         return problemRepository.save(problem);
+    //     } else {
+    //         throw new RuntimeException("Problem not found");
+    //     }
+    // }
 
     public void deleteProblem(String id) {
         problemRepository.deleteById(id);

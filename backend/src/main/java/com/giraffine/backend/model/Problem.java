@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Document(collection = "problems")
 @Data
 @NoArgsConstructor
@@ -18,8 +20,14 @@ public class Problem {
     private String level;
     private String title;
     private String description;
-    private String input;
-    private String output;
     private String hint;
+    private List<TestCase> testCases;  // List of test cases
 
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class TestCase {
+        private String input;
+        private String expectedOutput;
+    }
 }

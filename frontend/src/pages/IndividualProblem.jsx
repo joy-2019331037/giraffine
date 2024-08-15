@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  useContext,
+} from "react";
 import { useParams } from "react-router-dom";
 import {
   ChakraProvider,
@@ -22,6 +28,8 @@ import {
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import { AuthContext } from "../context/AuthContext.js";
+
 import Draggable from "react-draggable";
 import { ResizableBox } from "react-resizable";
 import "react-resizable/css/styles.css";
@@ -40,7 +48,7 @@ import "./../styles/individualproblem.css";
 import Lottie from "lottie-react";
 import loading from "../assets/data/animationData/loading.json";
 import alert from "../assets/data/animationData/alert.json";
-import bird from '../assets/data/animationData/bird_singing.json';
+import bird from "../assets/data/animationData/bird_singing.json";
 import speaker from "../assets/images/speaker.png";
 
 import settings from "../assets/images/settings.png";
@@ -56,6 +64,7 @@ const IndividualProblem = () => {
   const { ID } = useParams();
   const [imageUrl, setImageUrl] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { user, dispatch } = useContext(AuthContext);
   const {
     isOpen: isHintOpen,
     onOpen: onHintOpen,
@@ -63,10 +72,11 @@ const IndividualProblem = () => {
   } = useDisclosure();
   const [showSettings, setShowSettings] = useState(false);
   const [problem, setProblem] = useState(null);
+  const [accepted, setAccepted] = useState(false);
 
   const editorRef = useRef(null);
   const [value, setValue] = useState("");
-  const [language, setLanguage] = useState("javascript");
+  const [language, setLanguage] = useState("c");
   const [input, setInput] = useState("");
 
   const [output, setOutput] = useState("");
@@ -121,8 +131,8 @@ const IndividualProblem = () => {
         problem.id = problem.id.trim();
         problem.level = problem.level.trim();
         problem.description = problem.description.trim();
-        problem.input = problem.input.trim();
-        problem.output = problem.output.trim();
+        problem.input = problem.testCases[0].input.trim();
+        problem.output = problem.testCases[0].expectedOutput.trim();
 
         problem.description = problem.description.replace(/\\n/g, "\n");
         problem.output = problem.output.replace(/\\n/g, "\n");
@@ -137,21 +147,65 @@ const IndividualProblem = () => {
     fetchProblem();
   }, [ID]);
 
-  const submitHandler = () => {
-    // console.log(typeof output);
-    // console.log(typeof problem.output);
-    console.log(problem.output);
+  const submitHandler = async () => {
+    const sourceCode = editorRef.current.getValue(); // Get the user's code from the editor
 
-    const trimmedOutput = output.trim();
-    const trimmedProblemOutput = problem.output.trim();
+    if (!sourceCode) return;
 
-    // console.log(`output: '${trimmedOutput}'`);
-    // console.log(`problem.output: '${trimmedProblemOutput}'`);
+    let allTestCasesPassed = true; // Assume all test cases will pass initially
+    console.log(user._id);
+    console.log(problem.id);
+    
+    try {
+      for (const testCase of problem.testCases) {
+        const { input, expectedOutput } = testCase;
 
-    if (trimmedOutput === trimmedProblemOutput) {
-      console.log("accepted");
-    } else {
-      console.log("wrong answer");
+        // Execute the code with the current test case
+        const { run: result } = await executeCode(language, sourceCode, input);
+
+        if (result.output.trim() !== expectedOutput.trim()) {
+          console.log("Test case failed!");
+          allTestCasesPassed = false; // If one test case fails, set this to false
+          break; // Stop the loop if a test case fails
+        } else {
+          console.log("Test case passed!");
+        }
+      }
+
+      // If all test cases passed, set accepted to true
+      setAccepted(allTestCasesPassed);
+
+      if (allTestCasesPassed) {
+        console.log("All test cases passed! Problem accepted.");
+      } else {
+        console.log("Some test cases failed.");
+      }
+
+    
+     // Submit the code to the backend
+     const response = await fetch('http://localhost:8080/submissions/submit?' + new URLSearchParams({
+      userId: user._id,
+      problemId: problem.id,
+      code: sourceCode,
+      language: language,
+      verdict: allTestCasesPassed ? 'Accepted' : 'Rejected',
+    }), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to submit code');
+    }
+
+     
+
+      // const submission = await response.json();
+      // console.log("Submission successful:", submission);
+    } catch (error) {
+      console.error("An error occurred:", error.message);
     }
   };
 
@@ -195,7 +249,6 @@ const IndividualProblem = () => {
         </div>
         <div className="others">
           <div className="io">
-           
             <div className="input">
               <label>Input</label>
               <p>{problem.input}</p>
@@ -222,7 +275,7 @@ const IndividualProblem = () => {
               >
                 <Menu>
                   <MenuButton
-                  style={{ marginBottom: "5px", marginTop:"5px"}}
+                    style={{ marginBottom: "5px", marginTop: "5px" }}
                     as={Button}
                     rightIcon={<i className="arrow down icon" />}
                     className="menu-button"
@@ -234,7 +287,7 @@ const IndividualProblem = () => {
                     <MenuItem
                       className="menu-item"
                       onClick={onOpen}
-                      style={{ marginBottom: "5px", marginTop:"5px" }}
+                      style={{ marginBottom: "5px", marginTop: "5px" }}
                     >
                       Open Whiteboard
                     </MenuItem>
@@ -305,9 +358,8 @@ const IndividualProblem = () => {
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody className="hint-modal-body">
-           
-            <Text className="hint-text">{problem.hint}</Text>
-            <Lottie className="animation" animationData={bird} />
+              <Text className="hint-text">{problem.hint}</Text>
+              <Lottie className="animation" animationData={bird} />
               {/* <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -316,7 +368,6 @@ const IndividualProblem = () => {
                
               </motion.div> */}
             </ModalBody>
-            
           </ModalContent>
         </Modal>
       </ChakraProvider>

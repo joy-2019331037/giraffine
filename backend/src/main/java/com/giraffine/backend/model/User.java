@@ -10,13 +10,26 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 @Document(collection = "users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId _id;
+
+    public String getId() {
+        return _id != null ? _id.toHexString() : null;
+    }
+
+    public void setId(ObjectId _id) {
+        this._id = _id;
+    }
+    
     private String firstName;
     private String lastName;
     private String rank;

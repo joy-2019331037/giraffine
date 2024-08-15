@@ -1,6 +1,7 @@
 package com.giraffine.backend.service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -16,6 +17,9 @@ import com.giraffine.backend.dao.OtpRepository;
 import com.giraffine.backend.dao.UserDao;
 import com.giraffine.backend.model.OTP;
 import com.giraffine.backend.model.User;
+
+import java.util.Map;
+import java.util.HashMap;
 
 @Service
 public class UserService {
@@ -94,10 +98,23 @@ public class UserService {
 
     public ResponseEntity<Object> login(String email, String password) {
         Optional<User> userOpt = ud.findByEmail(email);
+
         if (userOpt.isPresent()) {
             User user = userOpt.get();
+
             if (user.getPassword().equals(password)) {
-                return new ResponseEntity<>(user, HttpStatus.OK);
+                // Convert ObjectId to string before sending response
+                Map<String, Object> response = new HashMap<>();
+                response.put("_id", user.getId().toString()); // Assuming getId() returns a String
+                response.put("firstName", user.getFirstName());
+                response.put("lastName", user.getLastName());
+                response.put("email", user.getEmail());
+                response.put("rank", user.getRank());
+                response.put("friends", user.getFriends());
+                response.put("isVerified", user.isVerified());
+                response.put("password", user.getPassword());
+
+                return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
             }
@@ -105,4 +122,5 @@ public class UserService {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
     }
+
 }

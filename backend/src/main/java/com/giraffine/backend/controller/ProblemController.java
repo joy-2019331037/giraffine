@@ -51,15 +51,15 @@ public class ProblemController {
         return problemService.createProblem(problem);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Problem> updateProblem(@PathVariable String id, @RequestBody Problem problemDetails) {
-        try {
-            Problem updatedProblem = problemService.updateProblem(id, problemDetails);
-            return ResponseEntity.ok(updatedProblem);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Problem> updateProblem(@PathVariable String id, @RequestBody Problem problemDetails) {
+    //     try {
+    //         Problem updatedProblem = problemService.updateProblem(id, problemDetails);
+    //         return ResponseEntity.ok(updatedProblem);
+    //     } catch (RuntimeException e) {
+    //         return ResponseEntity.notFound().build();
+    //     }
+    // }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProblem(@PathVariable String id) {
