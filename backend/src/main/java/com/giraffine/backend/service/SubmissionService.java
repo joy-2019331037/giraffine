@@ -17,7 +17,7 @@ public class SubmissionService {
         this.submissionRepository = submissionRepository;
     }
 
-    public Submission submitCode(String userId, String problemId, String code, String language, String verdict) {
+    public Submission submitCode(String userId, String problemId, String code, String language, String verdict, String message) {
         Submission submission = new Submission();
         submission.setUserId(userId);
         submission.setProblemId(problemId);  // Save problemId
@@ -25,7 +25,7 @@ public class SubmissionService {
         submission.setTimeAndDate(LocalDateTime.now());
         submission.setLanguage(language);
         submission.setVerdict(verdict);
-
+        submission.setMessage(message);
         return submissionRepository.save(submission);
     }
 

@@ -1,0 +1,71 @@
+.submissions {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  max-height: 120vh;
+  overflow-y: auto;
+}
+
+.submissions .currentSubmission {
+  display: flex;
+  flex-direction: column;
+}
+
+.submissions .currentSubmission .title {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: green;
+  width: auto;
+  font-size: 1.2rem;
+  border-bottom: 1px solid rgb(254, 202, 165);
+}
+
+.submissions .currentSubmission .testCases {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  gap: 16px; /* Space between test cases */
+}
+
+.submissions .currentSubmission .testCases .testCaseStatus {
+  flex-basis: calc(33.33% - 16px); /* Three items per row */
+  padding: 8px;
+  text-align: center;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.submissions .currentSubmission .testCases :hover {
+  background-color: #ebebeb;
+}
+
+.submissions .currentSubmission .result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.submissions .currentSubmission .result p {
+  font-size: large;
+  color: green;
+}
+
+.submissions .currentSubmission .result .animation{
+  width: 40%;
+}
+
+.submission-modal-header {
+  color: chocolate;
+}
+
+.submission-modal-body .code {
+  max-height: 18rem;
+  padding: 1rem;
+  margin: 10px 0px 10px 0px;
+  background-color: #e5e4e4;
+  overflow: auto;
+}

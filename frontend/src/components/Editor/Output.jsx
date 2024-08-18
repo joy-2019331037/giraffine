@@ -14,24 +14,14 @@ const Output = ({
   
   return (
     <Box>
-      <Text mb={2} fontSize="lg">
+      <Text mb={2} fontSize="lg" color="green">
         Output
       </Text>
-      <Button
-        variant="outline"
-        colorScheme="green"
-        border="2px solid"
-        borderColor="green"
-        mb={4}
-        isLoading={isLoading}
-        onClick={runCode}
-      >
-        Run Code
-      </Button>
+      
       <Textarea
-        height="40vh"
+        height="30vh"
         color={isError ? "red.400" : ""}
-        border="2px solid"
+        border="1px solid"
         borderRadius={4}
         borderColor={isError ? "red.500" : "blue.600"}
         value={output}

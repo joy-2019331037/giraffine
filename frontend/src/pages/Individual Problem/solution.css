@@ -1,0 +1,15 @@
+.solution{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    max-height: 120vh;
+    overflow-y: auto;
+}
+
+.solution div .animation{
+    width: 50%;
+}

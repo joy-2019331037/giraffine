@@ -27,9 +27,11 @@ public class SubmissionController {
             @RequestParam String problemId,  // Accept problemId
             @RequestParam String code,
             @RequestParam String language,
-            @RequestParam String verdict) {
+            @RequestParam String verdict,
+            @RequestParam String message
+            ) {
 
-        Submission submission = submissionService.submitCode(userId, problemId, code, language, verdict);
+        Submission submission = submissionService.submitCode(userId, problemId, code, language, verdict, message);
         return ResponseEntity.ok(submission);
     }
 

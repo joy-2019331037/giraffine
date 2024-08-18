@@ -20,6 +20,7 @@
     "axios": "^1.7.2",
     "codemirror": "^5.57.0",
     "d3": "^7.9.0",
+    "date-fns": "^3.6.0",
     "framer-motion": "^11.3.2",
     "frontend": "file:",
     "lottie-react": "^2.4.0",

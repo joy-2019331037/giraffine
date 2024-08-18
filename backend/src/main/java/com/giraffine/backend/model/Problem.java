@@ -21,6 +21,7 @@ public class Problem {
     private String title;
     private String description;
     private String hint;
+    private String solution;
     private List<TestCase> testCases;  // List of test cases
 
     @Data

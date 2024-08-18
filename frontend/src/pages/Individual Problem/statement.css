@@ -1,0 +1,241 @@
+.individualproblem {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /*required for scrolling*/
+  margin: 0rem 1rem 0rem 1rem;
+  max-height: 100vh;
+  overflow-y: auto;
+  align-items: center;
+}
+
+.individualproblem .problemDetails {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 0rem 2rem 2rem 2rem;
+}
+
+.individualproblem .animation{
+  width: 60%;
+}
+
+.individualproblem .problemDetails img {
+  width: 1rem;
+}
+
+.individualproblem .problemDetails div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.individualproblem .problemDetails div .description {
+  border: none;
+  color: black;
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: none;
+}
+
+.individualproblem .problemDetails div p {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: green;
+  width: auto;
+  font-size: 1.4rem;
+  border-bottom: 1px solid rgb(254, 202, 165);
+}
+
+.individualproblem .problemDetails .io {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+.individualproblem .problemDetails .io img {
+  width: 10rem;
+}
+
+.individualproblem .problemDetails .io .input {
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.individualproblem .problemDetails .io .input p {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(224, 224, 224);
+  padding: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+}
+.individualproblem .problemDetails .io .input img {
+  width: 20px;
+  height: 20px;
+  cursor: copy;
+}
+
+.individualproblem .problemDetails .io .input label {
+  width: 60%;
+  color: rgb(7, 33, 55);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: green;
+  font-size: 1.2rem;
+  /* border-bottom: 1px solid rgb(254, 202, 165); */
+}
+
+.individualproblem .problemDetails .io .output {
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.individualproblem .problemDetails .io .output label {
+  width: 60%;
+  color: rgb(7, 33, 55);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: green;
+  font-size: 1.2rem;
+  /* border-bottom: 1px solid rgb(254, 202, 165); */
+}
+.individualproblem .problemDetails .io .output p {
+  background-color: rgb(224, 224, 224);
+  padding: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+}
+
+.individualproblem .problemDetails .others .settings {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.individualproblem .problemDetails .others .settings div {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgb(196, 255, 196);
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.individualproblem .tools {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  
+}
+
+.individualproblem .tools p {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: green;
+  width: auto;
+  font-size: 1.4rem;
+  border-bottom: 1px solid rgb(254, 202, 165);
+}
+
+.individualproblem .tools .options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.individualproblem .tools .options div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 35%;
+  cursor: pointer;
+}
+
+.individualproblem .tools .options div img {
+  width: 10%;
+}
+
+.individualproblem .tools .options div label {
+  cursor: pointer;
+}
+
+.individualproblem .community {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  
+}
+
+.individualproblem .community p {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: green;
+  width: auto;
+  font-size: 1.4rem;
+  border-bottom: 1px solid rgb(254, 202, 165);
+}
+
+
+/*----------------------------*/
+
+.whiteboard-modal-header {
+  cursor: move;
+  background-color: blanchedalmond;
+}
+
+.hint-modal-content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hint-modal-header {
+  color: green;
+  display: flex;
+  align-items: center;
+}
+
+.hint-modal-content .hint-text {
+  /* font-family: "Segoe Script";
+      font-family: "Papyrus";
+      font-family: "Harrington"; */
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 1.1rem;
+}
+
+.hint-modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hint-modal-body .animation {
+  width: 30%;
+}
+
+.hint-modal-header .animation {
+  width: 8%;
+}
+
+.hint-modal-footer button {
+  color: green;
+}

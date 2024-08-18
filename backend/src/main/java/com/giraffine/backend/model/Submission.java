@@ -21,4 +21,5 @@ public class Submission {
     private LocalDateTime timeAndDate;
     private String language;
     private String verdict;
+    private String message;
 }

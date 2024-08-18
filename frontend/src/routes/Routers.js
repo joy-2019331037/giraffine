@@ -8,7 +8,7 @@ import Login from "../pages/Login";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import Problems from "../pages/Problems";
-import IndividualProblem from "../pages/IndividualProblem";
+import IndividualProblem from "../pages/Individual Problem/IndividualProblem";
 import LevelWiseProblemSet from "../pages/LevelWiseProblemSet";
 import Competition from "../pages/Competition";
 import Artciles from "../pages/Articles";
