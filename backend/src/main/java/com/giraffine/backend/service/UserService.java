@@ -12,10 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.giraffine.backend.dao.OtpRepository;
 import com.giraffine.backend.dao.UserDao;
 import com.giraffine.backend.model.OTP;
+import com.giraffine.backend.model.SolveProblemResponse;
 import com.giraffine.backend.model.User;
 
 import java.util.Map;
@@ -37,6 +39,11 @@ public class UserService {
         return ud.findAll();
     }
 
+    public User getUserById(String userId) {
+        ObjectId objectId = new ObjectId(userId);
+        return ud.findById(objectId).orElse(null);
+    }
+    
     public ResponseEntity<String> addUser(User user) {
         try {
             String email = user.getEmail();
@@ -113,6 +120,8 @@ public class UserService {
                 response.put("friends", user.getFriends());
                 response.put("isVerified", user.isVerified());
                 response.put("password", user.getPassword());
+                response.put("levelProgress", user.getLevelProgress());
+                
 
                 return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
@@ -121,6 +130,25 @@ public class UserService {
         } else {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
+    }
+
+    public SolveProblemResponse solveProblem(
+            String userId,
+            String level,
+            String problemId) {
+
+        // Fetch the user by ID
+        User user = ud.findById(new ObjectId(userId))
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Solve the specific problem for the given level
+        String message = user.solveProblem(level, problemId);
+
+        // Save the updated user state
+        ud.save(user);
+
+        // Return the response with the user data and message
+        return new SolveProblemResponse(user, message);
     }
 
 }

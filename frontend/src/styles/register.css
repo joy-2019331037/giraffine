@@ -34,7 +34,7 @@
     padding: 8px;
     border-radius: 10px;
     border: 0.5px solid var(--tertiary-color);
-    font-size: large;
+    font-size: 15px;
 }
 .reg_form label{
     font-size: medium;

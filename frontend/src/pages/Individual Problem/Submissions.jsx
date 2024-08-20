@@ -11,6 +11,7 @@ import {
   Button,
   useDisclosure,
   useToast,
+  Text,
 } from "@chakra-ui/react";
 import { format } from "date-fns";
 import reload from "../../assets/images/reload.png";
@@ -21,6 +22,13 @@ import { executeCode } from "../../components/Editor/api.js";
 
 import Lottie from "lottie-react";
 import acceptedAnimation from "../../assets/data/animationData/visu_success.json";
+import Swal from "sweetalert2";
+
+import learner from "../../assets/images/levels/sprout.png";
+import explorer from "../../assets/images/levels/explorer.png";
+import adventurer from "../../assets/images/levels/adventurer.png";
+import challenger from "../../assets/images/levels/challenger.png";
+import mastermind from "../../assets/images/levels/mastermind.png";
 
 const Submissions = ({
   userId,
@@ -37,6 +45,14 @@ const Submissions = ({
   const [showCurrentSubmission, setShowCurrentSubmission] = useState(false);
   const editorRef = useRef(null);
 
+  const images = {
+    Learner: learner,
+    Explorer: explorer,
+    Adventurer: adventurer,
+    Challenger: challenger,
+    Mastermind: mastermind,
+  };
+
   const [testCaseStatuses, setTestCaseStatuses] = useState([]);
 
   const [value, setValue] = useState("");
@@ -46,12 +62,52 @@ const Submissions = ({
   const [isError, setIsError] = useState(false);
   const toast = useToast();
 
+  const updateProblemSolveInfo = async (userId, level, problemId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/user/solveProblem/${userId}/${level}/${problemId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Problem count updated:", data);
+      const updatedUser = data.user;
+      const message = data.message;
+      if(message[0]=='C'){
+        Swal.fire({
+          text: message,
+          imageUrl: images[updatedUser.rank], // Access the image by rank
+          imageWidth: 100, // Dynamically set the image width
+          imageHeight: 100, // You can adjust this as needed
+          imageAlt: "Custom image",
+          confirmButtonText: "OK",
+        });
+      }
+      sessionStorage.setItem("user", JSON.stringify(updatedUser));
+    } catch (error) {
+      console.error("Failed to update problem count:", error);
+    }
+  };
+
   const submitHandler = async () => {
     if (!sourceCode) return;
 
     let allTestCasesPassed = true; // Assume all test cases will pass initially
     let failureMessage = ""; // Initialize an empty failure message
     const updatedTestCaseStatuses = [];
+
+    let failedTestCaseInput = ""; // Variable to store failed test case input
+    let failedExpectedOutput = ""; // Variable to store failed expected output
+    let failedUserOutput = ""; // Variable to store failed user output
 
     try {
       setShowCurrentSubmission(true);
@@ -72,9 +128,12 @@ const Submissions = ({
           setTestCaseStatuses([...updatedTestCaseStatuses]);
 
           // Set the failure message
-          if (failureMessage === "")
+          if (failureMessage === "") {
             failureMessage = `Wrong answer at test case ${i + 1}`;
-          // Stop the loop if a test case fails
+            failedTestCaseInput = input;
+            failedExpectedOutput = expectedOutput;
+            failedUserOutput = result.output.trim();
+          }
         } else {
           console.log("Test case passed!");
           updatedTestCaseStatuses[i] = { status: "passed" };
@@ -86,6 +145,8 @@ const Submissions = ({
       if (allTestCasesPassed) {
         console.log("All test cases passed! Problem accepted.");
         failureMessage = ""; // No failure message if all test cases passed
+        setAccepted(true);
+        updateProblemSolveInfo(userId, problem.level, problem.id);
       } else {
         console.log("Some test cases failed.");
       }
@@ -100,6 +161,13 @@ const Submissions = ({
             language: language,
             verdict: allTestCasesPassed ? "Accepted" : "W/A",
             message: failureMessage, // Add the failure message here
+            failedTestCaseInput: allTestCasesPassed ? "" : failedTestCaseInput,
+            failedTestCaseExpectedOutput: allTestCasesPassed
+              ? ""
+              : failedExpectedOutput,
+            failedTestCaseUserOutput: allTestCasesPassed
+              ? ""
+              : failedUserOutput,
           }),
         {
           method: "POST",
@@ -315,19 +383,76 @@ const Submissions = ({
                 </label>
               </p>
               {selectedSubmission.message !== "" && (
-                <p>
-                  <strong>Message:</strong>{" "}
-                  <label
+                <div>
+                  <p>
+                    <strong>Message:</strong>{" "}
+                    <label
+                      style={{
+                        color:
+                          selectedSubmission.verdict === "Accepted"
+                            ? "green"
+                            : "red",
+                      }}
+                    >
+                      <underline>{selectedSubmission.message}</underline>
+                    </label>
+                  </p>
+
+                  <div
                     style={{
-                      color:
-                        selectedSubmission.verdict === "Accepted"
-                          ? "green"
-                          : "red",
+                      display: "flex",
+                      flexDirection: "column",
+                      maxHeight: "10rem",
+                      width: "100%",
+                      overflowX: "auto",
+                      overflowY: "auto",
+                      backgroundColor: " #e5e4e4",
+                      padding: "0.5rem 3rem 0.5rem 3rem",
+                      gap: "0.5rem",
                     }}
                   >
-                    <underline>{selectedSubmission.message}</underline>
-                  </label>
-                </p>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <label>Input</label>
+                      <Text whiteSpace="pre-line">
+                        {" "}
+                        {selectedSubmission.failedTestCaseInput}
+                      </Text>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <label>Expected Output</label>
+                      <Text whiteSpace="pre-line" style={{ color: "green" }}>
+                        {" "}
+                        {selectedSubmission.failedTestCaseExpectedOutput}
+                      </Text>
+                    </div>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <label>User's Output</label>
+                      <Text whiteSpace="pre-line" style={{ color: "red" }}>
+                        {" "}
+                        {selectedSubmission.failedTestCaseUserOutput}
+                      </Text>
+                    </div>
+                  </div>
+                </div>
               )}
             </ModalBody>
             <ModalFooter>

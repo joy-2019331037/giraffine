@@ -56,7 +56,7 @@ const Routers = () => {
       <Route path="/home" element={<Home />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/problems" element={<Problems />} />
-      <Route path="/problem/:levelName/:ID" element={<IndividualProblem />} />
+      <Route path="/problems/:levelName/:ID" element={<IndividualProblem />} />
       <Route path="/problems/:levelName" element={<LevelWiseProblemSet />} />
       <Route path="/competition" element={<Competition />} />
       <Route path="/articles" element={<Artciles />} />

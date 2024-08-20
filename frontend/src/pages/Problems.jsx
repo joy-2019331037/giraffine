@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { ChakraProvider, Box, Text, VStack } from "@chakra-ui/react";
 import theme from "../components/Editor/theme.js";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 import "./../styles/problems.css";
 
-import sprout from "../assets/images/levels/sprout.png";
+import learner from "../assets/images/levels/sprout.png";
 import explorer from "../assets/images/levels/explorer.png";
 import adventurer from "../assets/images/levels/adventurer.png";
 import challenger from "../assets/images/levels/challenger.png";
@@ -19,12 +19,12 @@ import ScrollDown from "../assets/data/animationData/scrollDown.json";
 
 const Problems = () => {
   const [problemsData, setProblemsData] = useState({});
-  const images = [sprout, explorer, adventurer, challenger, mastermind];
+  const images = [learner, explorer, adventurer, challenger, mastermind];
 
   useEffect(() => {
     const fetchProblems = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/problems/');
+        const response = await axios.get("http://localhost:8080/problems/");
         const problems = response.data;
 
         const groupedProblems = problems.reduce((acc, problem) => {
@@ -37,7 +37,7 @@ const Problems = () => {
         }, {});
 
         setProblemsData(groupedProblems);
-        console.log(problemsData)
+        console.log(problemsData);
       } catch (error) {
         console.error("Error fetching problems:", error);
       }
@@ -95,7 +95,7 @@ const Problems = () => {
             </Text>
             <VStack align="start" spacing={3}>
               {problems.slice(0, 5).map((problem, problemIndex) => (
-                <Link key={problem.id} to={`/problem/${level}/${problem.id}`}>
+                <Link key={problem.id} to={`/problems/${level}/${problem.id}`}>
                   <Box className={`problem problem-${problemIndex + 1}`}>
                     <Text fontSize="xl">{problem.title}</Text>
                     {/* <Text whiteSpace="pre-line">{problem.description}</Text> */}

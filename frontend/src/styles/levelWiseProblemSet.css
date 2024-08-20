@@ -1,11 +1,18 @@
 .levelWiseProblem{
     margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:3rem;
+    padding: 2rem;
 }
 .levelWiseProblem .arrows{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    text-align: center;
 }
 
 .levelWiseProblem .arrows img{
@@ -15,28 +22,52 @@
 .levelWiseProblem .Problem{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    padding: 2rem 20rem 2rem 20rem;
+    justify-content: space-evenly;
+    
     gap: 2rem;
 }
+
+
+.levelWiseProblem .Problem a{
+   text-decoration: none;
+   color: black;
+}
+
+.levelWiseProblem .Problem .text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.levelWiseProblem .Problem .text p{
+    color: chocolate;
+    font-size: 0.8rem;
+}
+
 
 
 .levelWiseProblem .Problem .text img{
     width: 40%;
 }
-
+.levelWiseProblem .Problem .problemList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    
+}
 .levelWiseProblem .Problem .sing_prob{
     width: 25rem;
-    border: 1px solid #ccc;
+    border: 1px solid #e2e2e2;
     border-radius: 8px;
     padding: 8px;
     background-color: rgb(255, 238, 214);
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1.1rem;
-}
-.levelWiseProblem .Problem a{
-   text-decoration: none;
-   color: black;
+    cursor: pointer;
 }
 
 .levelWiseProblem .Problem .sing_prob:hover {

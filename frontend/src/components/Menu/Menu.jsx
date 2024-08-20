@@ -11,34 +11,37 @@ import leaderboard from "../../assets/images/leaderboard.png";
 const Menu = () => {
   const location = useLocation();
 
+  // Helper function to check if the keyword is in the current pathname
+  const isActive = (keyword) => location.pathname.includes(keyword);
+
   return (
     <div className="menu">
       <Link to="/problems">
-        <div className={`item ${location.pathname === "/problems" ? "active" : ""}`}>
+        <div className={`item ${isActive("problems") ? "active" : ""}`}>
           <img src={problems} alt="Problems" />
           Problems
         </div>
       </Link>
       <Link to="/competition">
-        <div className={`item ${location.pathname === "/competition" ? "active" : ""}`}>
+        <div className={`item ${isActive("competition") ? "active" : ""}`}>
           <img src={competition} alt="Competition" />
           Competition
         </div>
       </Link>
       <Link to="/articles">
-        <div className={`item ${location.pathname === "/articles" ? "active" : ""}`}>
+        <div className={`item ${isActive("articles") ? "active" : ""}`}>
           <img src={articles} alt="Articles" />
           Articles
         </div>
       </Link>
       <Link to="/tutorials">
-        <div className={`item ${location.pathname === "/tutorials" ? "active" : ""}`}>
+        <div className={`item ${isActive("tutorials") ? "active" : ""}`}>
           <img src={tutorial} alt="Tutorials" />
           Tutorials
         </div>
       </Link>
       <Link to="/leaderboard">
-        <div className={`item ${location.pathname === "/leaderboard" ? "active" : ""}`}>
+        <div className={`item ${isActive("leaderboard") ? "active" : ""}`}>
           <img src={leaderboard} alt="Leaderboard" />
           Leaderboard
         </div>

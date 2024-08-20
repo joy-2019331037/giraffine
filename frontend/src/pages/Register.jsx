@@ -3,6 +3,7 @@ import axios from "axios";
 import "./../styles/register.css";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
+import Swal from 'sweetalert2';
 
 import animationData from '../assets/data/animationData/panda_2.json'
 
@@ -24,10 +25,14 @@ const Register = () => {
       lastName: lastName,
       email: email,
       password: pass,
-      rank: "pawn",
+      rank: "Learner",
       isVerified: "",
       friends: [],
+      problemsSolved: {
+        learner: 0, // Initialize with 0 problems solved for the "learner" rank
+      },
     };
+    
 
     try {
       const response = await axios.post(
@@ -35,9 +40,15 @@ const Register = () => {
         newUser
       );
       if (response.status === 201) {
-        alert(
-          "Registration Successful! Please check your email for verification."
-        );
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful",
+          text: "Congratulations! You have been successfully registered into Giraffine Academy!",
+          footer: 'Please check your email for verification code'
+        });
+        // alert(
+        //   "Registration Successful! Please check your email for verification."
+        // );
         navigate("/otpVerification", { state: { email } });
       }
     } catch (error) {

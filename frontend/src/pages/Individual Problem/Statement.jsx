@@ -68,14 +68,14 @@ const Statement = ({ problem }) => {
       left: iconRect.left,
     });
     setShowTooltip(true);
-    setTimeout(() => setShowTooltip(false), 2000);
+    setTimeout(() => setShowTooltip(false), 1000);
   };
 
   return (
     <div className="individualproblem">
       <Lottie className="animation" animationData={thinking2} />
       <div className="problemDetails">
-        <div>
+        <div className="desc">
           <p>Description</p>
           <Text className="description" whiteSpace="pre-line">
             {problem.description}
@@ -86,7 +86,7 @@ const Statement = ({ problem }) => {
           <div className="input">
             <label>Input</label>
             <p>
-              {problem.input}
+            <Text whiteSpace="pre-line">{problem.input}</Text>
               <img
                 src={copy}
                 alt="Copy Icon"
@@ -102,7 +102,7 @@ const Statement = ({ problem }) => {
                   width:"12%",
                   textAlign:"center",
                   position: "absolute",
-                  top: tooltipPosition.top+310,
+                  top: tooltipPosition.top+100,
                   left: tooltipPosition.left+150,
                   backgroundColor: "#ccc",
                   color: "black",

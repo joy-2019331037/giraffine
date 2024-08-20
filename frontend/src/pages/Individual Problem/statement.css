@@ -26,7 +26,7 @@
   width: 1rem;
 }
 
-.individualproblem .problemDetails div {
+.individualproblem .problemDetails .desc {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,7 +34,7 @@
   width: 100%;
 }
 
-.individualproblem .problemDetails div .description {
+.individualproblem .problemDetails .desc .description {
   border: none;
   color: black;
   font-size: 1rem;
@@ -42,7 +42,7 @@
   padding: none;
 }
 
-.individualproblem .problemDetails div p {
+.individualproblem .problemDetails .desc p {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   color: green;
@@ -74,7 +74,7 @@
   flex-direction: row;
   justify-content: space-between;
   background-color: rgb(224, 224, 224);
-  padding: 1rem;
+  padding: 5px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
 }
@@ -111,7 +111,7 @@
 }
 .individualproblem .problemDetails .io .output p {
   background-color: rgb(224, 224, 224);
-  padding: 1rem;
+  padding: 10px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
 }

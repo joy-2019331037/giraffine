@@ -16,6 +16,14 @@ const Header = () => {
   const { user, dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const rankColors = {
+    Mastermind: "#ff0037",
+    Challenger: "orange",
+    Adventurer: "blueviolet",
+    Explorer: "blue",
+    Learner: "#4CAF50",
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -40,9 +48,11 @@ const Header = () => {
         <>
           <Menu />
           <div className="user">
-    
             <label>
-              <Link to="/profile"> {user.firstName} </Link>
+              <Link to="/profile">
+                {" "}
+                <label style={{color:`${rankColors[user.rank]}`, cursor:"pointer"}}>{user.firstName}</label>{" "}
+              </Link>
             </label>
             <img src={logout} onClick={logoutHandler} />
             <ConfirmDialog
@@ -54,7 +64,6 @@ const Header = () => {
           </div>
         </>
       )}
-      
     </div>
   );
 };

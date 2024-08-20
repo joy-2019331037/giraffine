@@ -1,6 +1,11 @@
 package com.giraffine.backend.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.HashSet;
+
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,13 +34,68 @@ public class User {
     public void setId(ObjectId _id) {
         this._id = _id;
     }
-    
+
     private String firstName;
     private String lastName;
     private String rank;
     private List<String> friends;
-    
+
     private String email;
     private String password;
-    private boolean isVerified; // Add this field
+    private boolean isVerified;
+
+    // Map to track the set of problems solved for each level
+    private Map<String, Set<String>> levelProgress = new HashMap<>();
+
+    // Initialize the levelProgress map with empty sets for all levels
+    {
+        levelProgress.put("Learner", new HashSet<>());
+        levelProgress.put("Explorer", new HashSet<>());
+        levelProgress.put("Adventurer", new HashSet<>());
+        levelProgress.put("Challenger", new HashSet<>());
+        levelProgress.put("Mastermind", new HashSet<>());
+    }
+
+    // Method to track which problem from a level has been solved
+    public String solveProblem(String level, String problemId) {
+        Set<String> solvedProblems = levelProgress.getOrDefault(level, new HashSet<>());
+
+        // If the problem is not already solved
+        if (!solvedProblems.contains(problemId)) {
+            solvedProblems.add(problemId);
+            levelProgress.put(level, solvedProblems);
+        }
+
+        String message;
+
+        if (level.equals(rank) && solvedProblems.size() == 10) {
+            upgradeRank();
+            message = "Congratulations! You've solved all problems in " + level + " and your rank has been upgraded to " + rank + "!";
+        } else {
+            message = "Problem " + problemId + " solved! Your current progress in " + level + " level is " + solvedProblems.size() + "/10.";
+        }
+
+        return message;
+    }
+
+    // Method to upgrade the user's rank only if the current level's problems are all solved
+    private void upgradeRank() {
+        switch (rank) {
+            case "Learner":
+                rank = "Explorer";
+                break;
+            case "Explorer":
+                rank = "Adventurer";
+                break;
+            case "Adventurer":
+                rank = "Challenger";
+                break;
+            case "Challenger":
+                rank = "Mastermind";
+                break;
+            default:
+                // Already at the highest rank
+                break;
+        }
+    }
 }

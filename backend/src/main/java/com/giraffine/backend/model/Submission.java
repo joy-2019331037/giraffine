@@ -22,4 +22,8 @@ public class Submission {
     private String language;
     private String verdict;
     private String message;
+
+    private String failedTestCaseInput;
+    private String failedTestCaseExpectedOutput;
+    private String failedTestCaseUserOutput;
 }

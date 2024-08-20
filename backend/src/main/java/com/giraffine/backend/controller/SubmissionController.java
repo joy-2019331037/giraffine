@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/submissions")
 public class SubmissionController {
-    //do not remove from line 14 to 20
+    // do not remove from line 14 to 20
     private final SubmissionService submissionService;
 
     @Autowired
@@ -24,24 +24,34 @@ public class SubmissionController {
     @PostMapping("/submit")
     public ResponseEntity<Submission> submitCode(
             @RequestParam String userId,
-            @RequestParam String problemId,  // Accept problemId
+            @RequestParam String problemId, // Accept problemId
             @RequestParam String code,
             @RequestParam String language,
             @RequestParam String verdict,
-            @RequestParam String message
-            ) {
+            @RequestParam String message,
+            @RequestParam String failedTestCaseInput,
+            @RequestParam String failedTestCaseExpectedOutput,
+            @RequestParam String failedTestCaseUserOutput) {
 
-        Submission submission = submissionService.submitCode(userId, problemId, code, language, verdict, message);
+        Submission submission = submissionService.submitCode(userId, problemId, code, language, verdict, message,
+                failedTestCaseInput, failedTestCaseExpectedOutput, failedTestCaseUserOutput);
         return ResponseEntity.ok(submission);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/user/{userId}/problem/{problemId}")
     public ResponseEntity<List<Submission>> getAllSubmissionsByUserIdAndProblemId(
-            @PathVariable String userId, 
+            @PathVariable String userId,
             @PathVariable String problemId) {
 
         List<Submission> submissions = submissionService.getAllSubmissionsByUserIdAndProblemId(userId, problemId);
+        return ResponseEntity.ok(submissions);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/getAllSubmissionsByUserId/{userId}")
+    public ResponseEntity<List<Submission>> getAllSubmissions(@PathVariable String userId) {
+        List<Submission> submissions = submissionService.getAllSubmissionsByUserId(userId);
         return ResponseEntity.ok(submissions);
     }
 }

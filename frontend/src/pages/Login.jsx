@@ -27,6 +27,7 @@ const Login = () => {
         "http://localhost:8080/user/login",
         userCredentials
       );
+      console.log(response.data);
       if (response.status === 200) {
         // alert(
         //   response.data
