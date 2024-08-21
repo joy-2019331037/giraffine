@@ -22,10 +22,10 @@ const Menu = () => {
           Problems
         </div>
       </Link>
-      <Link to="/competition">
-        <div className={`item ${isActive("competition") ? "active" : ""}`}>
+      <Link to="/contests">
+        <div className={`item ${isActive("contests") ? "active" : ""}`}>
           <img src={competition} alt="Competition" />
-          Competition
+          Contests
         </div>
       </Link>
       <Link to="/articles">

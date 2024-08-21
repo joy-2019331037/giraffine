@@ -1,0 +1,48 @@
+.contests-container {
+    padding: 0rem 5rem 2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .contests-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Ensure 3 columns per row */
+    gap: 20px;
+  }
+
+  .contests-grid a{
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .contest-card {
+    background-color: aliceblue;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .contest-card img{
+   text-align: center;
+  }
+  
+  .contest-card:hover {
+    transform: scale(1.03);
+  }
+  
+  .contest-card h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+  
+  .contest-card p {
+    margin: 8px 0;
+  }
+  
+  .contest-card strong {
+    color: #333;
+  }
+  

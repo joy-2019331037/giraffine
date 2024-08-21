@@ -24,10 +24,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-import { AuthContext } from "../context/AuthContext";
-import "./../styles/profile.css";
-import PersonalSubmissions from "./Profile/PersonalSubmissions";
-import PersonalInfo from "./Profile/PersonalInfo";
+import { AuthContext } from "../../context/AuthContext";
+import "../../styles/profile.css";
+import PersonalSubmissions from "./PersonalSubmissions";
+import PersonalInfo from "./PersonalInfo";
 
 const Profile = () => {
   const { user, dispatch } = useContext(AuthContext);
