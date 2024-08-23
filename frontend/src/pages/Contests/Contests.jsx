@@ -10,6 +10,8 @@ import challenger from "../../assets/images/levels/challenger.png";
 import mastermind from "../../assets/images/levels/mastermind.png";
 import { Link } from "react-router-dom";
 
+import CircularProgress from "@mui/material/CircularProgress";
+
 const Contests = () => {
   const [contests, setContests] = useState([]);
 
@@ -40,23 +42,36 @@ const Contests = () => {
     fetchContests();
   }, []);
 
+  if (!contests) {
+    return (
+      <center>
+        <CircularProgress color="inherit" />
+      </center>
+    );
+  }
+
   return (
     <div className="contests-container">
       <h1>Contests</h1>
       <div className="contests-grid">
-        {contests.length > 0 ? (
+        {contests.length > 0 && (
           contests.map((contest) => (
             <div className="contest-card" key={contest.id}>
               <Link to={`/contests/preview/${contest.id}`}>
                 <center>
-                  <div style={{backgroundColor:"white"}}>
+                  <div style={{ backgroundColor: "white" }}>
                     <img
                       style={{ width: "30%", margin: "10px" }}
                       src={`${images[contest.level]}`}
                     />
                   </div>
                 </center>
-                <div style={{ backgroundColor: "rgb(255, 247, 234)", padding:"16px" }}>
+                <div
+                  style={{
+                    backgroundColor: "rgb(255, 247, 234)",
+                    padding: "16px",
+                  }}
+                >
                   <h2>
                     {contest.level} Round {contest.round}
                   </h2>
@@ -71,9 +86,7 @@ const Contests = () => {
               </Link>
             </div>
           ))
-        ) : (
-          <p>No contests available.</p>
-        )}
+        ) }
       </div>
     </div>
   );

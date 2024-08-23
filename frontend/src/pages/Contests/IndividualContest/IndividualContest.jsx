@@ -1,15 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext.js";
+import { AuthContext } from "../../../context/AuthContext.js";
 import axios from "axios";
 
 import CircularProgress from "@mui/material/CircularProgress";
 
-import sprout from "../../assets/images/levels/sprout.png";
-import explorer from "../../assets/images/levels/explorer.png";
-import adventurer from "../../assets/images/levels/adventurer.png";
-import challenger from "../../assets/images/levels/challenger.png";
-import mastermind from "../../assets/images/levels/mastermind.png";
+import sprout from "../../../assets/images/levels/sprout.png";
+import explorer from "../../../assets/images/levels/explorer.png";
+import adventurer from "../../../assets/images/levels/adventurer.png";
+import challenger from "../../../assets/images/levels/challenger.png";
+import mastermind from "../../../assets/images/levels/mastermind.png";
 
 import IndividualContestProblems from "./IndividualContestProblems.jsx";
 import IndividualContestSubmissions from "./IndividualContestSubmissions.jsx";

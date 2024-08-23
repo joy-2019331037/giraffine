@@ -14,34 +14,35 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { format } from "date-fns";
-import reload from "../../assets/images/reload.png";
-import greenTick from "../../assets/images/greenTick.png";
-import "./submissions.css";
+import reload from "../../../assets/images/reload.png";
+import greenTick from "../../../assets/images/greenTick.png";
+import "../../Individual Problem/submissions.css";
 import CircularProgress from "@mui/material/CircularProgress";
-import { executeCode } from "../../components/Editor/api.js";
+import { executeCode } from "../../../components/Editor/api.js";
 
 import Lottie from "lottie-react";
-import acceptedAnimation from "../../assets/data/animationData/visu_success.json";
+import acceptedAnimation from "../../../assets/data/animationData/visu_success.json";
 import Swal from "sweetalert2";
 
-import learner from "../../assets/images/levels/sprout.png";
-import explorer from "../../assets/images/levels/explorer.png";
-import adventurer from "../../assets/images/levels/adventurer.png";
-import challenger from "../../assets/images/levels/challenger.png";
-import mastermind from "../../assets/images/levels/mastermind.png";
+import learner from "../../../assets/images/levels/sprout.png";
+import explorer from "../../../assets/images/levels/explorer.png";
+import adventurer from "../../../assets/images/levels/adventurer.png";
+import challenger from "../../../assets/images/levels/challenger.png";
+import mastermind from "../../../assets/images/levels/mastermind.png";
 
-const Submissions = ({
+const ContestProblemSubmissions = ({
   userId,
   submittedBy,
+  contestId,
   problem,
   language,
   sourceCode,
-  submitted = false,
+  submitted =false,
   resetSubmissionState,
 }) => {
   const [submissions, setSubmissions] = useState([]);
   const [selectedSubmission, setSelectedSubmission] = useState(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [accepted, setAccepted] = useState(false);
   const [showCurrentSubmission, setShowCurrentSubmission] = useState(false);
   const editorRef = useRef(null);
@@ -63,44 +64,9 @@ const Submissions = ({
   const [isError, setIsError] = useState(false);
   const toast = useToast();
 
-  const updateProblemSolveInfo = async (userId, level, problemId) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/user/solveProblem/${userId}/${level}/${problemId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log("Problem count updated:", data);
-      const updatedUser = data.user;
-      const message = data.message;
-      if(message[0]=='C'){
-        Swal.fire({
-          text: message,
-          imageUrl: images[updatedUser.rank], // Access the image by rank
-          imageWidth: 100, // Dynamically set the image width
-          imageHeight: 100, // You can adjust this as needed
-          imageAlt: "Custom image",
-          confirmButtonText: "OK",
-        });
-      }
-      sessionStorage.setItem("user", JSON.stringify(updatedUser));
-    } catch (error) {
-      console.error("Failed to update problem count:", error);
-    }
-  };
-
-  const submitHandler = async () => {
+  const contestSubmitHandler = async () => {
     if (!sourceCode) return;
+   
 
     let allTestCasesPassed = true; // Assume all test cases will pass initially
     let failureMessage = ""; // Initialize an empty failure message
@@ -123,7 +89,7 @@ const Submissions = ({
         const { run: result } = await executeCode(language, sourceCode, input);
 
         if (result.output.trim() !== expectedOutput.trim()) {
-          console.log("Test case failed!");
+          // console.log("Test case failed!");
           allTestCasesPassed = false; // If one test case fails, set this to false
           updatedTestCaseStatuses[i] = { status: "failed" };
           setTestCaseStatuses([...updatedTestCaseStatuses]);
@@ -136,7 +102,7 @@ const Submissions = ({
             failedUserOutput = result.output.trim();
           }
         } else {
-          console.log("Test case passed!");
+          // console.log("Test case passed!");
           updatedTestCaseStatuses[i] = { status: "passed" };
           setTestCaseStatuses([...updatedTestCaseStatuses]);
         }
@@ -144,66 +110,63 @@ const Submissions = ({
 
       // If all test cases passed, set accepted to true and keep the message empty
       if (allTestCasesPassed) {
-        console.log("All test cases passed! Problem accepted.");
+        // console.log("All test cases passed! Problem accepted.");
         failureMessage = ""; // No failure message if all test cases passed
         setAccepted(true);
-        updateProblemSolveInfo(userId, problem.level, problem.id);
       } else {
-        console.log("Some test cases failed.");
+        // console.log("Some test cases failed.");
       }
 
-      // Submit the code to the backend with the verdict and message
-      const response = await fetch(
-        "http://localhost:8080/submissions/submit?" +
-          new URLSearchParams({
-            userId: userId,
-            submittedBy : submittedBy,
-            problemId: problem.id,
-            code: sourceCode,
-            language: language,
-            verdict: allTestCasesPassed ? "Accepted" : "W/A",
-            message: failureMessage, // Add the failure message here
-            failedTestCaseInput: allTestCasesPassed ? "" : failedTestCaseInput,
-            failedTestCaseExpectedOutput: allTestCasesPassed
-              ? ""
-              : failedExpectedOutput,
-            failedTestCaseUserOutput: allTestCasesPassed
-              ? ""
-              : failedUserOutput,
-          }),
+      const contestSubmitResponse = await axios.post(
+        `http://localhost:8080/submissions/submit/contest/${contestId}`,
         {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
+          userId: userId,
+          submittedBy: submittedBy,
+          problemId: contestId + " "+ problem.id,
+          submittedCode: sourceCode,
+          timeAndDate:new Date().toISOString(),
+          language: language,
+          verdict: allTestCasesPassed ? "Accepted" : "W/A",
+          message: failureMessage, // Add the failure message here
+          failedTestCaseInput: allTestCasesPassed ? "" : failedTestCaseInput,
+          failedTestCaseExpectedOutput: allTestCasesPassed
+            ? ""
+            : failedExpectedOutput,
+          failedTestCaseUserOutput: allTestCasesPassed ? "" : failedUserOutput,
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to submit code");
-      }
+      console.log(
+        "Submission for Contest successful",
+        contestSubmitResponse.data
+      );
     } catch (error) {
-      console.error("An error occurred:", error.message);
+      if (error.response && error.response.status === 429) {
+        const retryAfter = error.response.headers["retry-after"];
+        console.error(
+          `Rate limit exceeded. Retry after ${retryAfter} seconds.`
+        );
+        // Implement logic to wait and retry after `retryAfter` seconds
+      } else {
+        console.error(
+          "An error occurred:",
+          error.response ? error.response.data : error.message
+        );
+      }
     }
   };
 
   useEffect(() => {
-    console.log(submitted)
-    if (submitted == true) {
-      submitHandler();
-      submitted=false;
+
+    if (submitted === true) {
       resetSubmissionState();
+      contestSubmitHandler();
     }
   }, [submitted]);
-  console.log(submitted);
+
   useEffect(() => {
     fetchSubmissions();
   }, [userId, problem.id]);
-
-  const openModal = (submission) => {
-    setSelectedSubmission(submission);
-    onOpen();
-  };
 
   const formatDate = (dateString) => {
     return format(new Date(dateString), "MM/dd/yyyy HH:mm:ss");
@@ -211,7 +174,7 @@ const Submissions = ({
   const fetchSubmissions = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/submissions/user/${userId}/problem/${problem.id}`
+        `http://localhost:8080/submissions/user/${userId}/problem/${contestId+" "+problem.id}`
       );
 
       const fetchedSubmissions = response.data;
@@ -274,12 +237,7 @@ const Submissions = ({
                   .map((submission) => (
                     <tr key={submission.id}>
                       <td>
-                        <Button
-                          variant="link"
-                          onClick={() => openModal(submission)}
-                        >
-                          {submission.id}
-                        </Button>
+                        <Button variant="link">{submission.id}</Button>
                       </td>
                       <td>{submission.problemId}</td>
                       <td>{formatDate(submission.timeAndDate)}</td>
@@ -344,7 +302,7 @@ const Submissions = ({
         )}
       </div>
 
-      {selectedSubmission && (
+      {/* {selectedSubmission && (
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent className="submission-modal-content">
@@ -412,8 +370,6 @@ const Submissions = ({
                       backgroundColor: " #e5e4e4",
                       padding: "0.5rem 3rem 0.5rem 3rem",
                       gap: "0.5rem",
-                      marginTop:"1rem"
-
                     }}
                   >
                     <div
@@ -467,9 +423,9 @@ const Submissions = ({
             </ModalFooter>
           </ModalContent>
         </Modal>
-      )}
+      )} */}
     </div>
   );
 };
 
-export default Submissions;
+export default ContestProblemSubmissions;

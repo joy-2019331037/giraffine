@@ -23,34 +23,9 @@ public class Contest {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private int numberOfProblems;
-    private List<Problem> problemSet;  // List of problems
+    private List<ContestProblem> problemSet;  // List of problems
     private int numberOfParticipants;
     private List<User> participants;  // List of User objects
     private List<Submission> submissions;  // List of Submission objects
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Problem {
-        private String id;
-        
-        
-        private String level;
-        private String title;
-        private String description;
-        private String hint;
-        private String solution;
-        private String constraints;
-        private List<TestCase> testCases;
-        private int timeLimit;  // Time limit in seconds
-        private int memoryLimit;  // Memory limit in MB
-
-        @Data
-        @NoArgsConstructor
-        @AllArgsConstructor
-        public static class TestCase {
-            private String input;
-            private String expectedOutput;
-        }
-    }
 }

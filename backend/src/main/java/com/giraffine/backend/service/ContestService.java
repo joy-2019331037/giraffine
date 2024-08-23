@@ -5,6 +5,7 @@ import com.giraffine.backend.dao.ContestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.giraffine.backend.model.User;
+import com.giraffine.backend.model.ContestProblem;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -40,7 +41,7 @@ public class ContestService {
 
             // Check if the user is already registered
             // boolean alreadyRegistered = contest.getParticipants().stream()
-            //         .anyMatch(participant -> participant.getId().equals(user.getId()));
+            // .anyMatch(participant -> participant.getId().equals(user.getId()));
 
             if (isUserRegistered(contestId, user.getId())) {
 
@@ -60,41 +61,51 @@ public class ContestService {
 
     public boolean isUserRegistered(String contestId, String userId) {
         Optional<Contest> contestOptional = contestRepository.findById(contestId);
-    
+
         if (contestOptional.isPresent()) {
             Contest contest = contestOptional.get();
             return contest.getParticipants().stream()
                     .anyMatch(participant -> participant.getId().equals(userId));
         }
-        
+
         return false; // Return false if the contest is not found
     }
 
-
-
     public String getupdatedContestStatus(String contestId) {
         Optional<Contest> contestOptional = contestRepository.findById(contestId);
-        String response="";
+        String response = "";
         if (contestOptional.isPresent()) {
             Contest contest = contestOptional.get();
             LocalDateTime now = LocalDateTime.now();
-            
+
             if (now.isBefore(contest.getStartTime())) {
                 contest.setStatus("Upcoming");
-                response= "Upcoming";
+                response = "Upcoming";
             } else if (now.isAfter(contest.getEndTime())) {
                 contest.setStatus("Ended");
-                response= "Ended";
+                response = "Ended";
             } else {
                 contest.setStatus("Ongoing");
-                response= "Ongoing";
+                response = "Ongoing";
             }
-            
+
             contestRepository.save(contest);
             return response;
         } else {
             throw new RuntimeException("Contest not found with id: " + contestId);
         }
     }
-    
+
+    public ContestProblem getContestProblem(String contestId, String problemId) {
+        // Fetch the contest by its ID
+        Contest contest = contestRepository.findById(contestId)
+                .orElseThrow(() -> new RuntimeException("Contest not found"));
+
+        // Find the specific problem by its ID
+        return contest.getProblemSet().stream()
+                .filter(problem -> problem.getId().equals(problemId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Problem not found"));
+    }
+
 }

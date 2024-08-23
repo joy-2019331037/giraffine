@@ -16,7 +16,8 @@ public class Submission {
     @Id
     private String id;
     private String userId;
-    private String problemId;  // Added problemId field
+    private String submittedBy;
+    private String problemId;  
     private String submittedCode;
     private LocalDateTime timeAndDate;
     private String language;

@@ -5,6 +5,7 @@ import com.giraffine.backend.service.ContestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.giraffine.backend.model.User;
+import com.giraffine.backend.model.ContestProblem;
 
 import java.util.List;
 
@@ -50,4 +51,10 @@ public class ContestController {
         return contestService.getupdatedContestStatus(contestId);
     }
 
+    @GetMapping("/getContestProblem/{contestId}/{problemId}")
+    public ContestProblem getContestProblem(
+            @PathVariable String contestId,
+            @PathVariable String problemId) {
+        return contestService.getContestProblem(contestId, problemId);
+    }
 }

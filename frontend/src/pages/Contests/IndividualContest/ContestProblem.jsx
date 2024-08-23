@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useContext,
 } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSubmit } from "react-router-dom";
 import {
   ChakraProvider,
   Box,
@@ -30,28 +30,23 @@ import {
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import { AuthContext } from "../../context/AuthContext.js";
+import { AuthContext } from "../../../context/AuthContext.js";
 
-import speaker from "../../assets/images/speaker.png";
+import CodeEditor from "../../../components/Editor/CodeEditor.jsx";
+import { CODE_SNIPPETS } from "../../../components/Editor/constants.js";
+import { executeCode } from "../../../components/Editor/api.js";
 
-import CodeEditor from "../../components/Editor/CodeEditor.jsx";
-import LanguageSelector from "../../components/Editor/LanguageSelector.jsx";
-import { CODE_SNIPPETS } from "../../components/Editor/constants.js";
-import { executeCode } from "../../components/Editor/api.js";
+import Statement from "./ContestProblemStatement.jsx";
+import Submissions from "./ContestProblemSubmissions.jsx";
 
-import Statement from "./Statement.jsx";
-import Submissions from "./Submissions.jsx";
-import Solution from "./Solution.jsx";
+import "./../../Individual Problem/individualproblem.css";
 
-import "./individualproblem.css";
-const IndividualProblem = () => {
-  const { ID } = useParams();
-  const [imageUrl, setImageUrl] = useState(null);
+const ContestProblem = () => {
   const { user, dispatch } = useContext(AuthContext);
   const [problem, setProblem] = useState(null);
+  const [contest, setContest] = useState(null);
   const [srcCode, setSrcCode] = useState("");
-  const [submitted, setSubmitted] =useState(false);
-
+  const [submitted, setSubmitted] = useState(false);
   const [activeTab, setActiveTab] = useState("statement");
 
   const editorRef = useRef(null);
@@ -62,6 +57,8 @@ const IndividualProblem = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const toast = useToast();
+
+  const { contestId, problemId } = useParams();
 
   const onMount = (editor) => {
     editorRef.current = editor;
@@ -95,35 +92,29 @@ const IndividualProblem = () => {
   };
 
   useEffect(() => {
-    const fetchProblem = async () => {
+    const fetchContest = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/problems/${ID}`
+          `http://localhost:8080/contests/getContestById/${contestId}`
         );
-        const problem = response.data;
 
-        problem.title = problem.title.trim();
-        problem.id = problem.id.trim();
-        problem.level = problem.level.trim();
-        problem.description = problem.description.trim();
-        problem.input = problem.testCases[0].input.trim();
-        problem.output = problem.testCases[0].expectedOutput.trim();
-
-        problem.description = problem.description.replace(/\\n/g, "\n");
-        problem.output = problem.output.replace(/\\n/g, "\n");
-
-        setProblem(problem);
-        console.log(problem);
+        setContest(response.data);
       } catch (error) {
-        console.error("Error fetching problems:", error);
+        console.error("Error fetching contests:", error);
       }
     };
-
-    fetchProblem();
-  }, [ID]);
+    fetchContest();
+  }, [contestId]);
+  // console.log(contestId, problemId);
+  useEffect(() => {
+    if (contest) {
+      const problem = contest.problemSet.find((p) => p.id === problemId);
+      setProblem(problem);
+    }
+  }, [contest, problemId]);
 
   const submitHandler = () => {
-    const sourceCode = editorRef.current.getValue();   // Get the user's code from the editor
+    const sourceCode = editorRef.current.getValue(); // Get the user's code from the editor
     setSrcCode(sourceCode);
     setSubmitted(true);
     setActiveTab("submissions");
@@ -132,7 +123,6 @@ const IndividualProblem = () => {
   const resetSubmissionState = () => {
     setSubmitted(false);
   };
-  
 
   if (!problem) {
     return (
@@ -153,15 +143,40 @@ const IndividualProblem = () => {
             style={{
               width: "100%",
               padding: "0rem 2rem 1rem 1rem",
-              margin: "1rem",
-              borderBottom: "1px solid #ccc",
+              fontSize: "2.5rem",
+              color: "green",
+              textAlign: "center",
+            }}
+          >
+            {contest.level} Round {contest.round}
+          </label>
+        </Flex>
+        <Flex display="flex" flexDirection="column" alignItems="center" m={0}>
+          <label
+            style={{
+              width: "100%",
+              padding: "0rem 2rem 0rem 1rem",
               fontSize: "2rem",
-
               color: "chocolate",
             }}
           >
-            {problem.title}
+            {problem.id} : {problem.title}
           </label>
+          <div
+            style={{
+              width: "100%",
+              padding: "0rem 2rem 0.5rem 1rem",
+              borderBottom: "1px solid #ccc",
+              marginBottom:"1rem"
+            }}
+          >
+            <div style={{display:"flex", flexDirection:"row", gap:"1rem"}}>
+              {" "}
+              <label style={{color:"gray"}}>Time : {problem.timeLimit}sec</label>
+              <label style={{color:"gray"}}>Memory : {problem.memoryLimit}MB</label>
+             
+            </div>
+          </div>
         </Flex>
         <Flex
           padding="0.5rem 1rem 0.5rem 1rem"
@@ -187,13 +202,6 @@ const IndividualProblem = () => {
               >
                 Submissions
               </Button>
-              <Button
-                w="100%"
-                onClick={() => setActiveTab("solution")}
-                colorScheme={activeTab === "solution" ? "green" : "gray"}
-              >
-                Solution
-              </Button>
             </Flex>
 
             {activeTab === "statement" && <Statement problem={problem} />}
@@ -201,6 +209,7 @@ const IndividualProblem = () => {
               <Submissions
                 userId={user._id}
                 submittedBy={user.firstName}
+                contestId={contestId}
                 problem={problem}
                 language={language}
                 sourceCode={srcCode}
@@ -208,7 +217,6 @@ const IndividualProblem = () => {
                 resetSubmissionState={resetSubmissionState}
               />
             )}
-            {activeTab === "solution" && <Solution solutionCode={problem.solution} solutionHint={problem.hint}/>}
           </Box>
           <ChakraProvider>
             <Flex w="50%" display="flex" flexDirection="column">
@@ -244,7 +252,7 @@ const IndividualProblem = () => {
   );
 };
 
-export default IndividualProblem;
+export default ContestProblem;
 
 /*
   useEffect(() => {

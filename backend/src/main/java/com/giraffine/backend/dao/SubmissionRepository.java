@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface SubmissionRepository extends MongoRepository<Submission, String> {
     List<Submission> findAllByUserId(String userId);
-    List<Submission> findByUserIdAndProblemId(String userId, String problemId);  // New method to find submissions by userId and problemId
+    List<Submission> findByUserIdAndProblemId(String userId, String problemId); 
 }

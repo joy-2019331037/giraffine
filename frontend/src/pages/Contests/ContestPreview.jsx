@@ -246,16 +246,26 @@ const ContestPreview = () => {
                 gap: "1rem",
               }}
             >
-              <Button onClick={registerHandler}>Register</Button>
               <Button
-                onClick={() => {navigate(`/contests/${contestId}`)}}
+                isDisabled={contestStatus == "Ended" ? true : false}
+                onClick={registerHandler}
+              >
+                Register
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate(`/contests/${contestId}`);
+                }}
                 isDisabled={contestStatus == "Ongoing" ? false : true}
               >
                 Enter Contest
               </Button>
             </div>
+            
           </ChakraProvider>
+         
         </div>
+        {contestStatus==="Upcoming" && <label style={{color:"chocolate", fontSize:"0.8rem"}}>*contest entry will be available in due time</label>}
       </div>
     </div>
   );

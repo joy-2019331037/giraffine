@@ -23,7 +23,7 @@ const Games = () => {
                outsmart the computer on hard mode?</Text>
           </div>
         </Link>
-        <Link to="/tutorials/games/suduko">
+        <Link to="/tutorials/games/sudoku">
           <div>
             <h3> Sudoku</h3>
             <img src={sudoku} />
