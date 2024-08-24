@@ -290,12 +290,12 @@ const ContestProblemSubmissions = ({
             {accepted && (
               <div className="result">
                 <p style={{ fontSize: "large", color: "green" }}>
-                  Congratulations ! You have solved the Problem !
+                  Solution Accepted !
                 </p>
-                <Lottie
+                {/* <Lottie
                   className="animation"
                   animationData={acceptedAnimation}
-                />
+                /> */}
               </div>
             )}
           </div>

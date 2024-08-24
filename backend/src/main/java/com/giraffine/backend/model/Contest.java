@@ -27,5 +27,5 @@ public class Contest {
     private int numberOfParticipants;
     private List<User> participants;  // List of User objects
     private List<Submission> submissions;  // List of Submission objects
-
+    private boolean ratingsUpdated;
 }

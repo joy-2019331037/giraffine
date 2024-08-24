@@ -38,6 +38,8 @@ public class User {
     private String firstName;
     private String lastName;
     private String rank;
+    private int rating;
+    private int ratingIncrement;
     private List<String> friends;
 
     private String email;
@@ -69,8 +71,8 @@ public class User {
         String message;
 
         if (level.equals(rank) && solvedProblems.size() == 10) {
-            upgradeRank();
-            message = "Congratulations! You've solved all problems in " + level + " and your rank has been upgraded to " + rank + "!";
+           
+            message = "Congratulations! You've solved all problems in " + level +"!";
         } else {
             message = "Problem " + problemId + " solved! Your current progress in " + level + " level is " + solvedProblems.size() + "/10.";
         }
@@ -78,24 +80,4 @@ public class User {
         return message;
     }
 
-    // Method to upgrade the user's rank only if the current level's problems are all solved
-    private void upgradeRank() {
-        switch (rank) {
-            case "Learner":
-                rank = "Explorer";
-                break;
-            case "Explorer":
-                rank = "Adventurer";
-                break;
-            case "Adventurer":
-                rank = "Challenger";
-                break;
-            case "Challenger":
-                rank = "Mastermind";
-                break;
-            default:
-                // Already at the highest rank
-                break;
-        }
-    }
 }
