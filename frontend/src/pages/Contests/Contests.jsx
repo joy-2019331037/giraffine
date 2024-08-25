@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { format } from "date-fns";
 import "./Contests.css"; // CSS file for styling
+import { ChakraProvider, Button } from "@chakra-ui/react";
 
 import sprout from "../../assets/images/levels/sprout.png";
 import explorer from "../../assets/images/levels/explorer.png";
@@ -14,6 +16,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const Contests = () => {
   const [contests, setContests] = useState([]);
+  const navigate = useNavigate()
 
   const images = {
     Learner: sprout,
@@ -30,7 +33,7 @@ const Contests = () => {
     const fetchContests = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/contests/getAllContests"
+          "http://localhost:8080/contests/getAllContestsNotEnded"
         );
         setContests(response.data);
         console.log(contests);
@@ -52,42 +55,52 @@ const Contests = () => {
 
   return (
     <div className="contests-container">
-      <h1>Contests</h1>
-      <div className="contests-grid">
-        {contests.length > 0 && (
-          contests.map((contest) => (
-            <div className="contest-card" key={contest.id}>
-              <Link to={`/contests/preview/${contest.id}`}>
-                <center>
-                  <div style={{ backgroundColor: "white" }}>
-                    <img
-                      style={{ width: "30%", margin: "10px" }}
-                      src={`${images[contest.level]}`}
-                    />
+      <label style={{ fontSize: "3rem", color: "chocolate" }}>Contests</label>
+      {contests.length === 0 && (
+        <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", margin:"3rem"}}>
+          <label>New contests will be available soon</label>
+        </div>
+      )}
+      {contests.length !== 0 && (
+        <div className="contests-grid">
+          {contests.length > 0 &&
+            contests.map((contest) => (
+              <div className="contest-card" key={contest.id}>
+                <Link to={`/contests/preview/${contest.id}`}>
+                  <center>
+                    <div style={{ backgroundColor: "white" }}>
+                      <img
+                        style={{ width: "30%", margin: "10px" }}
+                        src={`${images[contest.level]}`}
+                      />
+                    </div>
+                  </center>
+                  <div
+                    style={{
+                      backgroundColor: "rgb(255, 247, 234)",
+                      padding: "16px",
+                    }}
+                  >
+                    <h2>
+                      {contest.level} Round {contest.round}
+                    </h2>
+                    <p>{contest.description}</p>
+                    <p>
+                      <strong>Starts : </strong> {formatDate(contest.startTime)}
+                    </p>
+                    <p>
+                      <strong>Ends : </strong> {formatDate(contest.endTime)}
+                    </p>
                   </div>
-                </center>
-                <div
-                  style={{
-                    backgroundColor: "rgb(255, 247, 234)",
-                    padding: "16px",
-                  }}
-                >
-                  <h2>
-                    {contest.level} Round {contest.round}
-                  </h2>
-                  <p>{contest.description}</p>
-                  <p>
-                    <strong>Starts : </strong> {formatDate(contest.startTime)}
-                  </p>
-                  <p>
-                    <strong>Ends : </strong> {formatDate(contest.endTime)}
-                  </p>
-                </div>
-              </Link>
-            </div>
-          ))
-        ) }
-      </div>
+                </Link>
+              </div>
+            ))}
+        </div>
+      )}
+      <ChakraProvider>
+        {" "}
+        <Button onClick={()=>{navigate("/contests/previousContests")}}>View Previous Contests</Button>
+      </ChakraProvider>
     </div>
   );
 };

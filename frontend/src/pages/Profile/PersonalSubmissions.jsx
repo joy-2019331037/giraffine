@@ -63,7 +63,7 @@ const PersonalSubmissions = ({ userId }) => {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "0rem 3rem 0rem 3rem",
+            padding: "0rem 3rem 1rem 3rem",
           }}
         >
           <h2 style={{ fontSize: "1.2rem", color: "green" }}>

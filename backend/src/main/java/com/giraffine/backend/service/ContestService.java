@@ -51,6 +51,14 @@ public class ContestService {
         return contestRepository.findAll();
     }
 
+    public List<Contest> getAllContestsByStatus(String status) {
+        return contestRepository.findContestsByStatus(status);
+    }
+
+    public List<Contest> getContestsByStatusNotEnded() {
+        return contestRepository.findByStatusNot("Ended");
+    }
+
     // Fetch contest by ID
     public Contest getContestById(String id) {
         return contestRepository.findById(id).orElse(null);

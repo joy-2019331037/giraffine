@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap:2rem
   }
   
   .contests-grid {
@@ -18,7 +19,7 @@
   }
   
   .contest-card {
-    background-color: aliceblue;
+    
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

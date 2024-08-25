@@ -29,6 +29,16 @@ public class ContestController {
         return contestService.getAllContests();
     }
 
+    @GetMapping("/getAllContestsByStatus/{status}")
+    public List<Contest> getAllContestsByStatus(@PathVariable String status) {
+        return contestService.getAllContestsByStatus(status);
+    }
+
+    @GetMapping("/getAllContestsNotEnded")
+    public List<Contest> getAllContestsNotEnded() {
+        return contestService.getContestsByStatusNotEnded();
+    }
+
     // Get contest by ID
     @GetMapping("/getContestById/{id}")
     public Contest getContestById(@PathVariable String id) {

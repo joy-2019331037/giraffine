@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Lottie from "lottie-react";
 
 import {
@@ -28,10 +28,52 @@ import { AuthContext } from "../../context/AuthContext";
 import "../../styles/profile.css";
 import PersonalSubmissions from "./PersonalSubmissions";
 import PersonalInfo from "./PersonalInfo";
+import ContestPerformances from "./ContestPerformances";
+
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Profile = () => {
   const { user, dispatch } = useContext(AuthContext);
-  const [activeTab, setActiveTab] = useState(`${user.firstName}`);
+  const [activeTab, setActiveTab] = useState("About");
+  const [User, setUser] = useState(null);
+  
+
+  const { userId } = useParams();
+  console.log(userId)
+  let id = null;
+  if (!userId) {
+    id = user._id;
+  } else {
+    id = userId;
+  }
+  console.log(id)
+
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/user/getUserById/${id}`
+      );
+
+      setUser(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error("Failed to fetch personal submissions : ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, [id]);
+
+ 
+
+  if (!User) {
+    return (
+      <center>
+        <CircularProgress color="inherit" />
+      </center>
+    );
+  }
 
   return (
     <>
@@ -45,14 +87,14 @@ const Profile = () => {
           >
             <Button
               w="15%"
-              onClick={() => setActiveTab(`${user.firstName}`)}
-              color={activeTab === `${user.firstName}` ? "green" : "gray"}
+              onClick={() => setActiveTab("About")}
+              color={activeTab === "About" ? "green" : "gray"}
               backgroundColor={
-                activeTab === `${user.firstName}` ? "#ececec" : "white"
+                activeTab === "About" ? "#ececec" : "white"
               }
-              fontWeight={activeTab === `${user.firstName}` ? "bold" : ""}
+              fontWeight={activeTab === "About" ? "bold" : ""}
             >
-              {user.firstName}
+              {User.firstName}
             </Button>
             <Button
               w="15%"
@@ -65,11 +107,23 @@ const Profile = () => {
             >
               Submissions
             </Button>
+            <Button
+              w="15%"
+              onClick={() => setActiveTab("Contests")}
+              color={activeTab === "Contests" ? "green" : "gray"}
+              backgroundColor={activeTab === "Contests" ? "#ececec" : "white"}
+              fontWeight={activeTab === "Contests" ? "bold" : ""}
+            >
+              Contests
+            </Button>
           </Flex>
 
-          {activeTab === `${user.firstName}` && <PersonalInfo user={user} />}
+          {activeTab === "About" && <PersonalInfo User={User} />}
           {activeTab === "Submissions" && (
-            <PersonalSubmissions userId={user._id} />
+            <PersonalSubmissions userId={User._id} />
+          )}
+          {activeTab === "Contests" && (
+            <ContestPerformances userId={User._id} />
           )}
         </Box>
       </ChakraProvider>

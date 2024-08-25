@@ -151,102 +151,130 @@ const ContestProblem = () => {
             {contest.level} Round {contest.round}
           </label>
         </Flex>
-        <Flex display="flex" flexDirection="column" alignItems="center" m={0}>
-          <label
-            style={{
-              width: "100%",
-              padding: "0rem 2rem 0rem 1rem",
-              fontSize: "2rem",
-              color: "chocolate",
-            }}
-          >
-            {problem.id} : {problem.title}
-          </label>
-          <div
-            style={{
-              width: "100%",
-              padding: "0rem 2rem 0.5rem 1rem",
-              borderBottom: "1px solid #ccc",
-              marginBottom:"1rem"
-            }}
-          >
-            <div style={{display:"flex", flexDirection:"row", gap:"1rem"}}>
+        {contest.status != "Ended" && (
+          <>
+            <Flex
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              m={0}
+            >
+              <label
+                style={{
+                  width: "100%",
+                  padding: "0rem 2rem 0rem 1rem",
+                  fontSize: "2rem",
+                  color: "chocolate",
+                }}
+              >
+                {problem.id} : {problem.title}
+              </label>
+              <div
+                style={{
+                  width: "100%",
+                  padding: "0rem 2rem 0.5rem 1rem",
+                  borderBottom: "1px solid #ccc",
+                  marginBottom: "1rem",
+                }}
+              >
+                <div
+                  style={{ display: "flex", flexDirection: "row", gap: "1rem" }}
+                >
+                  {" "}
+                  <label style={{ color: "gray" }}>
+                    Time : {problem.timeLimit}sec
+                  </label>
+                  <label style={{ color: "gray" }}>
+                    Memory : {problem.memoryLimit}MB
+                  </label>
+                </div>
+              </div>
+            </Flex>
+            <Flex
+              padding="0.5rem 1rem 0.5rem 1rem"
+              gap="3rem"
+              display="flex"
+              flexDirection="row"
+              justifyContent="center"
+              width="100%"
+            >
+              <Box width="50%" mx="auto">
+                <Flex justifyContent="space-evenly" mb={4}>
+                  <Button
+                    w="100%"
+                    onClick={() => setActiveTab("statement")}
+                    colorScheme={activeTab === "statement" ? "green" : "gray"}
+                  >
+                    Statement
+                  </Button>
+                  <Button
+                    w="100%"
+                    onClick={() => setActiveTab("submissions")}
+                    colorScheme={activeTab === "submissions" ? "green" : "gray"}
+                  >
+                    Submissions
+                  </Button>
+                </Flex>
+
+                {activeTab === "statement" && <Statement problem={problem} />}
+                {activeTab === "submissions" && (
+                  <Submissions
+                    userId={user._id}
+                    submittedBy={user.firstName}
+                    contestId={contestId}
+                    problem={problem}
+                    language={language}
+                    sourceCode={srcCode}
+                    submitted={submitted}
+                    resetSubmissionState={resetSubmissionState}
+                  />
+                )}
+              </Box>
+              <ChakraProvider>
+                <Flex w="50%" display="flex" flexDirection="column">
+                  <CodeEditor
+                    editorRef={editorRef}
+                    value={value}
+                    setValue={setValue}
+                    language={language}
+                    setLanguage={setLanguage}
+                    input={input}
+                    setInput={setInput}
+                    onMount={onMount}
+                    onSelect={onSelect}
+                    runCode={runCode}
+                    output={output}
+                    isLoading={isLoading}
+                    isError={isError}
+                  />
+
+                  <Button
+                    onClick={submitHandler}
+                    m={10}
+                    colorScheme="green"
+                    _hover={{ bg: "green.400", fontWeight: "600" }}
+                  >
+                    Submit
+                  </Button>
+                </Flex>
+              </ChakraProvider>
+            </Flex>
+          </>
+        )}
+        {contest.status == "Ended" && (
+          <div>
+            <label
+              style={{
+                color: "chocolate",
+                fontSize: "1.2rem",
+                marginBottom: "7.5rem",
+              }}
+            >
               {" "}
-              <label style={{color:"gray"}}>Time : {problem.timeLimit}sec</label>
-              <label style={{color:"gray"}}>Memory : {problem.memoryLimit}MB</label>
-             
-            </div>
+              Contest is {contest.status}
+            </label>
           </div>
-        </Flex>
-        <Flex
-          padding="0.5rem 1rem 0.5rem 1rem"
-          gap="3rem"
-          display="flex"
-          flexDirection="row"
-          justifyContent="center"
-          width="100%"
-        >
-          <Box width="50%" mx="auto">
-            <Flex justifyContent="space-evenly" mb={4}>
-              <Button
-                w="100%"
-                onClick={() => setActiveTab("statement")}
-                colorScheme={activeTab === "statement" ? "green" : "gray"}
-              >
-                Statement
-              </Button>
-              <Button
-                w="100%"
-                onClick={() => setActiveTab("submissions")}
-                colorScheme={activeTab === "submissions" ? "green" : "gray"}
-              >
-                Submissions
-              </Button>
-            </Flex>
-
-            {activeTab === "statement" && <Statement problem={problem} />}
-            {activeTab === "submissions" && (
-              <Submissions
-                userId={user._id}
-                submittedBy={user.firstName}
-                contestId={contestId}
-                problem={problem}
-                language={language}
-                sourceCode={srcCode}
-                submitted={submitted}
-                resetSubmissionState={resetSubmissionState}
-              />
-            )}
-          </Box>
-          <ChakraProvider>
-            <Flex w="50%" display="flex" flexDirection="column">
-              <CodeEditor
-                editorRef={editorRef}
-                value={value}
-                setValue={setValue}
-                language={language}
-                setLanguage={setLanguage}
-                input={input}
-                setInput={setInput}
-                onMount={onMount}
-                onSelect={onSelect}
-                runCode={runCode}
-                output={output}
-                isLoading={isLoading}
-                isError={isError}
-              />
-
-              <Button
-                onClick={submitHandler}
-                m={10}
-                colorScheme="green"
-                _hover={{ bg: "green.400", fontWeight: "600" }}
-              >
-                Submit
-              </Button>
-            </Flex>
-          </ChakraProvider>
-        </Flex>
+        )}
       </ChakraProvider>
     </>
   );
