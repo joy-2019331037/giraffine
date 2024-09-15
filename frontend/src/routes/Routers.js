@@ -8,6 +8,7 @@ import contestRoutes from "./ContestRoutes";
 import tutorialRoutes from "./TutorialRoutes";
 import problemRoutes from "./ProblemRoutes";
 import ThreeDotLoader from "../components/ThreeDotLoader/ThreeDotloader";
+import CommunityRoutes from "./CommunityRoutes";
 
 const Routers = () => {
   const location = useLocation();
@@ -36,6 +37,7 @@ const Routers = () => {
               {contestRoutes}
               {tutorialRoutes}
               {problemRoutes}
+              {CommunityRoutes}
             </Routes>
           </CSSTransition>
         </TransitionGroup>

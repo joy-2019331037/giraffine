@@ -3,7 +3,7 @@ import axios from "axios";
 import "./../styles/login.css";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
-
+import Swal from 'sweetalert2';
 
 import { AuthContext } from "../context/AuthContext";
 
@@ -11,7 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
-
+  const [error,setError]=useState('');
   const { dispatch } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
@@ -32,9 +32,24 @@ const Login = () => {
         // alert(
         //   response.data
         // );
-        console.log(response)
         dispatch({ type: "LOGIN_SUCCESS", payload: response.data});
         navigate("/home");  
+      }
+      else{
+        if(response.status===404){
+          setError("User Not Found");
+          Swal.fire({
+            icon: "error",
+            text: "User Not Found",
+          });
+        }
+        if(response.status===401){
+          setError("Incorrect Password! Please try again.");
+          Swal.fire({
+            icon: "error",
+            text: "Incorrect Password! Please try again.",
+          });
+        }
       }
     } catch (error) {
       //alert(error.response.data);
@@ -68,7 +83,7 @@ const Login = () => {
               required
             />
           </div>
-
+          {error && <div style={{color:"red"}}>{error}</div>}
           <button className="button" type="submit">
             Login
           </button>

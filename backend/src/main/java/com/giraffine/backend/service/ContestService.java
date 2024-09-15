@@ -152,7 +152,10 @@ public class ContestService {
     // @Scheduled(cron = "*/5 * * * * *") // Every 5 seconds //"*/5 * * * * *"
     // Scheduled to run every minute (you can adjust the cron expression) //"0 * * *
     // * *"
-    @Scheduled(cron = "*/30 * * * * *")
+    // every 1 minute @Scheduled(cron = "*/30 * * * * *")
+
+    //every 5 hours
+    @Scheduled(cron = "0 0 */5 * * *")
     public void checkAndUpdateRatings() {
 
         List<Contest> endedContests = contestRepository.findContestsByStatus("Ended");
