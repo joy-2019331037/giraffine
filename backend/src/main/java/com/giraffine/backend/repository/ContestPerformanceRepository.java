@@ -1,4 +1,4 @@
-package com.giraffine.backend.dao;
+package com.giraffine.backend.repository;
 
 import com.giraffine.backend.model.ContestPerformance;
 import org.springframework.data.mongodb.repository.MongoRepository;

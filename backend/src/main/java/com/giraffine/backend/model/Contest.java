@@ -23,9 +23,9 @@ public class Contest {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private int numberOfProblems;
-    private List<ContestProblem> problemSet;  // List of problems
+    private List<ContestProblem> problemSet; 
     private int numberOfParticipants;
-    private List<User> participants;  // List of User objects
-    private List<Submission> submissions;  // List of Submission objects
+    private List<User> participants;  
+    private List<Submission> submissions;  
     private boolean ratingsUpdated;
 }

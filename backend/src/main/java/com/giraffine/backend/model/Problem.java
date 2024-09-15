@@ -22,7 +22,10 @@ public class Problem {
     private String description;
     private String hint;
     private String solution;
-    private List<TestCase> testCases;  // List of test cases
+    private String constraints;
+    private List<TestCase> testCases;
+    private int timeLimit;  
+    private int memoryLimit;  
 
     @Data
     @AllArgsConstructor

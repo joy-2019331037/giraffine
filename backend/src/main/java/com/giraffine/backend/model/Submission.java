@@ -17,6 +17,7 @@ public class Submission {
     private String id;
     private String userId;
     private String submittedBy;
+    private String submittedByRank;
     private String problemId;  
     private String submittedCode;
     private LocalDateTime timeAndDate;

@@ -2,8 +2,9 @@ package com.giraffine.backend.service;
 
 import com.giraffine.backend.model.Contest;
 import com.giraffine.backend.model.Submission;
-import com.giraffine.backend.dao.SubmissionRepository;
-import com.giraffine.backend.dao.ContestRepository;
+import com.giraffine.backend.repository.ContestRepository;
+import com.giraffine.backend.repository.SubmissionRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;

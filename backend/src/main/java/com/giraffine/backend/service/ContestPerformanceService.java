@@ -1,7 +1,8 @@
 package com.giraffine.backend.service;
 
 import com.giraffine.backend.model.ContestPerformance;
-import com.giraffine.backend.dao.ContestPerformanceRepository;
+import com.giraffine.backend.repository.ContestPerformanceRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

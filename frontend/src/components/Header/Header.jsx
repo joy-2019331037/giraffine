@@ -5,7 +5,7 @@ import animationData from "../../assets/data/animationData/header.json";
 import logo from "../../assets/images/logo.png";
 import { AuthContext } from "../../context/AuthContext";
 import logout from "../../assets/images/logout.png";
-
+import axios from "axios";
 import ConfirmDialog from "../Dialog/ConfirmDialog.js";
 import Menu from "../Menu/Menu.jsx";
 
@@ -28,10 +28,26 @@ const Header = () => {
     setOpen(false);
   };
 
-  const handleConfirm = () => {
+  const userCredentials = {
+    email:  user?.email,
+    password: user?.password,
+  };
+
+  const handleConfirm = async () => {
     setOpen(false);
-    dispatch({ type: "LOGOUT" });
-    navigate("/login");
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/user/logout",
+        userCredentials
+      );
+      console.log(response.data);
+      if (response.status === 200) {
+        dispatch({ type: "LOGOUT" });
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const logoutHandler = () => {
@@ -51,7 +67,14 @@ const Header = () => {
             <label>
               <Link to="/profile">
                 {" "}
-                <label style={{color:`${rankColors[user.rank]}`, cursor:"pointer"}}>{user.firstName}</label>{" "}
+                <label
+                  style={{
+                    color: `${rankColors[user.rank]}`,
+                    cursor: "pointer",
+                  }}
+                >
+                  {user.firstName}
+                </label>{" "}
               </Link>
             </label>
             <img src={logout} onClick={logoutHandler} />

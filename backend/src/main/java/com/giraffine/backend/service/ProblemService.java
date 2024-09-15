@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import com.giraffine.backend.dao.ProblemRepository;
 import com.giraffine.backend.model.Problem;
+import com.giraffine.backend.repository.ProblemRepository;
 
 @Service
 public class ProblemService {

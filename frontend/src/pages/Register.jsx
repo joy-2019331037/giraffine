@@ -26,6 +26,7 @@ const Register = () => {
       email: email,
       password: pass,
       rank: "Learner",
+      activeStatus:"Offline",
       isVerified: "",
       friends: [],
       problemsSolved: {

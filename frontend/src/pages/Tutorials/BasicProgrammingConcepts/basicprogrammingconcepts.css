@@ -1,0 +1,29 @@
+.conceptCard{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1) ;
+    cursor: pointer;
+}
+          
+.conceptCard p{
+    font-Family:cursive;
+    font-size: small;
+    color: rgb(133, 133, 133);
+}
+
+.conceptCard label{
+    font-size: 1.5rem;
+}
+
+.conceptCard:hover{
+    background-color: rgb(227, 242, 255);
+    color: chocolate;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    p{
+        color: green;
+    }
+}

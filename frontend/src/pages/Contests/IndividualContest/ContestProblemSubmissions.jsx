@@ -157,7 +157,6 @@ const ContestProblemSubmissions = ({
   };
 
   useEffect(() => {
-
     if (submitted === true) {
       resetSubmissionState();
       contestSubmitHandler();

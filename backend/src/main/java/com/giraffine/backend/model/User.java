@@ -1,10 +1,9 @@
 package com.giraffine.backend.model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.HashSet;
-
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -38,18 +37,18 @@ public class User {
     private String firstName;
     private String lastName;
     private String rank;
+    private String activeStatus;
     private int rating;
     private int ratingIncrement;
-    private List<String> friends;
+    private Set<ObjectId> friends = new HashSet<>();
+    private Set<ObjectId> friendRequests = new HashSet<>();
 
     private String email;
     private String password;
     private boolean isVerified;
 
-    // Map to track the set of problems solved for each level
     private Map<String, Set<String>> levelProgress = new HashMap<>();
 
-    // Initialize the levelProgress map with empty sets for all levels
     {
         levelProgress.put("Learner", new HashSet<>());
         levelProgress.put("Explorer", new HashSet<>());
@@ -58,11 +57,9 @@ public class User {
         levelProgress.put("Mastermind", new HashSet<>());
     }
 
-    // Method to track which problem from a level has been solved
     public String solveProblem(String level, String problemId) {
         Set<String> solvedProblems = levelProgress.getOrDefault(level, new HashSet<>());
 
-        // If the problem is not already solved
         if (!solvedProblems.contains(problemId)) {
             solvedProblems.add(problemId);
             levelProgress.put(level, solvedProblems);
@@ -71,8 +68,7 @@ public class User {
         String message;
 
         if (level.equals(rank) && solvedProblems.size() == 10) {
-           
-            message = "Congratulations! You've solved all problems in " + level +"!";
+            message = "Congratulations! You've solved all problems in " + level + "!";
         } else {
             message = "Problem " + problemId + " solved! Your current progress in " + level + " level is " + solvedProblems.size() + "/10.";
         }
@@ -80,4 +76,19 @@ public class User {
         return message;
     }
 
+    // Additional methods for friends management
+    public void sendFriendRequest(ObjectId friendId) {
+        friendRequests.add(friendId);
+    }
+
+    public void acceptFriendRequest(ObjectId friendId) {
+        if (friendRequests.contains(friendId)) {
+            friends.add(friendId);
+            friendRequests.remove(friendId);
+        }
+    }
+
+    public void removeFriend(ObjectId friendId) {
+        friends.remove(friendId);
+    }
 }

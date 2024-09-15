@@ -14,11 +14,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.giraffine.backend.dao.OtpRepository;
-import com.giraffine.backend.dao.UserDao;
 import com.giraffine.backend.model.OTP;
 import com.giraffine.backend.model.SolveProblemResponse;
 import com.giraffine.backend.model.User;
+import com.giraffine.backend.repository.OtpRepository;
+import com.giraffine.backend.repository.UserRepository;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class UserService {
 
     @Autowired
-    UserDao ud;
+    UserRepository ud;
 
     @Autowired
     OtpRepository otpRepository;
@@ -60,6 +60,31 @@ public class UserService {
             e.printStackTrace();
         }
         return new ResponseEntity<>("Failed to register user", HttpStatus.BAD_REQUEST);
+    }
+
+
+    public Optional<User> updateUser(ObjectId id, User updatedUser) {
+        Optional<User> optionalUser = ud.findById(id);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+
+            // Update the fields if they are provided
+            if (updatedUser.getFirstName() != null) {
+                user.setFirstName(updatedUser.getFirstName());
+            }
+            if (updatedUser.getLastName() != null) {
+                user.setLastName(updatedUser.getLastName());
+            }
+            if (updatedUser.getPassword() != null) {
+                user.setPassword(updatedUser.getPassword());  // Password hashing should be done here
+            }
+
+            ud.save(user);
+            return Optional.of(user);
+        }
+
+        return Optional.empty();
     }
 
     private void generateAndSendOtp(String email) {
@@ -110,6 +135,8 @@ public class UserService {
             User user = userOpt.get();
 
             if (user.getPassword().equals(password)) {
+                user.setActiveStatus("online");
+                ud.save(user);
                 // Convert ObjectId to string before sending response
                 Map<String, Object> response = new HashMap<>();
                 response.put("_id", user.getId().toString()); // Assuming getId() returns a String
@@ -117,6 +144,7 @@ public class UserService {
                 response.put("lastName", user.getLastName());
                 response.put("email", user.getEmail());
                 response.put("rank", user.getRank());
+                response.put("activeStatus", user.getActiveStatus());
                 response.put("friends", user.getFriends());
                 response.put("isVerified", user.isVerified());
                 response.put("password", user.getPassword());
@@ -127,6 +155,19 @@ public class UserService {
             } else {
                 return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
             }
+        } else {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public ResponseEntity<String> logout(String email, String password) {
+        Optional<User> userOpt = ud.findByEmail(email);
+
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            user.setActiveStatus("offline");
+            ud.save(user);
+            return new ResponseEntity<>("User logged out", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }

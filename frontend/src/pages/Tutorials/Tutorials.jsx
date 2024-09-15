@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../styles/tutorials.css";
+import "./tutorials.css";
 
 import fox from "../../assets/data/animationData/fox.json";
 

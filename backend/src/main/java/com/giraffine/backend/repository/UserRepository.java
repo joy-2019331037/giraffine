@@ -1,4 +1,4 @@
-package com.giraffine.backend.dao;
+package com.giraffine.backend.repository;
 
 import java.util.Optional;
 
@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.giraffine.backend.model.User;
 
 @Repository
-public interface UserDao extends MongoRepository<User,ObjectId>{
+public interface UserRepository extends MongoRepository<User,ObjectId>{
     Optional<User> findByEmail(String email);
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import Tutorials from "../pages/Tutorials/Tutorials";
 import AlgoVisualizer from "../pages/Tutorials/Visualizer/AlgoVisualizer";
-import BasicProgrammingConcepts from "../pages/Tutorials/BasicProgrammingConcepts";
+import BasicProgrammingConcepts from "../pages/Tutorials/BasicProgrammingConcepts/BasicProgrammingConcepts";
 import WebDevelopmentBasics from "../pages/Tutorials/WebDevBasics/WebDevelopmentBasics";
 import BubbleSortVisualizer from "../pages/Tutorials/Visualizer/BubbleSortVisualizer";
 import InsertionSortVisualizer from "../pages/Tutorials/Visualizer/InsertionSortVisualizer";
@@ -31,6 +31,7 @@ import WebDevPractice from "../pages/Tutorials/WebDevBasics/WebDevPractice";
 import Games from "../pages/Tutorials/Games/Games";
 import TicTacToe from "../pages/Tutorials/Games/TicTaeToe/TicTacToe";
 import Sudoku from "../pages/Tutorials/Games/Sudoku/Sudoku";
+import IndividualConcept from "../pages/Tutorials/BasicProgrammingConcepts/IndividualConcept";
 
 // Complete list of routes
 const tutorialRoutes = [
@@ -167,6 +168,8 @@ const tutorialRoutes = [
   <Route key="games" path="/tutorials/games" element={<Games />} />,
   <Route key="tictactoe" path="/tutorials/games/tictactoe" element={<TicTacToe />} />,
   <Route key="sudoku" path="/tutorials/games/sudoku" element={<Sudoku />} />,
+
+  <Route key="individualConcept" path="/tutorials/basicProgrammingConcepts/:id/:title" element={<IndividualConcept/>}/>
 ];
 
 export default tutorialRoutes;

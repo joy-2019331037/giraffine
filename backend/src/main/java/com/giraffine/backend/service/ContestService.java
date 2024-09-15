@@ -2,13 +2,16 @@ package com.giraffine.backend.service;
 
 import com.giraffine.backend.model.Contest;
 import com.giraffine.backend.model.ContestPerformance;
-import com.giraffine.backend.dao.ContestPerformanceRepository;
-import com.giraffine.backend.dao.ContestRepository;
-import com.giraffine.backend.dao.UserDao;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.giraffine.backend.model.User;
+import com.giraffine.backend.repository.ContestPerformanceRepository;
+import com.giraffine.backend.repository.ContestRepository;
+import com.giraffine.backend.repository.ProblemRepository;
+import com.giraffine.backend.repository.UserRepository;
 import com.giraffine.backend.model.ContestProblem;
+import com.giraffine.backend.model.Problem;
 import com.giraffine.backend.model.Submission;
 
 import org.slf4j.Logger;
@@ -30,10 +33,13 @@ public class ContestService {
     private ContestRepository contestRepository;
 
     @Autowired
-    private UserDao ud;
+    private UserRepository ud;
 
     @Autowired
     private ContestPerformanceRepository cpr;
+
+    @Autowired
+    private ProblemRepository pr;
 
     private final SimpMessagingTemplate messagingTemplate;
 
@@ -181,10 +187,20 @@ public class ContestService {
         }
     }
 
+    // private void addContestProblems(Contest contest){
+    //     List<ContestProblem> problems = contest.getProblemSet();
+    //     for (Problem cp: problems){
+    //             pr.save(cp);
+    //     }
+    // }
+
     private void updateUserRating(User user, Contest contest, List<Submission> submissions) {
         int ratingIncrement = 0;
         int penalty = 0;
         int noOfProblemsSolved = 0;
+
+        if( submissions.size()==0) return;
+        
         for (Submission submission : submissions) {
             if (submission.getVerdict().equals("Accepted")) {
                 noOfProblemsSolved += 1;

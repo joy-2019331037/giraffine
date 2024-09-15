@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 
@@ -10,9 +10,11 @@ import explorer from "../../assets/images/levels/explorer.png";
 import adventurer from "../../assets/images/levels/adventurer.png";
 import challenger from "../../assets/images/levels/challenger.png";
 import mastermind from "../../assets/images/levels/mastermind.png";
+import search from  "../../assets/images/search.png";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const { user, dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -48,6 +50,12 @@ const Leaderboard = () => {
     fetchUsers();
   }, []);
 
+  const filteredUsers = users.filter((u) =>
+    `${u.firstName} ${u.lastName}`
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase())
+  );
+
   if (!users) {
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -62,16 +70,46 @@ const Leaderboard = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: "0rem 1rem 5rem 1rem",
+        padding: "0rem 1rem 6rem 1rem",
       }}
     >
       <h1 style={{ color: "chocolate", marginBottom: "2rem" }}>
         Giraffine Leaderboard
       </h1>
-      {users.length > 0 ? (
+
+      {/* Search Input */}
+      <div style={{ position: "relative", width: "20%", marginBottom: "2rem" }}>
+        <input
+          type="text"
+          placeholder="Search users by name..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+            padding: "0.5rem 2.5rem 0.5rem 0.5rem", // Adjust padding to make room for the icon
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            width: "100%",
+            boxSizing: "border-box", // Ensure padding and width work as expected
+          }}
+        />
+        <img
+          src={search}
+          alt="search"
+          style={{
+            position: "absolute",
+            right: "10px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: "16px", // Adjust the width of the icon as needed
+            height: "16px", // Adjust the height of the icon as needed
+          }}
+        />
+      </div>
+
+      {filteredUsers.length > 0 ? (
         <div
           style={{
-            width: "70%",
+            width: "80%",
             maxHeight: "80vh",
             overflowY: "auto",
             display: "flex-start",
@@ -107,7 +145,7 @@ const Leaderboard = () => {
               Rating
             </div>
           </div>
-          {users.map((u, index) => (
+          {filteredUsers.map((u, index) => (
             <div
               key={u._id}
               style={{
@@ -178,7 +216,11 @@ const Leaderboard = () => {
                   gap: "0.5rem",
                 }}
               >
-                <img style={{ width: "10%" }} src={images[u.rank]} />
+                <img
+                  style={{ width: "10%" }}
+                  src={images[u.rank]}
+                  alt={u.rank}
+                />
                 {u.rank}
               </div>
               <div

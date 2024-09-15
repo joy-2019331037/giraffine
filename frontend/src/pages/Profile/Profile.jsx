@@ -31,22 +31,22 @@ import PersonalInfo from "./PersonalInfo";
 import ContestPerformances from "./ContestPerformances";
 
 import CircularProgress from "@mui/material/CircularProgress";
+import Friends from "./Friends";
+import Settings from "./Settings";
 
 const Profile = () => {
   const { user, dispatch } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState("About");
   const [User, setUser] = useState(null);
-  
 
   const { userId } = useParams();
-  console.log(userId)
+
   let id = null;
   if (!userId) {
     id = user._id;
   } else {
     id = userId;
   }
-  console.log(id)
 
   const fetchUser = async () => {
     try {
@@ -55,7 +55,6 @@ const Profile = () => {
       );
 
       setUser(response.data);
-      console.log(response.data)
     } catch (error) {
       console.error("Failed to fetch personal submissions : ", error);
     }
@@ -64,8 +63,6 @@ const Profile = () => {
   useEffect(() => {
     fetchUser();
   }, [id]);
-
- 
 
   if (!User) {
     return (
@@ -89,12 +86,10 @@ const Profile = () => {
               w="15%"
               onClick={() => setActiveTab("About")}
               color={activeTab === "About" ? "green" : "gray"}
-              backgroundColor={
-                activeTab === "About" ? "#ececec" : "white"
-              }
+              backgroundColor={activeTab === "About" ? "#ececec" : "white"}
               fontWeight={activeTab === "About" ? "bold" : ""}
             >
-              {User.firstName}
+              Profile
             </Button>
             <Button
               w="15%"
@@ -116,6 +111,32 @@ const Profile = () => {
             >
               Contests
             </Button>
+            {!userId && (
+              <>
+                <Button
+                  w="15%"
+                  onClick={() => setActiveTab("Friends")}
+                  color={activeTab === "Friends" ? "green" : "gray"}
+                  backgroundColor={
+                    activeTab === "Friends" ? "#ececec" : "white"
+                  }
+                  fontWeight={activeTab === "Friends" ? "bold" : ""}
+                >
+                  Friends
+                </Button>
+                <Button
+                  w="15%"
+                  onClick={() => setActiveTab("Settings")}
+                  color={activeTab === "Settings" ? "green" : "gray"}
+                  backgroundColor={
+                    activeTab === "Settings" ? "#ececec" : "white"
+                  }
+                  fontWeight={activeTab === "Settings" ? "bold" : ""}
+                >
+                  Settings
+                </Button>
+              </>
+            )}
           </Flex>
 
           {activeTab === "About" && <PersonalInfo User={User} />}
@@ -125,6 +146,8 @@ const Profile = () => {
           {activeTab === "Contests" && (
             <ContestPerformances userId={User._id} />
           )}
+          {activeTab == "Friends" && <Friends userId={User._id} />}
+          {activeTab == "Settings" && <Settings userId={User._id}/>}
         </Box>
       </ChakraProvider>
     </>

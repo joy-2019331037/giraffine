@@ -1,4 +1,4 @@
-package com.giraffine.backend.dao;
+package com.giraffine.backend.repository;
 
 import com.giraffine.backend.model.Contest;
 

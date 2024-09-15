@@ -25,7 +25,7 @@
 .games div:hover{
     background-color: rgb(227, 242, 255);
     color: chocolate;
-
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     .gameIntro{
         color: green;
     }
