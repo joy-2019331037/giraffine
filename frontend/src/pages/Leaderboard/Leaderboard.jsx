@@ -73,9 +73,9 @@ const Leaderboard = () => {
         padding: "0rem 1rem 6rem 1rem",
       }}
     >
-      <h1 style={{ color: "chocolate", marginBottom: "2rem" }}>
+      <label style={{ color: "chocolate", marginBottom: "2rem", fontSize:"2rem" }}>
         Giraffine Leaderboard
-      </h1>
+      </label>
 
       {/* Search Input */}
       <div style={{ position: "relative", width: "20%", marginBottom: "2rem" }}>

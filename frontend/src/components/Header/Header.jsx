@@ -56,9 +56,12 @@ const Header = () => {
 
   return (
     <div className="header">
-      <Link to="/">
-        <img className="logo" src={logo} alt="logo" />
-      </Link>
+      
+        <img onClick={()=>{
+          if(user)
+            navigate("/home")
+        }} className="logo" src={logo} alt="logo" />
+      
       {!user && <Lottie className="animation" animationData={animationData} />}
       {user && (
         <>

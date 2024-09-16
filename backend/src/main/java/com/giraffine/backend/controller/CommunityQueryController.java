@@ -3,7 +3,10 @@ package com.giraffine.backend.controller;
 import java.util.List;
 import com.giraffine.backend.model.CommunityQuery;
 import com.giraffine.backend.model.CommunityQuery.QuerySolution;
+import com.giraffine.backend.model.User;
 import com.giraffine.backend.service.CommunityQueryService;
+
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,11 @@ public class CommunityQueryController {
     public ResponseEntity<CommunityQuery> addCommunityQuery(@RequestBody CommunityQuery query) {
         CommunityQuery savedQuery = communityQueryService.addCommunityQuery(query);
         return ResponseEntity.ok(savedQuery);
+    }
+
+    @GetMapping("/getQueryById/{queryId}")
+    public ResponseEntity<Optional<CommunityQuery>> getQueryById(@PathVariable String queryId) {
+        return new ResponseEntity<>(communityQueryService.findQueryById(queryId), HttpStatus.OK);
     }
 
     @GetMapping("/getAllCommunityQueries")

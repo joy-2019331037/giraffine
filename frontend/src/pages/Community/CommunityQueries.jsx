@@ -18,6 +18,9 @@ import {
 } from "@chakra-ui/react";
 import add from "../../assets/images/add.png";
 import leftArrow from "../../assets/images/left-arrow.png";
+import like from "../../assets/images/like.png";
+import unlike from "../../assets/images/unlike.png";
+
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 
@@ -46,6 +49,18 @@ const CommunityQueries = () => {
     }
   };
 
+  const fetchQuery = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/community-queries/getQueryById/${selectedQuery.id}`
+      );
+      console.log(response.data);
+      setSelectedQuery(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchQueries();
   }, []);
@@ -55,8 +70,6 @@ const CommunityQueries = () => {
       year: "numeric",
       month: "long",
       day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
@@ -79,7 +92,7 @@ const CommunityQueries = () => {
       );
       console.log("Solution submitted:", response);
       setSolutionText(""); // Clear the input after submission
-      fetchQueries(); // Optionally refresh the query details
+      fetchQuery(); // Optionally refresh the query details
     } catch (error) {
       console.error("Error submitting solution:", error);
     }
@@ -221,7 +234,6 @@ const CommunityQueries = () => {
                       fontSize: "smaller",
                     }}
                   >
-                    {/* Format the date */}
                     <label>
                       {selectedQuery.postedBy.firstName}{" "}
                       {selectedQuery.postedBy.lastName}
@@ -248,16 +260,131 @@ const CommunityQueries = () => {
                       display: "flex",
                       flexDirection: "column",
                       gap: "0.5rem",
-                      padding:"1rem 2rem 1rem 1rem"
+                      padding: "1rem 2rem 1rem 1rem",
                     }}
                   >
                     <label style={{ fontSize: "1.2rem", color: "green" }}>
                       {" "}
-                      Solutions
+                      Suggested Solutions
                     </label>
-                    <div style={{borderTop:"1px solid #ccc"}}>
+                    <div
+                      style={{
+                        borderTop: "1px solid #ccc",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.1rem",
+                        maxHeight: "40vh",
+                        overflowY: "scroll",
+                        scrollbarWidth: "none" /* For Firefox */,
+                        msOverflowStyle:
+                          "none" /* For Internet Explorer and Edge */,
+                      }}
+                      // Hide scrollbar for WebKit browsers
+                      onScroll={(e) => (e.target.style.scrollbarWidth = "none")}
+                      ref={(element) => {
+                        if (element) {
+                          element.style.overflow = "auto";
+                          element.style.scrollbarWidth = "none";
+                          element.style.msOverflowStyle = "none"; // IE and Edge
+                          element.style.setProperty(
+                            "--webkit-scrollbar",
+                            "none"
+                          ); // Chrome, Safari, and Edge
+                        }
+                      }}
+                    >
                       {selectedQuery.solutions.map((solution) => (
-                        <div style={{display:"flex"}}>{solution.description}</div>
+                        <div
+                          style={{
+                            width: "80%",
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "0.2rem",
+                            margin: "1rem 0rem 0rem 3rem",
+                            padding: "0.5rem 1rem 0.5rem 2rem",
+                            backgroundColor: "#ecffe8",
+                            borderRadius: "5px",
+                          }}
+                        >
+                          {solution.description}
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            {/* <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                gap: "1rem",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  justifyContent: "center",
+                                  gap: "0.1rem",
+                                }}
+                              >
+                                <Tooltip
+                                  label="click to upvote"
+                                  fontSize="md"
+                                  placement="top"
+                                >
+                                  <img
+                                    style={{
+                                      width: "0.8rem",
+                                      objectFit: "contain",
+                                      cursor: "pointer",
+                                    }}
+                                    src={like}
+                                  />
+                                </Tooltip>
+
+                                <label>{solution.upVoteCount}</label>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  justifyContent: "center",
+                                  gap: "0.1rem",
+                                }}
+                              >
+                                <Tooltip
+                                  label="click to downvote"
+                                  fontSize="md"
+                                  placement="top"
+                                >
+                                  <img
+                                    style={{
+                                      width: "0.8rem",
+                                      objectFit: "contain",
+                                      cursor: "pointer",
+                                    }}
+                                    src={unlike}
+                                  />
+                                </Tooltip>
+
+                                <label>{solution.downVoteCount}</label>
+                              </div>
+                            </div> */}
+                            <label
+                              style={{
+                                marginLeft: "auto",
+                                fontSize: "smaller",
+                                color: "gray",
+                              }}
+                            >
+                              {solution.proposedBy.firstName}{" "}
+                              {solution.proposedBy.lastName}
+                            </label>
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -271,7 +398,6 @@ const CommunityQueries = () => {
                     backgroundColor: "aliceblue",
                     padding: "1rem 2rem 1rem 2rem",
                     borderRadius: "5px",
-                    width: "80%",
                   }}
                 >
                   <label

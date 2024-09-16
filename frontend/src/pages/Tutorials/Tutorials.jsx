@@ -15,6 +15,7 @@ import "animate.css/animate.min.css";
 const Tutorials = () => {
   return (
     <>
+      <div style={{textAlign:"center", fontSize:"2rem", marginBottom:"2rem", color:"chocolate"}}>Tutorials</div>
       <div className="tutorials">
         <div className="pre">
         <Link to="/tutorials/basicProgrammingConcepts">

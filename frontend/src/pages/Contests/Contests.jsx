@@ -55,7 +55,7 @@ const Contests = () => {
 
   return (
     <div className="contests-container">
-      <label style={{ fontSize: "3rem", color: "chocolate" }}>Contests</label>
+      <label style={{ fontSize: "2rem", color: "chocolate" }}>Contests</label>
       {contests.length === 0 && (
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", margin:"3rem"}}>
           <label>New contests will be available soon</label>

@@ -8,7 +8,7 @@ export const categories = [
         { id: "selection-sort", name: "Selection Sort" },
         { id: "insertion-sort", name: "Insertion Sort" },
         { id: "merge-sort", name: "Merge Sort" },
-        { id: "quick-sort", name: "Quick Sort" },
+     
         // { id: 'heap-sort', name: 'Heap Sort' },
         // { id: 'radix-sort', name: 'Radix Sort' },
       ],
@@ -74,10 +74,10 @@ export const categories = [
       ],
     },
     {
-      label: "others",
-      name: "Others",
+      label: "Backtracking",
+      name: "Backtracking",
       items: [
-        { id: "kmp", name: "Pattern Matching (KMP Algorithm)" },
+        // { id: "kmp", name: "Pattern Matching (KMP Algorithm)" },
         { id: "n-queens", name: "N-Queens Problem" },
       ],
     },

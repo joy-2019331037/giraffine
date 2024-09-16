@@ -3,9 +3,10 @@ import axios from "axios";
 import "./../styles/register.css";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
-import Swal from 'sweetalert2';
-
-import animationData from '../assets/data/animationData/panda_2.json'
+import Swal from "sweetalert2";
+import { Tooltip } from "@chakra-ui/react";
+import home from "../assets/images/home.png";
+import animationData from "../assets/data/animationData/panda_2.json";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -26,14 +27,13 @@ const Register = () => {
       email: email,
       password: pass,
       rank: "Learner",
-      activeStatus:"Offline",
+      activeStatus: "Offline",
       isVerified: "",
       friends: [],
       problemsSolved: {
         learner: 0, // Initialize with 0 problems solved for the "learner" rank
       },
     };
-    
 
     try {
       const response = await axios.post(
@@ -45,7 +45,7 @@ const Register = () => {
           icon: "success",
           title: "Registration Successful",
           text: "Congratulations! You have been successfully registered into Giraffine Academy!",
-          footer: 'Please check your email for verification code'
+          footer: "Please check your email for verification code",
         });
         // alert(
         //   "Registration Successful! Please check your email for verification."
@@ -125,11 +125,20 @@ const Register = () => {
         {confirmTouched && !passwordsMatch && (
           <p className="error_text">Passwords do not match!</p>
         )}
-    
+
         <button className="button" type="submit" disabled={!passwordsMatch}>
           Register
         </button>
       </form>
+      <Tooltip label="Back to Home" fontSize="md" placement="top">
+        <img
+          style={{ width: "2%", cursor: "pointer" }}
+          onClick={() => {
+            navigate("/");
+          }}
+          src={home}
+        />
+      </Tooltip>
     </div>
   );
 };

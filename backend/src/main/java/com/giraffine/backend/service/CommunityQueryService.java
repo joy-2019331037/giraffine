@@ -3,7 +3,10 @@ package com.giraffine.backend.service;
 import java.util.List;
 import com.giraffine.backend.model.CommunityQuery;
 import com.giraffine.backend.model.CommunityQuery.QuerySolution;
+import com.giraffine.backend.model.User;
 import com.giraffine.backend.repository.CommunityQueryRepository;
+
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,10 @@ public class CommunityQueryService {
 
     public List<CommunityQuery> getAllCommunityQuery() {
         return communityQueryRepository.findAll();
+    }
+
+    public Optional<CommunityQuery> findQueryById(String queryId) {
+        return communityQueryRepository.findById(queryId);
     }
 
     // Add a solution to a query

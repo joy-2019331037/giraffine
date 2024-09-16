@@ -3,15 +3,16 @@ import axios from "axios";
 import "./../styles/login.css";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
-import Swal from 'sweetalert2';
-
+import Swal from "sweetalert2";
+import { Tooltip } from "@chakra-ui/react";
+import home from "../assets/images/home.png";
 import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
-  const [error,setError]=useState('');
+  const [error, setError] = useState("");
   const { dispatch } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
@@ -32,18 +33,17 @@ const Login = () => {
         // alert(
         //   response.data
         // );
-        dispatch({ type: "LOGIN_SUCCESS", payload: response.data});
-        navigate("/home");  
-      }
-      else{
-        if(response.status===404){
+        dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
+        navigate("/home");
+      } else {
+        if (response.status === 404) {
           setError("User Not Found");
           Swal.fire({
             icon: "error",
             text: "User Not Found",
           });
         }
-        if(response.status===401){
+        if (response.status === 401) {
           setError("Incorrect Password! Please try again.");
           Swal.fire({
             icon: "error",
@@ -59,36 +59,45 @@ const Login = () => {
   };
 
   return (
-      <div className="login">
-        {/* <Lottie className="reg_anime" animationData={animationData}/> */}
-        <form className="login_form" onSubmit={handleSubmit}>
-          <h2>Sign In</h2>
+    <div className="login">
+      {/* <Lottie className="reg_anime" animationData={animationData}/> */}
+      <form className="login_form" onSubmit={handleSubmit}>
+        <h2>Sign In</h2>
 
-          <div>
-            <label htmlFor="email">Email Address</label>
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="pass">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
-              required
-            />
-          </div>
-          {error && <div style={{color:"red"}}>{error}</div>}
-          <button className="button" type="submit">
-            Login
-          </button>
-        </form>
-      </div>
+        <div>
+          <label htmlFor="email">Email Address</label>
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="pass">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+            required
+          />
+        </div>
+        {error && <div style={{ color: "red" }}>{error}</div>}
+        <button className="button" type="submit">
+          Login
+        </button>
+      </form>
+      <Tooltip label="Back to Home" fontSize="md" placement="top">
+      <img
+        style={{ width: "2%", cursor: "pointer" }}
+        onClick={() => {
+          navigate("/");
+        }}
+        src={home}
+      />
+      </Tooltip>
+    </div>
   );
 };
 

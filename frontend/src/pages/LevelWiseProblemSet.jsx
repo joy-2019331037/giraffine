@@ -74,59 +74,54 @@ const LevelWiseProblemSet = () => {
   );
 
   return (
-    
-      <div className="levelWiseProblem">
-        <div className="Problem">
-          <div className="text">
-            <label>
-              {levelName.charAt(0).toUpperCase() + levelName.slice(1)}
-            </label>
-            <img
-              src={
-                images[
-                  levelName.charAt(0).toUpperCase() +
-                    levelName.slice(1).toLowerCase()
-                ]
-              }
-              alt={levelName}
-            />
-            {remainingProblems==0 && (
-              <p>
-              You have already solved all problems from this level
-            </p>
-            )}
-            {remainingProblems!=0 && remainingProblems!=10 &&  (
-              <p>
+    <div className="levelWiseProblem">
+      <div className="Problem">
+        <div className="text">
+          <label>
+            {levelName.charAt(0).toUpperCase() + levelName.slice(1)}
+          </label>
+          <img
+            src={
+              images[
+                levelName.charAt(0).toUpperCase() +
+                  levelName.slice(1).toLowerCase()
+              ]
+            }
+            alt={levelName}
+          />
+          {remainingProblems == 0 && (
+            <p>You have already solved all problems from this level</p>
+          )}
+          {remainingProblems != 0 && remainingProblems != 10 && (
+            <p>
               You have {remainingProblems} problems left to solve in this level
             </p>
-            )}
-          </div>
-
-          <div className="problemList" align="start" spacing={3}>
-            {problemsData.map((problem) => (
-              <Link
-                key={problem.id}
-                to={`/problems/${levelName}/${problem.id}`}
-              >
-                <Box
-                  className={`sing_prob ${
-                    isProblemSolved(problem.id) ? "solved" : ""
-                  }`}
-                  style={{
-                    backgroundColor: isProblemSolved(problem.id)
-                      ? "#e2fbe2"
-                      : "rgb(255, 238, 214)",
-                  }}
-                >
-                  <div>
-                    <label className="title">{problem.title}</label>
-                  </div>
-                </Box>
-              </Link>
-            ))}
-          </div>
+          )}
         </div>
 
+        <div className="problemList" align="start" spacing={3}>
+          {problemsData.map((problem) => (
+            <Link key={problem.id} to={`/problems/${levelName}/${problem.id}`}>
+              <Box
+                className={`sing_prob ${
+                  isProblemSolved(problem.id) ? "solved" : ""
+                }`}
+                style={{
+                  backgroundColor: isProblemSolved(problem.id)
+                    ? "#e2fbe2"
+                    : "rgb(255, 238, 214)",
+                }}
+              >
+                <div>
+                  <label className="title">{problem.title}</label>
+                </div>
+              </Box>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      
         <div className="arrows">
           {currentIndex > 0 && (
             <Link to={`/problems/${levels[currentIndex - 1]}`}>
@@ -139,8 +134,8 @@ const LevelWiseProblemSet = () => {
             </Link>
           )}
         </div>
-      </div>
-    
+      
+    </div>
   );
 };
 

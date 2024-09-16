@@ -147,7 +147,7 @@ const tutorialRoutes = [
   />,
 
   <Route key="kmpVisualizer" path="/tutorials/algoVisualizer/others/kmp" element={<KMPSearchVisualizer />} />,
-  <Route key="nQueensVisualizer" path="/tutorials/algoVisualizer/others/n-queens" element={<NQueensVisualizer />} />,
+  <Route key="nQueensVisualizer" path="/tutorials/algoVisualizer/backtracking/n-queens" element={<NQueensVisualizer />} />,
 
   <Route
     key="webDevTutorials"
