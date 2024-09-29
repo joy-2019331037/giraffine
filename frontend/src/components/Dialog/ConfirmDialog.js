@@ -24,7 +24,7 @@ const ConfirmDialog = ({ open, handleClose, handleConfirm, message}) => {
       <DialogTitle id="alert-dialog-title">
         <Box className="dialog_box" display="flex" alignItems="center">
           {<Lottie className="animation" animationData={animationData} />}
-          {"Confirmation"}
+          {"Logout"}
         </Box>
       </DialogTitle>
       <DialogContent className="dialog_content">

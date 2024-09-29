@@ -1,0 +1,54 @@
+.landing_education{
+  padding: 3rem 7%;
+  
+}
+
+.horizontal-card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 2rem; /* Space above the cards */
+}
+
+.horizontal-card {
+  height: 50vh;
+  display: flex; 
+  align-items: center; 
+  flex-direction: row;
+  background: aliceblue;
+  padding: 2rem; 
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  transition: background 0.3s, transform 0.3s; 
+  margin: 1rem 1rem; 
+}
+
+.horizontal-card:hover {
+  background: var(--orange); /* Change background on hover */
+  transform: scale(1.02); /* Slightly enlarge on hover */
+
+}
+
+.horizontal-card img {
+  width: 150px; /* Set a consistent width for images */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 1.5rem; /* Space between image and content */
+}
+
+
+
+
+.horizontal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizontal-content h3 {
+  font-size: 1.5rem; /* Title font size */
+  color: var(--black); /* Text color */
+}
+
+.horizontal-content p {
+  font-size: 0.7rem; /* Description font size */
+  color: var(--black); /* Text color */
+}
+

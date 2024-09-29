@@ -1,0 +1,54 @@
+.landing_about {
+  padding: 3rem 7%;
+  background: #0575e6; 
+  background: -webkit-linear-gradient(
+    to right,
+    #021b79,
+    #0575e6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #021b79,
+    #0575e6
+  );
+}
+
+.landing_about .row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.landing_about .row .image{
+  width: 50%;
+}
+
+
+.landing_about .row .content{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.landing_about .row .content h3{
+    font-size: 2.5rem;
+}
+
+.landing_about .row .content p{
+  font-size: 1.2rem;
+}
+
+
+.landing_about .btn{
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  border-radius: 0.5rem;
+  border: 0.2rem solid var(--orange);
+  color: var(--orange);
+  background: none;
+  cursor: pointer;
+}

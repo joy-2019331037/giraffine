@@ -5,10 +5,10 @@ import Home from "../pages/Home";
 import Leaderboard from "../pages/Leaderboard/Leaderboard";
 import Articles from "../pages/Articles";
 import Profile from "../pages/Profile/Profile";
-import Landing from "../pages/Landing";
+import Root from "../pages/Landing/Root";
 
 const homeRoutes = [
-  <Route key="root" path="/" element={<Landing />} />,
+  <Route key="root" path="/root" element={<Root />} />,
   <Route key="home" path="/home" element={<Home />} />,
   <Route key="leaderboard" path="/leaderboard" element={<Leaderboard />} />,
   <Route key="articles" path="/articles" element={<Articles />} />,

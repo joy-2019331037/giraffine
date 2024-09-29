@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const WebDevelopmentBasics = () => {
   return (
     <div className="webdevbasics">
-      <h2>Web Development Basics</h2>
+      <h2 style={{textAlign: "center", fontSize:"2rem", color:"chocolate"}}>Web Development Basics</h2>
       <div className="case">
         <Link to="/tutorials/webDevelopmentBasics/webDevTutorials">
           <div className="element">

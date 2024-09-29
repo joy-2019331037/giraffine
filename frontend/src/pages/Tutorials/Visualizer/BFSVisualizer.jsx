@@ -169,8 +169,8 @@ const BfsVisualizer = () => {
 
   return (
     <div className="visualizer">
-      <div className="header">
-        <h1>BFS Visualizer</h1>
+      <div style={{marginLeft:"5rem"}} className="header">
+        <h1 style={{fontSize:"1.5rem"}}>BFS Visualizer</h1>
         <label>BFS explores all nodes at the present depth level before moving on to nodes at the next depth level</label>
         <label>Here is a simple graph with 12 nodes</label>
         <label>Click on the buttons below to visualize the BFS!</label>
@@ -206,7 +206,7 @@ const BfsVisualizer = () => {
         <div className="message-box">
           <p>{messages[step - 1]}</p>
         </div>
-        {step > 1 && <h3>Traversal Order</h3>}
+        {step > 1 && <h3 style={{marginTop:"2rem"}}>Traversal Order</h3>}
         <label>{visitedNodes.slice(0, currentNodeIndex).join(" -> ")}</label>
       </div>
     </div>

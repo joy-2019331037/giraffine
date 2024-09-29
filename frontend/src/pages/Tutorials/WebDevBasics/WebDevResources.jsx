@@ -78,8 +78,8 @@ const resources = [
 
 const Resources = () => {
   return (
-    <Box p={25}>
-      <Heading as="h1" size="xl" mb={15} textAlign="center" color="chocolate">
+    <Box p={25} mb={90}>
+      <Heading as="h1" size="xl" mb={15} textAlign="center" color="chocolate" fontSize="2rem">
         Web Development Resources
       </Heading>
       <Grid templateColumns="repeat(auto-fill, minmax(250px, 1fr))" gap={60}>
@@ -87,7 +87,7 @@ const Resources = () => {
           <GridItem key={index}>
             <Box
               bg="gray.100"
-              borderWidth={1}
+             
               borderRadius="lg"
               overflow="hidden"
               p={10}

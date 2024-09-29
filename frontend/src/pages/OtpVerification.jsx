@@ -42,8 +42,13 @@ const OtpVerification = () => {
       );
 
       if (response.status === 200) {
-        alert("Your email has been verified successfully.");
-        navigate("/"); // Redirect to home or login page after successful verification
+        Swal.fire({
+          icon: "success",
+          title: "Email Verified",
+          text: "Your email has been verified successfully.",
+        });
+        // alert("Your email has been verified successfully.");
+        navigate("/login"); // Redirect to home or login page after successful verification
       } else {
         Swal.fire({
           icon: "error",

@@ -55,6 +55,7 @@ const PersonalSubmissions = ({ userId }) => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          marginBottom:personalSubmissions.length===0?"15rem":"8rem"
         }}
       >
         <div
@@ -77,7 +78,7 @@ const PersonalSubmissions = ({ userId }) => {
         </div>
         {personalSubmissions.length === 0 && (
           <div style={{ textAlign: "center", padding: "1rem" }}>
-            You have made no submissions yet
+            No submissions made yet.
           </div>
         )}
         {personalSubmissions.length !== 0 && (

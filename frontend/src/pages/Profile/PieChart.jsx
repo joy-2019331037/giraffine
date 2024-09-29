@@ -7,7 +7,7 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
 const PieChart = ({ data }) => {
   const chartData = {
-    labels: data.labels,
+    labels: data.levels,
     datasets: [
       {
         data: data.values,

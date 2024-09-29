@@ -72,7 +72,7 @@ const QueueVisualizer = () => {
   return (
     <div className="queuevisualizer">
       <div className="header">
-        <h1>Queue Operations Visualizer</h1>
+        <h1 style={{fontSize:"1.5rem"}}>Queue Operations Visualizer</h1>
         <div className="desc">
           <div>
             <label>

@@ -72,7 +72,7 @@ const StackVisualizer = () => {
   return (
     <div className="stackvisualizer">
       <div className="header">
-        <h1>Stack Operations Visualizer</h1>
+        <h1 style={{fontSize:"1.5rem"}}>Stack Operations Visualizer</h1>
         <div className="desc">
           <div>
             <label>

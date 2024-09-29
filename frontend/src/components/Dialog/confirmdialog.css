@@ -1,6 +1,6 @@
 .dialog_box{
     display: flex;
-    justify-content: center;
+   
     float: row;
     gap: 0.5rem;
     font-size: 1.5rem;

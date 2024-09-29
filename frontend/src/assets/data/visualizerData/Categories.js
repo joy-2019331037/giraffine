@@ -28,7 +28,7 @@ export const categories = [
       items: [
         { id: "bfs", name: "Breadth-First Search (BFS)" },
         { id: "dfs", name: "Depth-First Search (DFS)" },
-        { id: "dijkstra", name: "Dijkstra's Algorithm" },
+        // { id: "dijkstra", name: "Dijkstra's Algorithm" },
       ],
     },
     {

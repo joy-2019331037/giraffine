@@ -35,7 +35,7 @@ const WebdevPractice = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: "center", color: "chocolate" }}>
+      <h1 style={{ textAlign: "center", color: "chocolate", fontSize:"2rem" }}>
         Web Development Practice Problems
       </h1>
       <div
@@ -55,7 +55,7 @@ const WebdevPractice = () => {
             borderRadius: "5px",
           }}
         >
-          <h3>Problem List</h3>
+          <h3 style={{fontSize:"1.2rem", fontWeight:"bold"}}>Problem List</h3>
           <div
             style={{
               flex: 1,
@@ -95,10 +95,10 @@ const WebdevPractice = () => {
           }}
         >
           <>
-            <h2>{problems[selectedProblem].title}</h2>
+            <h2 style={{fontSize:"1.2rem"}}>{problems[selectedProblem].title}</h2>
             <hr style={{ margin: "16px 0" }} />
             <p>{problems[selectedProblem].description}</p>
-            <h3>Expected Output</h3>
+            <h3 style={{marginTop:"1.5rem", fontWeight:"bold"}}>Expected Output</h3>
             <iframe
               ref={iframeRef}
               title="Web Development Preview"
@@ -125,7 +125,7 @@ const WebdevPractice = () => {
                 value="See Solution"
                 onClick={() => setSeeSolution(true)}
                 style={{
-                  padding: "5px 10px",
+                  padding: "3px 5px",
                   border: "1px solid gray",
                   borderRadius: "10px",
                   fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
@@ -140,7 +140,7 @@ const WebdevPractice = () => {
                 value="Reset Content"
                 onClick={() => setSeeSolution(false)}
                 style={{
-                  padding: "5px 10px",
+                  padding: "3px 5px",
                   border: "1px solid gray",
                   borderRadius: "10px",
                   fontFamily: "Verdana, Geneva, Tahoma, sans-serif",

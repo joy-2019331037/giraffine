@@ -5,7 +5,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Basics</h2>
       <p>CSS (Cascading Style Sheets) is used to style and layout web pages.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   body {
     background-color: lightblue;
@@ -44,7 +45,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Selectors</h2>
       <p>Selectors are used to select the HTML elements you want to style.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   p {
     color: red;
@@ -81,7 +83,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Box Model</h2>
       <p>The CSS box model describes the rectangular boxes generated for elements in the document tree and the space around them.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   div {
     width: 300px;
@@ -115,7 +118,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Flexbox</h2>
       <p>Flexbox is a layout model that allows for the creation of flexible and responsive layouts.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   .container {
     display: flex;
@@ -164,7 +168,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Grid</h2>
       <p>CSS Grid Layout is a two-dimensional layout system for the web.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   .grid-container {
     display: grid;
@@ -221,7 +226,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Positioning</h2>
       <p>Positioning allows you to control the placement of elements on the page.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   .container {
     position: relative;
@@ -268,7 +274,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Pseudo-classes</h2>
       <p>Pseudo-classes are used to define special states of elements.</p>
-      <h3>Example</h3>
+     <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   a:hover {
     color: orange;
@@ -344,7 +351,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Animations</h2>
       <p>CSS animations allow you to animate the transition of an element from one style to another.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   @keyframes example {
     from {background-color: red;}
@@ -389,7 +397,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Variables</h2>
       <p>CSS variables (custom properties) allow you to store values that can be reused throughout your stylesheet.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   :root {
     --main-color: blue;
@@ -467,7 +476,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Grid Areas</h2>
       <p>CSS Grid areas allow you to define sections of your layout that can be named and placed in a grid.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   .grid-container {
     display: grid;
@@ -524,7 +534,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Z-Index</h2>
       <p>The z-index property specifies the stack order of elements.</p>
-      <h3>Example</h3>
+     <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   div {
     position: absolute;
@@ -584,7 +595,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Backgrounds</h2>
       <p>The background properties are used to define the background effects for elements.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   body {
     background-color: lightgray;
@@ -627,7 +639,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Borders</h2>
       <p>The border properties allow you to specify the style, width, and color of an element's border.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   p {
     border: 2px solid black;
@@ -666,7 +679,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Margins</h2>
       <p>The margin properties are used to create space around elements, outside of any defined borders.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   p {
     margin: 20px;
@@ -707,7 +721,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Padding</h2>
       <p>The padding properties are used to create space inside of elements, within any defined borders.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   p {
     padding: 20px;
@@ -746,7 +761,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Text Styling</h2>
       <p>CSS offers various properties to style text, such as font, color, and alignment.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   h1 {
     font-family: Arial, sans-serif;
@@ -789,7 +805,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Lists</h2>
       <p>You can style list items and the list marker with CSS.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   ul {
     list-style-type: square;
@@ -834,7 +851,8 @@ const cssTutorials = [
     content: `
       <h2>CSS Table Styling</h2>
       <p>CSS allows you to add styles to tables, such as borders, spacing, and alignment.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;style&gt;
   table {
     width: 100%;

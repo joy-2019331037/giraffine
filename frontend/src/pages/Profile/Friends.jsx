@@ -18,7 +18,7 @@ const Friends = ({ userId }) => {
   const [friends, setFriends] = useState([]);
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [showModal, setShowModal] = useState(false); 
-
+  console.log(userId)
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -29,6 +29,7 @@ const Friends = ({ userId }) => {
         setFriends(response.data);
         setSelectedFriend(response.data[0]);
         console.log(response.data);
+        console.log(userId)
       } catch (error) {
         console.error("Error fetching friends:", error);
       }
@@ -53,7 +54,7 @@ const Friends = ({ userId }) => {
   };
 
   return (
-    <div style={{ display: "flex", gap: "3rem" }}>
+    <div style={{ display: "flex", gap: "3rem", marginBottom:friends.length===0?"18rem":"0rem" }}>
       {/* Left Side: List of Friends */}
 
       <div
@@ -84,6 +85,11 @@ const Friends = ({ userId }) => {
             gap: "5px",
           }}
         >
+          {friends.length===0 && 
+          <div style={{fontSize:"1rem", textAlign:"center", color:"chocolate"}}>
+            No Friends yet.
+          </div>
+          }
           {friends.map((friend) => (
             <div
               key={friend.id}

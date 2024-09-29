@@ -38,6 +38,7 @@ const Profile = () => {
   const { user, dispatch } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState("About");
   const [User, setUser] = useState(null);
+  const [isFriend, setIsFriend]=useState(false);
 
   const { userId } = useParams();
 
@@ -60,9 +61,36 @@ const Profile = () => {
     }
   };
 
+  const fetchAllFriendsOfCurrentUser = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/friends/all-friends/${user._id}`
+      );
+
+      // Assuming the API response contains an array of friends
+      const friendsList = response.data;
+
+      // Check if any friend's id matches the userId
+      const isFriend = friendsList.some((friend) => friend._id === userId);
+
+      if (isFriend) {
+        setIsFriend(true);
+      } else {
+        setIsFriend(false);
+      }
+    } catch (error) {
+      console.error("Failed to fetch friends: ", error);
+    }
+  };
+
   useEffect(() => {
     fetchUser();
   }, [id]);
+
+
+  useEffect(()=>{
+    fetchAllFriendsOfCurrentUser();
+  },[user._id])
 
   if (!User) {
     return (
@@ -139,7 +167,7 @@ const Profile = () => {
             )}
           </Flex>
 
-          {activeTab === "About" && <PersonalInfo User={User} />}
+          {activeTab === "About" && <PersonalInfo User={User} isFriend={isFriend}/>}
           {activeTab === "Submissions" && (
             <PersonalSubmissions userId={User._id} />
           )}
@@ -147,7 +175,7 @@ const Profile = () => {
             <ContestPerformances userId={User._id} />
           )}
           {activeTab == "Friends" && <Friends userId={User._id} />}
-          {activeTab == "Settings" && <Settings userId={User._id}/>}
+          {activeTab == "Settings" && <Settings userId={User._id} />}
         </Box>
       </ChakraProvider>
     </>

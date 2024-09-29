@@ -227,7 +227,7 @@ const TicTacToe = () => {
 
   return (
     <Box className="tictactoe" textAlign="center" py={10}>
-      <h1>Tic Tac Toe</h1>
+      <h1 style={{fontSize:'1.5rem'}}>Tic Tac Toe</h1>
       <Box mt={10} mb={40}>
         <Text fontSize="lg" fontWeight="500" mb={2}>
           Select Difficulty

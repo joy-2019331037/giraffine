@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+.root-container {
+  --orange: #f9ba60;
+  --pink: #e9768f;
+  --black: #1d1c1c;
+  --white: #fff;
+  --light-color: #666;
+  --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+
+.root-container * {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+  
+}
+
+html {
+  
+}
+
+.root-container .heading {
+  font-size: 4rem;
+  color: var(--black);
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bolder;
+  margin-bottom: 6rem;
+}
+
+.root-container .heading span {
+  color: var(--orange);
+  text-transform: uppercase;
+}
+
+.root-container .btn {
+  font-size: 1.7rem;
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.8rem 3rem;
+  border-radius: 0.5rem;
+  border: 0.2rem solid var(--orange);
+  color: var(--orange);
+  background: none;
+  cursor: pointer;
+}
+
+.root-container .btn:hover {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.root-container #menu-btn {
+  display: none;
+}
+
+/* landing_header ends */
+
+/* landing_home */
+
+/* end */
+
+/* landing_about us */
+
+/* end */
+
+/* landing_education */
+
+/* end */
+
+/* landing_activities */
+
+/* end */
+
+/* gallery */
+
+/* contact */
+
+/* end */
+
+/* footer */
+
+/* end */
+
+/* media query */

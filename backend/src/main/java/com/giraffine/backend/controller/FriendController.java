@@ -96,4 +96,21 @@ public class FriendController {
             return ResponseEntity.badRequest().body("User not found");
         }
     }
+
+
+    @GetMapping("/getAllFriendRequests/{userId}")
+    public ResponseEntity<?> getAllFriendRequests(@PathVariable String userId) {
+        Optional<User> userOpt = ud.findById(new ObjectId(userId));
+
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            Set<ObjectId> friendIds = user.getFriendRequests();
+
+            
+            List<User> friendRequests = ud.findAllById(friendIds);
+            return ResponseEntity.ok(friendRequests);
+        } else {
+            return ResponseEntity.badRequest().body("User not found");
+        }
+    }
 }

@@ -142,8 +142,8 @@ const DfsVisualizer = () => {
 
   return (
     <div className="visualizer">
-      <div className="header">
-        <h1>DFS Visualizer</h1>
+      <div style={{marginLeft:"5rem"}} className="header">
+        <h1 style={{fontSize:"1.5rem"}}>DFS Visualizer</h1>
         <label>DFS explores as far as possible along each branch before backtracking</label>
         <label>Here is a simple graph with 12 nodes</label>
         <label>Click on the buttons below to visualize the DFS!</label>
@@ -180,7 +180,7 @@ const DfsVisualizer = () => {
           <p>{messages[step -1]}</p>
           
         </div>
-        {step >= 1 && <h3>Traversal Order</h3>}
+        {step >= 1 && <h3 style={{marginTop:"2rem"}}>Traversal Order</h3>}
         <label>{visitedNodes.slice(0, currentNodeIndex).join(" -> ")}</label>
       </div>
     </div>

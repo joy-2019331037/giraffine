@@ -89,7 +89,7 @@ const DequeVisualizer = () => {
   return (
     <div className="dequevisualizer">
       <div className="header">
-        <h1>Deque Operations Visualizer</h1>
+        <h1 style={{fontSize:"1.5rem"}}>Deque Operations Visualizer</h1>
         <div className="desc">
           <div>
             <label>

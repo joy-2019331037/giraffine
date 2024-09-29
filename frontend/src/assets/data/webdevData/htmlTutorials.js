@@ -5,7 +5,8 @@ const htmlTutorials = [
     content: `
       <h2>HTML Basics</h2>
       <p>HTML (HyperText Markup Language) is the standard language for creating web pages.</p>
-      <h3>Basic Structure</h3>
+      <br>
+      <b>Basic Structure</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;!DOCTYPE html&gt;
   &lt;html&gt;
     &lt;head&gt;
@@ -34,9 +35,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Headings</h2>
       <p>Headings are used to define the titles and subtitles of a document.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use headings to create a structured and accessible document hierarchy.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;h1&gt;Main Heading&lt;/h1&gt;
   &lt;h2&gt;Subheading&lt;/h2&gt;
   &lt;h3&gt;Sub-subheading&lt;/h3&gt;</code></pre>`,
@@ -55,9 +58,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Paragraphs</h2>
       <p>Paragraphs are used to group blocks of text into a logical structure.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use paragraphs to separate different sections of text.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;p&gt;This is a paragraph of text.&lt;/p&gt;
   &lt;p&gt;This is another paragraph of text.&lt;/p&gt;</code></pre>`,
     preview: `
@@ -74,9 +79,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Links</h2>
       <p>Links are used to navigate between web pages and external resources.</p>
-      <h3>Use Case</h3>
+     <br>
+      <b>Use Case</b>
       <p>Use links to connect different pages or external resources like documents or websites.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;a href=&quot;https://www.example.com&quot;&gt;Visit Example.com&lt;/a&gt;</code></pre>`,
     preview: `
     <html>
@@ -91,9 +98,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Images</h2>
       <p>Images can be embedded in a web page using the &lt;img&gt; tag.</p>
-      <h3>Use Case</h3>
+     <br>
+      <b>Use Case</b>
       <p>Use images to visually enhance your content or convey information graphically.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;img src=&quot;image.jpg&quot; alt=&quot;Description of Image&quot; /&gt;</code></pre>`,
     preview: `
     <html>
@@ -108,9 +117,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Lists</h2>
       <p>Lists are used to group related items together.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use lists for creating bullet points, steps, or any other grouped information.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;ul&gt;
   &lt;li&gt;Item 1&lt;/li&gt;
   &lt;li&gt;Item 2&lt;/li&gt;
@@ -139,9 +150,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Tables</h2>
       <p>Tables are used to display data in a tabular format.</p>
-      <h3>Use Case</h3>
+     <br>
+      <b>Use Case</b>
       <p>Use tables for displaying structured data like schedules, pricing, or comparison charts.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;Name&lt;/th&gt;
@@ -182,9 +195,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Forms</h2>
       <p>Forms are used to collect user input and submit it to a server.</p>
-      <h3>Use Case</h3>
+     <br>
+      <b>Use Case</b>
       <p>Use forms for collecting user data, like login information, contact details, or survey responses.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;form&gt;
   &lt;label for=&quot;name&quot;&gt;Name:&lt;/label&gt;
   &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot;&gt;&lt;br&gt;
@@ -211,9 +226,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Buttons</h2>
       <p>Buttons are interactive elements that can trigger actions or submit forms.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use buttons for user interactions, such as submitting forms or triggering JavaScript functions.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;button&gt;Click Me!&lt;/button&gt;</code></pre>`,
     preview: `
     <html>
@@ -228,9 +245,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Div and Span</h2>
       <p>The &lt;div&gt; element is used to group block-level content, while &lt;span&gt; is used for inline content.</p>
-      <h3>Use Case</h3>
+     <br>
+      <b>Use Case</b>
       <p>Use &lt;div&gt; for large sections and &lt;span&gt; for small portions within text or other inline elements.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;div&gt;
   &lt;p&gt;This is a paragraph inside a div.&lt;/p&gt;
   &lt;p&gt;Another paragraph inside the same div.&lt;/p&gt;
@@ -253,9 +272,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Inline vs Block Elements</h2>
       <p>Block-level elements start on a new line and take up the full width available, while inline elements only take up as much space as necessary.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use block elements for major layout components and inline elements for minor styling or text modifications.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;div&gt;This is a block-level element.&lt;/div&gt;
 &lt;span&gt;This is an inline element.&lt;/span&gt; inside a paragraph.</code></pre>`,
     preview: `
@@ -272,9 +293,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Iframes</h2>
       <p>The &lt;iframe&gt; element allows you to embed another document within your current HTML page.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use iframes to embed external content, such as videos, maps, or other webpages, within your page.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;iframe src=&quot;https://www.example.com&quot; width=&quot;600&quot; height=&quot;400&quot;&gt;&lt;/iframe&gt;</code></pre>`,
     preview: `
     <html>
@@ -289,9 +312,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Semantic Elements</h2>
       <p>Semantic elements clearly describe their meaning in a human- and machine-readable way.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use semantic elements to improve the accessibility and SEO of your web pages.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;header&gt;Header content&lt;/header&gt;
 &lt;nav&gt;Navigation links&lt;/nav&gt;
 &lt;main&gt;Main content area&lt;/main&gt;
@@ -312,9 +337,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Audio and Video</h2>
       <p>HTML provides elements for embedding audio and video files directly into web pages.</p>
-      <h3>Use Case</h3>
+     <br>
+      <b>Use Case</b>
       <p>Use audio and video elements to include multimedia content on your web pages.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;audio controls&gt;
   &lt;source src=&quot;audio.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
   Your browser does not support the audio element.
@@ -345,9 +372,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Meta Tags</h2>
       <p>Meta tags provide metadata about the HTML document, such as the author, description, and keywords.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use meta tags to improve SEO, define the document's character set, and provide information to browsers and search engines.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;meta charset=&quot;UTF-8&quot;&gt;
 &lt;meta name=&quot;description&quot; content=&quot;Learn the basics of HTML.&quot;&gt;
 &lt;meta name=&quot;keywords&quot; content=&quot;HTML, web development, coding&quot;&gt;
@@ -372,9 +401,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Character Entities</h2>
       <p>Character entities allow you to display reserved characters in HTML, such as <, >, &amp;, and more.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use character entities when you need to display special characters in your HTML content.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;p&gt;The following are reserved characters in HTML: &amp;lt;, &amp;gt;, &amp;amp;.&lt;/p&gt;</code></pre>`,
     preview: `
     <html>
@@ -389,9 +420,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Forms - Input Types</h2>
       <p>HTML provides various input types for collecting different kinds of user data.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use different input types for collecting specific types of data, such as text, numbers, emails, dates, etc.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;form&gt;
   &lt;label for=&quot;text&quot;&gt;Text:&lt;/label&gt;
   &lt;input type=&quot;text&quot; id=&quot;text&quot; name=&quot;text&quot;&gt;&lt;br&gt;
@@ -434,9 +467,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Form Validation</h2>
       <p>HTML provides built-in validation attributes that allow you to control user input without the need for JavaScript.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use validation attributes to ensure that the user provides the correct type of data in forms.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;form&gt;
   &lt;label for=&quot;email&quot;&gt;Email:&lt;/label&gt;
   &lt;input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot; required&gt;&lt;br&gt;
@@ -467,9 +502,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Inline Frames (iframes)</h2>
       <p>An iframe is used to embed another document within the current HTML document.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use iframes to embed external content like videos, maps, or other web pages within your site.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;iframe src=&quot;https://www.example.com&quot; width=&quot;600&quot; height=&quot;400&quot;&gt;&lt;/iframe&gt;</code></pre>`,
     preview: `
     <html>
@@ -484,9 +521,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Blockquotes</h2>
       <p>The blockquote element is used to indicate that the enclosed text is a quotation from another source.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use blockquotes to display long quotes or citations in your HTML content.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;blockquote&gt;
   This is a blockquote element, typically used to display long quotations.
 &lt;/blockquote&gt;</code></pre>`,
@@ -505,9 +544,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Comments</h2>
       <p>Comments are used to add notes or explanations to your HTML code, which are not displayed in the browser.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use comments to document your code, explain sections, or temporarily disable code without deleting it.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;!-- This is a comment in HTML --&gt;
 &lt;p&gt;This is a paragraph.&lt;/p&gt;
 &lt;!-- The following line is a comment and won't be displayed in the browser --&gt;
@@ -527,9 +568,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Entity References</h2>
       <p>Entity references are used to display reserved characters like <, >, &, and non-keyboard characters like ©, €, etc.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use entity references when you need to display special characters that have a specific meaning in HTML.</p>
-      <h3>Example</h3>
+      <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;p&gt;This is a paragraph with special characters: &amp;lt;, &amp;gt;, &amp;amp;.&lt;/p&gt;
 &lt;p&gt;And here are some more: &amp;copy;, &amp;euro;.&lt;/p&gt;</code></pre>`,
     preview: `
@@ -546,9 +589,11 @@ const htmlTutorials = [
     content: `
       <h2>HTML Anchor Links</h2>
       <p>Anchor links allow you to create hyperlinks that navigate to a specific part of a webpage.</p>
-      <h3>Use Case</h3>
+      <br>
+      <b>Use Case</b>
       <p>Use anchor links to help users quickly navigate to different sections of a long webpage.</p>
-      <h3>Example</h3>
+       <br>
+      <b>Example</b>
       <pre style="background-color: #e3e3e3; padding: 10px; border-radius: 5px;"><code>&lt;a href=&quot;#section1&quot;&gt;Go to Section 1&lt;/a&gt;
 &lt;h2 id=&quot;section1&quot;&gt;Section 1&lt;/h2&gt;
 &lt;p&gt;This is section 1.&lt;/p&gt;</code></pre>`,

@@ -48,7 +48,7 @@ const MergeSortVisualizer = () => {
   // Render the cumulative steps with line breaks between each hardcoded step
   return (
     <div className="merge-sort-visualizer">
-      <div className="header">
+      <div style={{textAlign:"center"}} className="header">
         <h2>Merge Sort Visualizer</h2>
         <label>
           Merge Sort is a <span>divide-and-conquer</span> algorithm that recursively splits an array into smaller subarrays 

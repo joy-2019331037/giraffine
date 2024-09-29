@@ -21,6 +21,11 @@
     font-size: large;
     gap: 10px;
 }
+
+.visualizer .header h2{
+    font-size: 1.5rem;
+    gap: 10px;
+}
 .visualizer .header h3{
     color: green;
     font-family: cursive;

@@ -1,0 +1,28 @@
+
+.landing_footer {
+  background: black;
+  padding: 1rem 0rem 1rem 0rem;
+  color: white;
+  padding: 1rem 7%;
+  
+}
+
+
+.landing_footer .credit {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.4rem;
+  color: var(--white);
+}
+
+.landing_footer .credit span {
+  color: var(--orange);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .landing_footer .landing_footer-box-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}

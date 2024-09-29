@@ -26,6 +26,7 @@ const NQueensVisualizer = () => {
     }
   }, [isAutoSimulating, stepState]);
 
+
   const nextStep = () => {
     const { row, col, columns, diagonals1, diagonals2 } = stepState;
 
@@ -237,7 +238,7 @@ const NQueensVisualizer = () => {
           </button>
           <button onClick={reset}>Reset</button>
         </div>
-        <p>{actionMessage}</p>
+        <p style={{margin:"2rem 0rem 1rem 0rem"}}>{actionMessage}</p>
 
         <svg id="nqueens-visualizer"></svg>
       </div>

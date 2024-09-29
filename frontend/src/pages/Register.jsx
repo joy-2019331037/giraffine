@@ -129,6 +129,18 @@ const Register = () => {
         <button className="button" type="submit" disabled={!passwordsMatch}>
           Register
         </button>
+
+        <label
+         onClick={()=>{navigate("/login")}}
+          style={{
+            marginBottom: "2rem",
+            fontSize: "0.8rem",
+            fontFamily: "serif",
+            cursor:"pointer"
+          }}
+        >
+          Back to Sign In
+        </label>
       </form>
       <Tooltip label="Back to Home" fontSize="md" placement="top">
         <img

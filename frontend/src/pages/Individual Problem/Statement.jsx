@@ -137,19 +137,7 @@ const Statement = ({ problem }) => {
         </div>
       </div>
 
-      <div className="community">
-        <p>Community</p>
-        <div>hehe</div>
-        <div>hehe</div>
-        <div>hehe</div>
-        <div>hehe</div>
-        <div>hehe</div>
-        <div>hehe</div>
-        <div>hehe</div>
-        <div>hehe</div>
-        <div>hehe</div>
-        <div>hehe</div>
-      </div>
+      
 
       <ChakraProvider>
         <Modal isOpen={isOpen} onClose={onClose} size="xl">

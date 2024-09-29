@@ -44,7 +44,7 @@
 }
 
 .login_form .button{
-    background-color:var(--secondary-color);
+    background-color:rgb(2, 188, 2);
     font-size: large;
     color: white;
     font-weight: 700;
@@ -55,5 +55,5 @@
     margin: 1rem 0rem 2rem 0rem;
 }
 .login_form .button:hover{
-    background-color:rgb(2, 188, 2);
+    background-color:var(--secondary-color);
 }

@@ -1,0 +1,133 @@
+
+.landing_header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 9%;
+  background: var(--white);
+  box-shadow: var(--box-shadow);
+}
+
+.landing_header .logo {
+  font-size: 2.5rem;
+  font-weight: bolder;
+  color: var(--black);
+}
+
+.landing_header .navbar a {
+  font-size: 1rem;
+  margin: 0 1rem;
+  color: var(--black);
+  font-weight: normal; /* Default font weight */
+  display: inline-block;
+  font-weight: bold;   
+  /* transition: transform 0.3s ease, font-weight 0.3s ease, color 0.3s ease; */
+}
+
+.landing_header .navbar a:hover {
+  color: var(--orange); 
+  font-weight: bold;      
+  /* transform: scale(1.2);   Scale the link to 120% on hover */
+  /* z-index: 1; */
+}
+
+.landing_header .logo img {
+  width: 40%;
+  padding: 0%;
+}
+
+.landing_header .logo img:hover{
+  
+}
+
+.landing_header .icons div:hover {
+  color: var(--orange);
+}
+
+
+.landing_header .icons .user-icon {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  font-size: large;
+}
+
+.landing_header .icons .dropdown-content {
+  position: absolute;
+  /* background-color: var(--white); */
+  background-color: aliceblue;
+  min-width: 220px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  right: 0;
+  top: 50px;
+  border-radius: 10px;
+  display: block;
+  text-align: left;
+}
+
+.landing_header .icons .dropdown-content a {
+  color: var(--black);
+  padding: 12px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  transition: background 0.3s ease;
+}
+
+.landing_header .icons .dropdown-content a i {
+  margin-right: 10px;
+  font-size: 1.8rem;
+  color: black;
+}
+
+.landing_header .icons .dropdown-content a:hover {
+  background-color: #a9e2fc;
+  font-weight: bold;
+}
+
+#menu-btn {
+  display: none;
+}
+
+
+@media (max-width: 991px) {
+  .landing_header {
+    padding: 2rem 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #menu-btn {
+    display: inline-block;
+  }
+
+  .landing_header .navbar {
+    position: absolute;
+    top: 110%;
+    right: -110%;
+    width: 30rem;
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    background: var(--white);
+  }
+
+  .landing_header .navbar.active {
+    right: 2rem;
+    transition: 0.4s linear;
+  }
+
+  .landing_header .navbar a {
+    font-size: 1rem;
+    margin: 1rem 2.5rem;
+    display: block;
+  }
+}
+

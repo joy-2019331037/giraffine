@@ -1,0 +1,41 @@
+.landing_contact .icons-container{
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  padding: 3rem 7%;
+}
+
+.icons-container .lottie{
+  width: 300px;
+  height: auto;
+}
+
+.landing_contact .icons-container .icons{
+  flex: 1 1 30rem;
+  padding: 3rem 2rem;
+  background: var(--white);
+  box-shadow: var(--box-shadow);
+  border-radius: 2rem;
+  text-align: center;
+}
+
+.landing_contact .icons-container .icons i{
+  font-size: 4rem;
+  color: var(--black);
+}
+
+.landing_contact .icons-container .icons h3{
+  font-size: 1.5rem;
+  color: var(--black);
+  padding: 1rem 0;
+}
+
+.landing_contact .icons-container .icons label{
+  font-size: 2rem;
+}
+
+.landing_contact .icons-container .icons p{
+  font-size: 1rem;
+  color: var(--light-color);
+}
+

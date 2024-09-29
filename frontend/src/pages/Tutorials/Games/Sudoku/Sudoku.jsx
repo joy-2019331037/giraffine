@@ -148,7 +148,7 @@ const Sudoku = () => {
 
   return (
     <div className="sudoku">
-      <h1>Sudoku</h1>
+      <h1 style={{fontSize:'1.5rem'}}>Sudoku</h1>
       
       <div className="sudoku-content">
         {solved == 1 && <Lottie className="animation" animationData={success} />}

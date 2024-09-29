@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
     @Autowired
     private UserService us;
-
+    
     @Autowired
     private UserRepository ud;
 

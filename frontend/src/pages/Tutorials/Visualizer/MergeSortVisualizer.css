@@ -15,6 +15,10 @@
     font-weight: 600;
   }
 
+  .merge-sort-visualizer .header h2{
+    font-size: 1.5rem;
+  }
+
   .merge-sort-visualizer .header label{
     font-size: 1.1rem;
   }

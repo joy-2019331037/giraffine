@@ -10,11 +10,11 @@ import "./games.css";
 const Games = () => {
   return (
     <>
-      <h2 style={{ textAlign: "center" }}>Games</h2>
+      <h2 style={{ textAlign: "center", fontSize:"2rem", color:"chocolate" }}>Games</h2>
       <div className="games">
         <Link to="/tutorials/games/tictactoe">
           <div>
-            <h3>Tic Tac Toe</h3>
+            <label>Tic Tac Toe</label>
 
             <img src={ticTacToe} />
 

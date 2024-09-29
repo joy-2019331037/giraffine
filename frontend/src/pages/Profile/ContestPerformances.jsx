@@ -45,6 +45,7 @@ const ContestPerformances = ({ userId }) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        marginBottom:contestPerformances.length===0?"15rem":"8rem"
       }}
     >
       <div
@@ -67,7 +68,7 @@ const ContestPerformances = ({ userId }) => {
       </div>
       {contestPerformances.length === 0 && (
         <div style={{ textAlign: "center", padding: "1rem" }}>
-          You have made no participations in contests yet
+          No participations made in contests yet.
         </div>
       )}
       {contestPerformances.length !== 0 && (

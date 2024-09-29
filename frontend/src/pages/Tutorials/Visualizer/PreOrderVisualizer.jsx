@@ -169,7 +169,7 @@ const PreorderVisualizer = () => {
   return (
     <div className="visualizer">
       <div className="header">
-        <h1>Preorder Traversal Visualizer</h1>
+        <h1 style={{fontSize:"1.5rem"}}>Preorder Traversal Visualizer</h1>
         <label>Preorder Traversal visits the root node first, then recursively visits the left and right subtrees </label>
         <label>Here is a simple tree with 11 nodes</label>
         <label>Click on the buttons below to visualize the Preorder Traversal!</label>
@@ -205,7 +205,7 @@ const PreorderVisualizer = () => {
         <div className="message-box">
           <p>{messages[step - 1]}</p>
         </div>
-        {step > 1 && <h3>Traversal Order</h3>}
+        {step > 1 && <h3 style={{marginTop:"2rem"}}>Traversal Order</h3>}
         <label>{visitedNodes.slice(0, currentNodeIndex).join(" -> ")}</label>
       </div>
     </div>

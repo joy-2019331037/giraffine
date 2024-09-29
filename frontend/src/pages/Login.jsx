@@ -87,15 +87,26 @@ const Login = () => {
         <button className="button" type="submit">
           Login
         </button>
+        <label
+         onClick={()=>{navigate("/register")}}
+          style={{
+            marginBottom: "2rem",
+            fontSize: "0.8rem",
+            fontFamily: "serif",
+            cursor:"pointer"
+          }}
+        >
+          Not a Giraffine Member yet?
+        </label>
       </form>
       <Tooltip label="Back to Home" fontSize="md" placement="top">
-      <img
-        style={{ width: "2%", cursor: "pointer" }}
-        onClick={() => {
-          navigate("/");
-        }}
-        src={home}
-      />
+        <img
+          style={{ width: "2%", cursor: "pointer" }}
+          onClick={() => {
+            navigate("/");
+          }}
+          src={home}
+        />
       </Tooltip>
     </div>
   );

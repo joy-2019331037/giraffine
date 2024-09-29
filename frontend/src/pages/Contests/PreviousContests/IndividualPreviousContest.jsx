@@ -70,11 +70,11 @@ const IndividualPreviousContest = () => {
       style={{
         width: "70%",
         margin: "0 auto",
-        padding: "20px",
+        padding: "20px ",
         backgroundColor: "#f5f5f5",
         borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        marginBottom: "7rem",
+        marginBottom: "12rem",
       }}
     >
       <div

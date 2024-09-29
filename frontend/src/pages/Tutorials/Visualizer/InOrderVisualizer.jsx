@@ -156,7 +156,7 @@ const InorderVisualizer = () => {
   return (
     <div className="visualizer">
       <div className="header">
-        <h1>Inorder Traversal Visualizer</h1>
+        <h1 style={{fontSize:"1.5rem"}}>Inorder Traversal Visualizer</h1>
         <label>Inorder Traversal recursively visits the left subtree, then the root node, and finally the right subtree</label>
         <label>Here is a simple tree with 11 nodes</label>
         <label>Click on the buttons below to visualize the Inorder traversal!</label>
@@ -192,7 +192,7 @@ const InorderVisualizer = () => {
         <div className="message-box">
           <p>{messages[step - 1]}</p>
         </div>
-        {step > 1 && <h3>Traversal Order</h3>}
+        {step > 1 && <h3 style={{marginTop:"2rem"}}>Traversal Order</h3>}
         <label>{visitedNodes.slice(0, currentNodeIndex).join(" -> ")}</label>
       </div>
     </div>
