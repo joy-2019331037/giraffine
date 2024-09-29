@@ -23,7 +23,7 @@ Before setting up the project, ensure you have the following installed:
 
 - **Node.js** (v14.x or above)
 - **npm** (v6.x or above)
-- **Java** (JDK 11 or above)
+- **Java** (JDK 17 or above)
 - **MongoDB**
 
 ## Project Setup
@@ -84,4 +84,4 @@ Contributions are welcome! Please follow the standard procedure for reporting is
 
 ## Contact
 
-For any questions or suggestions, please contact us at [giraffineacademy@gmail.com](mailto:giraffineacademy@gmail.com).
+For any questions or suggestions, please contact us at [giraffine.academy@gmail.com](mailto:giraffine.academy@gmail.com).
